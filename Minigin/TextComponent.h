@@ -29,7 +29,7 @@ namespace dae
 	private:
 
 		SDL_Color m_TextColor;
-		bool m_NeedsUpdate{ true };
+		bool m_NeedsUpdate;
 		std::string m_Text;
 		std::shared_ptr<Font> m_pFont{};
 	};

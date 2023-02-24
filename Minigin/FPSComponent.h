@@ -17,7 +17,7 @@ namespace dae
 		void SetUpdateTimer(float seconds);
 
 	private:
-		std::weak_ptr<TextComponent> m_TextComponent{};
+		std::weak_ptr<TextComponent> m_pTextComponent{};
 		float m_UpdateTimer;
 		float m_MaxTimer;
 	};

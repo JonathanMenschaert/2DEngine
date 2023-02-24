@@ -9,6 +9,7 @@
 
 dae::TextComponent::TextComponent()
 	:m_TextColor{SDL_Color{}}
+	,m_NeedsUpdate{true}
 {
 }
 

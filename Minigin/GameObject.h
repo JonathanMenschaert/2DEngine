@@ -26,7 +26,7 @@ namespace dae
 		{
 			//Compile time check to make sure T is a component
 			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
-			m_Components.push_back(component);
+			m_Components.push_back(pComponent);
 		}
 
 		template<typename T>
