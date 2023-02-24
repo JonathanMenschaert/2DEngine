@@ -10,7 +10,7 @@ namespace dae
 	class TextComponent final : public BaseComponent
 	{
 	public:
-		TextComponent() = default;
+		TextComponent();
 		~TextComponent() = default;
 		TextComponent(const TextComponent& component) = delete;
 		TextComponent(TextComponent&& component) noexcept = delete;

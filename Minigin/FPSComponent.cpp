@@ -16,3 +16,8 @@ void dae::FPSComponent::Update()
 
 	m_TextComponent.lock()->SetText(text.str());
 }
+
+void dae::FPSComponent::SetUpdateTimer(float seconds)
+{
+	m_MaxTimer = seconds;
+}

@@ -2,6 +2,8 @@
 #include "BaseComponent.h"
 #include "Texture2D.h"
 #include "TransformComponent.h"
+#include <string>
+
 namespace dae
 {
 	class RenderComponent final : public BaseComponent
@@ -16,6 +18,7 @@ namespace dae
 
 		void Render() const override;
 		void SetTexture(std::shared_ptr<Texture2D> texture);
+		void SetTexture(const std::string& fileName);
 
 	private:
 		std::shared_ptr<Texture2D> m_Texture{};

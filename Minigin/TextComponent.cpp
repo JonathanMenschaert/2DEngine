@@ -7,6 +7,11 @@
 #include "GameObject.h"
 #include "RenderComponent.h"
 
+dae::TextComponent::TextComponent()
+	:m_TextColor{SDL_Color{}}
+{
+}
+
 void dae::TextComponent::Update()
 {
 	if (m_NeedsUpdate && m_Text.size() > 0) CreateTexture();

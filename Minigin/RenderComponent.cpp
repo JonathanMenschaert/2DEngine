@@ -1,8 +1,9 @@
 #include "RenderComponent.h"
 #include "GameObject.h"
 #include "Renderer.h"
-
+#include "ResourceManager.h"
 #include <glm/glm.hpp>
+#include <iostream>
 
 void dae::RenderComponent::Render() const
 {
@@ -10,7 +11,7 @@ void dae::RenderComponent::Render() const
 	auto transform{ m_GameObject.lock()->GetComponent<TransformComponent>() };
 	if (transform.expired()) return;
 
-	auto translation{ transform.lock()->GetTranslation() };
+	const auto translation{ transform.lock()->GetTranslation() };
 
 	Renderer::GetInstance().RenderTexture(*m_Texture, translation.x, translation.y);
 }
@@ -18,4 +19,9 @@ void dae::RenderComponent::Render() const
 void dae::RenderComponent::SetTexture(std::shared_ptr<Texture2D> texture)
 {
 	m_Texture = texture;
+}
+
+void dae::RenderComponent::SetTexture(const std::string& fileName)
+{
+	m_Texture = ResourceManager::GetInstance().LoadTexture(fileName);
 }

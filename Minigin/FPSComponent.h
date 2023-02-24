@@ -14,8 +14,12 @@ namespace dae
 		FPSComponent& operator=(FPSComponent&& component) noexcept = delete;
 
 		void Update() override;
+		void SetUpdateTimer(float seconds);
+
 	private:
 		std::weak_ptr<TextComponent> m_TextComponent{};
+		float m_UpdateTimer;
+		float m_MaxTimer;
 	};
 }
 
