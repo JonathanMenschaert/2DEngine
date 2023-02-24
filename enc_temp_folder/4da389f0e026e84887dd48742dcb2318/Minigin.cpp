@@ -84,14 +84,15 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 	Time::GetInstance().Reset();
-	auto& time = Time::GetInstance();
+
 	// todo: this update loop could use some work.
 	bool doContinue = true;
 	while (doContinue)
 	{
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
-		time.Update();
+		Time::GetInstance().Update();
+
 		renderer.Render();
 	}
 }

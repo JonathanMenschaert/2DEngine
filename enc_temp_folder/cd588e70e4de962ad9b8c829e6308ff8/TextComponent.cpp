@@ -28,9 +28,9 @@ const std::string& dae::TextComponent::GetText()
 	return m_Text;
 }
 
-void dae::TextComponent::SetFont(const std::shared_ptr<Font> pFont)
+void dae::TextComponent::SetFont(const std::shared_ptr<Font> font)
 {
-	m_pFont = pFont;
+	m_Font = font;
 	m_NeedsUpdate = true;
 }
 
@@ -42,21 +42,21 @@ void dae::TextComponent::SetColor(unsigned char r, unsigned char g, unsigned cha
 
 void dae::TextComponent::CreateTexture()
 {
-	const auto pSurface = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), m_TextColor);
-	if (!pSurface)
+	const auto surface = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), m_TextColor);
+	if (!surface)
 	{
 		throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
 	}
 
-	auto pTexture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), pSurface);
+	auto texture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), surface);
 
-	if (!pTexture)
+	if (!texture)
 	{
 		throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		
 	}
-	SDL_FreeSurface(pSurface);
+	SDL_FreeSurface(surface);
 
-	m_GameObject.lock()->GetComponent<RenderComponent>().lock()->SetTexture(std::make_shared<Texture2D>(pTexture));
+	m_GameObject.lock()->GetComponent<RenderComponent>().lock()->SetTexture(std::make_shared<Texture2D>(texture));
 	m_NeedsUpdate = false;
 }

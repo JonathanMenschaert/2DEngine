@@ -22,7 +22,7 @@ namespace dae
 		void SetText(const std::string& text);
 		const std::string& GetText();
 
-		void SetFont(const std::shared_ptr<Font> pFont);
+		void SetFont(const std::shared_ptr<Font> font);
 		void SetColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 		void CreateTexture();
 
@@ -31,7 +31,7 @@ namespace dae
 		SDL_Color m_TextColor;
 		bool m_NeedsUpdate{ true };
 		std::string m_Text;
-		std::shared_ptr<Font> m_pFont{};
+		std::shared_ptr<Font> m_Font{};
 	};
 }
 

@@ -17,11 +17,11 @@ namespace dae
 		RenderComponent& operator=(RenderComponent&& component) noexcept = delete;
 
 		void Render() const override;
-		void SetTexture(std::shared_ptr<Texture2D> pTexture);
+		void SetTexture(std::shared_ptr<Texture2D> texture);
 		void SetTexture(const std::string& fileName);
 
 	private:
-		std::shared_ptr<Texture2D> m_pTexture{};
+		std::shared_ptr<Texture2D> m_Texture{};
 	};
 }
 

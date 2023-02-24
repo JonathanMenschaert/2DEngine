@@ -8,21 +8,24 @@
 namespace dae
 {
 	class Texture2D;
-	class GameObject final
+
+	// todo: this should become final.
+	class GameObject
 	{
 	public:
+		virtual void Update();
+		virtual void LateUpdate();
+		virtual void Render() const;
+
 		GameObject() = default;
-		virtual ~GameObject() = default;
+		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		virtual void Update();
-		virtual void Render() const;
-
 		template <typename T>
-		void AddComponent(std::shared_ptr<T> pComponent)
+		void AddComponent(std::shared_ptr<T> component)
 		{
 			//Compile time check to make sure T is a component
 			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
@@ -67,6 +70,10 @@ namespace dae
 		}
 
 	private:
+		Transform m_transform{};
+		// todo: mmm, every gameobject has a texture? Is that correct?
+		std::shared_ptr<Texture2D> m_texture{};
+
 		std::vector<std::shared_ptr<BaseComponent>> m_Components{};
 	};
 }

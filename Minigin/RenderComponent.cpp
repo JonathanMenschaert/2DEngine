@@ -7,21 +7,21 @@
 
 void dae::RenderComponent::Render() const
 {
-	if (!m_Texture) return;
-	auto transform{ m_GameObject.lock()->GetComponent<TransformComponent>() };
-	if (transform.expired()) return;
+	if (!m_pTexture) return;
+	auto pTransform{ m_GameObject.lock()->GetComponent<TransformComponent>() };
+	if (pTransform.expired()) return;
 
-	const auto translation{ transform.lock()->GetTranslation() };
+	const auto& translation{ pTransform.lock()->GetTranslation() };
 
-	Renderer::GetInstance().RenderTexture(*m_Texture, translation.x, translation.y);
+	Renderer::GetInstance().RenderTexture(*m_pTexture, translation.x, translation.y);
 }
 
-void dae::RenderComponent::SetTexture(std::shared_ptr<Texture2D> texture)
+void dae::RenderComponent::SetTexture(std::shared_ptr<Texture2D> pTexture)
 {
-	m_Texture = texture;
+	m_pTexture = pTexture;
 }
 
 void dae::RenderComponent::SetTexture(const std::string& fileName)
 {
-	m_Texture = ResourceManager::GetInstance().LoadTexture(fileName);
+	m_pTexture = ResourceManager::GetInstance().LoadTexture(fileName);
 }
