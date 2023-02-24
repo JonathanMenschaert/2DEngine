@@ -8,6 +8,7 @@ namespace dae
 	class Time final : public Singleton<Time>
 	{
 	public:
+		Time() = default;
 		~Time() = default;
 		Time(const Time& time) = delete;
 		Time(Time&& time) noexcept = delete;
@@ -19,8 +20,8 @@ namespace dae
 		
 		float GetElapsedTime() const;
 
-	private:
-		Time() = default;
+	protected:
+		
 
 		std::chrono::high_resolution_clock::time_point m_CurrTime{};
 		std::chrono::high_resolution_clock::time_point m_PrevTime{};

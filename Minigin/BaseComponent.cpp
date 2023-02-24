@@ -2,9 +2,13 @@
 
 namespace dae
 {
-	BaseComponent::BaseComponent(GameObject* pGameObject)
-		:m_GameObject{ pGameObject }
+	BaseComponent::BaseComponent()
 	{
+	}
+
+	void BaseComponent::SetParent(std::weak_ptr<GameObject> pGameObject)
+	{
+		m_GameObject = pGameObject;
 	}
 
 	void BaseComponent::Update()

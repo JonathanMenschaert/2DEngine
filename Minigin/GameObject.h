@@ -50,7 +50,7 @@ namespace dae
 					return pWeakComponent;
 				}
 			}
-			return nullptr;
+			return std::weak_ptr<T>();
 		}
 
 		template<typename T>
