@@ -1,8 +1,11 @@
 #pragma once
 #include <memory>
+#include "Singleton.h"
+#include <chrono>
+
 namespace dae
 {
-	class Time
+	class Time final : public Singleton<Time>
 	{
 	public:
 		~Time() = default;
@@ -11,12 +14,18 @@ namespace dae
 		Time& operator=(const Time& time) = delete;
 		Time& operator=(Time& time) noexcept = delete;
 
-		static std::unique_ptr<Time*>& GetInstance();
+		void Reset();
+		void Update();
+		
+		float GetElapsedTime() const;
 
 	private:
 		Time() = default;
 
-		static std::unique_ptr<Time*> m_Instance;
+		std::chrono::high_resolution_clock::time_point m_CurrTime{};
+		std::chrono::high_resolution_clock::time_point m_PrevTime{};
+		float m_ElapsedTime;
+
 
 	};
 }
