@@ -28,8 +28,11 @@ void dae::GameObject::LateUpdate()
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+	if (m_texture)
+	{
+		const auto& pos = m_transform.GetPosition();
+		Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+	}
 
 	for (const std::shared_ptr<BaseComponent>& component : m_Components)
 	{

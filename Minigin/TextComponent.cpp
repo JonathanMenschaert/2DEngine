@@ -4,10 +4,12 @@
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
+#include "GameObject.h"
+#include "RenderComponent.h"
 
 void dae::TextComponent::Update()
 {
-	if (m_NeedsUpdate) CreateTexture();
+	if (m_NeedsUpdate && m_Text.size() > 0) CreateTexture();
 }
 
 void dae::TextComponent::SetText(const std::string& text)
@@ -23,6 +25,7 @@ const std::string& dae::TextComponent::GetText()
 
 void dae::TextComponent::SetFont(const std::shared_ptr<Font> font)
 {
+	m_Font = font;
 	m_NeedsUpdate = true;
 }
 
@@ -49,6 +52,6 @@ void dae::TextComponent::CreateTexture()
 	}
 	SDL_FreeSurface(surface);
 
-	//renderer here
+	m_GameObject.lock()->GetComponent<RenderComponent>().lock()->SetTexture(std::make_shared<Texture2D>(texture));
 	m_NeedsUpdate = false;
 }
