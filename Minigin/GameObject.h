@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "vector"
 #include "BaseComponent.h"
+#include <string>
 
 namespace dae
 {
