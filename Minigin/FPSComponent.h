@@ -6,7 +6,7 @@ namespace dae
 	class FPSComponent final : public BaseComponent
 	{
 	public:
-		FPSComponent() = default;
+		FPSComponent();
 		~FPSComponent() = default;
 		FPSComponent(const FPSComponent& component) = delete;
 		FPSComponent(FPSComponent&& component) noexcept = delete;

@@ -7,8 +7,8 @@ dae::FPSComponent::FPSComponent()
 	:m_TextComponent{}
 	,m_MaxTimer{1.f}
 {
-	//Initializing updatetimer at almost the MaxTimer value to ensure 
-	//the fps appear on screen instantly
+	//Initializing updatetimer at almost the MaxTimer value to ensure the fps appear 
+	//on screen instantly
 	m_UpdateTimer = m_MaxTimer * 0.99f;
 }
 
