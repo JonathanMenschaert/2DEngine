@@ -28,7 +28,7 @@ void Scene::Update()
 {
 	for(auto& object : m_objects)
 	{
-		object->Update();
+		object->BeginUpdate();
 	}
 }
 

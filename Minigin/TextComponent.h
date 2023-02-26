@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseComponent.h"
+#include "UpdateComponent.h"
 #include <string>
 #include "Font.h"
 #include "Renderer.h"
@@ -7,7 +8,7 @@
 
 namespace dae
 {
-	class TextComponent final : public BaseComponent
+	class TextComponent final : public UpdateComponent
 	{
 	public:
 		TextComponent();

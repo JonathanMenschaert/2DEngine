@@ -1,32 +1,54 @@
 #pragma once
 #include <memory>
 #include "Transform.h"
-#include "vector"
+#include <vector>
+#include <list>
+#include <unordered_map>
 #include "BaseComponent.h"
 #include <string>
+#include "UpdateComponent.h"
+#include "RenderComponent.h"
 
 namespace dae
 {
+	enum class ComponentType
+	{
+		Update,
+		Render,
+		Data
+	};
+
 	class Texture2D;
 	class GameObject final
 	{
 	public:
-		GameObject() = default;
+		GameObject();
 		virtual ~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		virtual void Update();
-		virtual void Render() const;
+		void BeginUpdate();
+		void EndUpdate();
+		void Render() const;
+
 
 		template <typename T>
-		void AddComponent(std::shared_ptr<T> pComponent)
+		std::shared_ptr<T> AddComponent()
 		{
 			//Compile time check to make sure T is a component
 			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
-			m_Components.push_back(pComponent);
+
+			ComponentType componentType{ ComponentType::Data };
+			if (std::is_base_of<UpdateComponent, T>::value) componentType = ComponentType::Update;
+			if (std::is_base_of<RenderComponent, T>::value) componentType = ComponentType::Render;
+			
+			std::shared_ptr<T> pComponent{ std::make_shared<T>()};
+			//m_Components[componentType]
+			std::list<std::shared_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
+			componentList.push_back(pComponent);
+			return pComponent;			
 		}
 
 		template<typename T>
@@ -35,8 +57,12 @@ namespace dae
 			//Compile time check to make sure T is a component
 			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
 
+			ComponentType componentType{ ComponentType::Data };
+			if (std::is_base_of<UpdateComponent, T>::value) componentType = ComponentType::Update;
+			if (std::is_base_of<RenderComponent, T>::value) componentType = ComponentType::Render;
+
 			//Loop over all components to find the requested component
-			for (const std::shared_ptr<BaseComponent>& pComponent : m_Components)
+			for (const auto& pComponent : m_Components.at(componentType))
 			{
 				std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
 				if (pRequestedComponent)
@@ -62,11 +88,15 @@ namespace dae
 				if (pRequestedComponent)
 				{
 					pRequestedComponent->MarkForDeath();
+					m_ComponentsMarkedForDeath = true;
 				}
 			}
 		}
 
 	private:
-		std::vector<std::shared_ptr<BaseComponent>> m_Components{};
+		void DestroyComponents();
+		bool m_ComponentsMarkedForDeath;
+
+		std::unordered_map<ComponentType, std::list<std::shared_ptr<BaseComponent>>> m_Components;
 	};
 }
