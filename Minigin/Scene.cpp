@@ -24,11 +24,19 @@ void Scene::RemoveAll()
 	m_objects.clear();
 }
 
-void Scene::Update()
+void Scene::BeginUpdate()
 {
 	for(auto& object : m_objects)
 	{
 		object->BeginUpdate();
+	}
+}
+
+void dae::Scene::EndUpdate()
+{
+	for (auto& object : m_objects)
+	{
+		object->EndUpdate();
 	}
 }
 
