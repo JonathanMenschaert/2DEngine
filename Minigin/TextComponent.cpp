@@ -15,7 +15,7 @@ dae::TextComponent::TextComponent()
 
 void dae::TextComponent::Update()
 {
-	if (m_NeedsUpdate && m_Text.size() > 0) CreateTexture();
+	if (m_NeedsUpdate && m_Text.size() > 0) UpdateTexture();
 }
 
 void dae::TextComponent::SetText(const std::string& text)
@@ -41,7 +41,7 @@ void dae::TextComponent::SetColor(unsigned char r, unsigned char g, unsigned cha
 	m_NeedsUpdate = true;
 }
 
-void dae::TextComponent::CreateTexture()
+void dae::TextComponent::UpdateTexture()
 {
 	const auto pSurface = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), m_TextColor);
 	if (!pSurface)
