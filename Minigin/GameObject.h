@@ -15,7 +15,10 @@ namespace dae
 	{
 		Update,
 		Render,
-		Data
+		Data,
+
+		//Define components types above
+		COUNT
 	};
 
 	class Texture2D;
@@ -98,5 +101,7 @@ namespace dae
 		bool m_ComponentsMarkedForDeath;
 
 		std::unordered_map<ComponentType, std::list<std::shared_ptr<BaseComponent>>> m_Components;
+
+		static const int m_NrOfComponentTypes;
 	};
 }

@@ -3,9 +3,17 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
+const int dae::GameObject::m_NrOfComponentTypes{ static_cast<int>(ComponentType::COUNT) };
+
 dae::GameObject::GameObject()
 	:m_ComponentsMarkedForDeath{false}
 {
+	
+	for (int i{}; i < m_NrOfComponentTypes; ++i)
+	{
+		//Initialize a list in the map per component type
+		m_Components[static_cast<ComponentType>(i)];
+	}
 }
 
 void dae::GameObject::BeginUpdate()
