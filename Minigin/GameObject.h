@@ -36,72 +36,130 @@ namespace dae
 		void EndUpdate();
 		void Render() const;
 
-
 		template <typename T>
-		std::shared_ptr<T> AddComponent()
-		{
-			//Compile time check to make sure T is a component
-			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
-
-			ComponentType componentType{ ComponentType::Data };
-			if (std::is_base_of<UpdateComponent, T>::value) componentType = ComponentType::Update;
-			if (std::is_base_of<RenderComponent, T>::value) componentType = ComponentType::Render;
-			
-			std::shared_ptr<T> pComponent{ std::make_shared<T>()};
-			//m_Components[componentType]
-			std::list<std::shared_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
-			componentList.push_back(pComponent);
-			return pComponent;			
-		}
+		std::shared_ptr<T> AddComponent();
 
 		template<typename T>
-		std::weak_ptr<T> GetComponent() const
-		{
-			//Compile time check to make sure T is a component
-			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
-
-			ComponentType componentType{ ComponentType::Data };
-			if (std::is_base_of<UpdateComponent, T>::value) componentType = ComponentType::Update;
-			if (std::is_base_of<RenderComponent, T>::value) componentType = ComponentType::Render;
-
-			//Loop over all components to find the requested component
-			for (const auto& pComponent : m_Components.at(componentType))
-			{
-				std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
-				if (pRequestedComponent)
-				{
-					std::weak_ptr<T> pWeakComponent{ pRequestedComponent };
-					return pWeakComponent;
-				}
-			}
-			return std::weak_ptr<T>();
-		}
+		std::weak_ptr<T> GetComponent() const;
 
 		template<typename T>
-		void RemoveComponent()
-		{
-			//Compile time check to make sure T is a component
-			static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
+		void RemoveComponent();
 
-			//Loop over all components to find the correct component to remove
-			//All instances of the component T will be marked for death
-			for (const std::shared_ptr<BaseComponent>& pComponent : m_Components)
-			{
-				std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
-				if (pRequestedComponent)
-				{
-					pRequestedComponent->MarkForDeath();
-					m_ComponentsMarkedForDeath = true;
-				}
-			}
-		}
+		template<typename T>
+		bool HasComponent() const;
 
 	private:
 		void DestroyComponents();
-		bool m_ComponentsMarkedForDeath;
 
+		template <typename T>
+		void AssertType() const;
+		
+		template <typename T>
+		ComponentType GetComponentType() const;
+
+		bool m_ComponentsMarkedForDeath;
 		std::unordered_map<ComponentType, std::list<std::shared_ptr<BaseComponent>>> m_Components;
 
 		static const int m_NrOfComponentTypes;
 	};
+
+	template <typename T>
+	std::shared_ptr<T> GameObject::AddComponent()
+	{
+		//Compile time check to make sure T is a component
+		AssertType<T>();
+
+		//Get Component type
+		ComponentType componentType{ GetComponentType<T>() };
+
+		std::shared_ptr<T> pComponent{ std::make_shared<T>() };
+
+		std::list<std::shared_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
+		componentList.push_back(pComponent);
+		return pComponent;
+	}
+
+	template<typename T>
+	std::weak_ptr<T> GameObject::GetComponent() const
+	{
+		//Compile time check to make sure T is a component
+		AssertType<T>();
+
+		//Get Component type
+		ComponentType componentType{ GetComponentType<T>() };
+
+		//Loop over all components to find the requested component
+		for (const auto& pComponent : m_Components.at(componentType))
+		{
+			std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
+			if (pRequestedComponent)
+			{
+				std::weak_ptr<T> pWeakComponent{ pRequestedComponent };
+				return pWeakComponent;
+			}
+		}
+		return std::weak_ptr<T>();
+	}
+
+	template<typename T>
+	bool GameObject::HasComponent() const
+	{
+		//Compile time check to make sure T is a component
+		AssertType<T>();
+
+		//Get Component type
+		ComponentType componentType{ GetComponentType<T>() };
+
+		//Loop over all components to find the requested component
+		for (const auto& pComponent : m_Components.at(componentType))
+		{
+			std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
+			if (pRequestedComponent)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	template<typename T>
+	void GameObject::RemoveComponent()
+	{
+		//Compile time check to make sure T is a component
+		static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
+
+		//Loop over all components to find the correct component to remove
+		//All instances of the component T will be marked for death
+		for (const std::shared_ptr<BaseComponent>& pComponent : m_Components)
+		{
+			std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
+			if (pRequestedComponent)
+			{
+				pRequestedComponent->MarkForDeath();
+				m_ComponentsMarkedForDeath = true;
+			}
+		}
+	}
+
+	template <typename T>
+	void GameObject::AssertType() const
+	{
+		static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
+	}
+
+	template <typename T>
+	ComponentType GameObject::GetComponentType() const
+	{
+		ComponentType componentType{ ComponentType::Data };
+		if (std::is_base_of<UpdateComponent, T>::value)
+		{
+			componentType = ComponentType::Update;
+		}
+		else if (std::is_base_of<RenderComponent, T>::value)
+		{
+			componentType = ComponentType::Render;
+		}
+		return componentType;
+	}
+
 }
