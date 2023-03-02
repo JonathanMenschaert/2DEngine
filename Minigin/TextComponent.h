@@ -11,7 +11,7 @@ namespace dae
 	class TextComponent final : public UpdateComponent
 	{
 	public:
-		TextComponent();
+		TextComponent(std::shared_ptr<GameObject> pGameObject);
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& component) = delete;
 		TextComponent(TextComponent&& component) noexcept = delete;

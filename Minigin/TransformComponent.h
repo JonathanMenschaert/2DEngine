@@ -7,7 +7,7 @@ namespace dae
 	class TransformComponent final : public BaseComponent
 	{
 	public:
-		TransformComponent() = default;
+		TransformComponent(std::shared_ptr<GameObject>);
 		virtual ~TransformComponent() = default;
 		TransformComponent(const TransformComponent& component) = delete;
 		TransformComponent(TransformComponent&& component) noexcept = delete;

@@ -5,10 +5,15 @@
 #include <glm/glm.hpp>
 #include <iostream>
 
+dae::RenderComponent::RenderComponent(std::shared_ptr<GameObject> pGameObject)
+	:BaseComponent(pGameObject)
+{
+}
+
 void dae::RenderComponent::Render() const
 {
 	if (!m_pTexture) return;
-	auto pTransform{ m_GameObject.lock()->GetComponent<TransformComponent>() };
+	auto pTransform{ GetGameObject()->GetComponent<TransformComponent>()};
 	if (pTransform.expired()) return;
 
 	const auto& translation{ pTransform.lock()->GetTranslation() };

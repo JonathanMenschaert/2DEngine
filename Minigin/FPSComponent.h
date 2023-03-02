@@ -6,7 +6,7 @@ namespace dae
 	class FPSComponent final : public UpdateComponent
 	{
 	public:
-		FPSComponent();
+		FPSComponent(std::shared_ptr<GameObject> pGameObject);
 		virtual ~FPSComponent() = default;
 		FPSComponent(const FPSComponent& component) = delete;
 		FPSComponent(FPSComponent&& component) noexcept = delete;

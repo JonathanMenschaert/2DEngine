@@ -3,8 +3,9 @@
 #include <sstream>
 #include "Time.h"
 
-dae::FPSComponent::FPSComponent()
-	:m_pTextComponent{}
+dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pGameObject)
+	:UpdateComponent(pGameObject)
+	,m_pTextComponent{}
 	,m_MaxTimer{1.f}
 {
 	//Initializing updatetimer at almost the MaxTimer value to ensure 
@@ -16,7 +17,7 @@ void dae::FPSComponent::Update()
 {
 	if (m_pTextComponent.expired())
 	{
-		m_pTextComponent = m_GameObject.lock()->GetComponent<TextComponent>();
+		m_pTextComponent = GetGameObject()->GetComponent<TextComponent>();
 	}
 
 	const float elapsedTime{ Time::GetInstance().GetElapsedTime() };

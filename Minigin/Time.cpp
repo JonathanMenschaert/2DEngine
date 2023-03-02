@@ -1,5 +1,5 @@
 #include "Time.h"
-#include <iostream>
+
 namespace dae
 {
     Time::Time()
@@ -17,7 +17,6 @@ namespace dae
     {
         m_CurrTime = std::chrono::high_resolution_clock::now();
         m_ElapsedTime = std::chrono::duration<float>(m_CurrTime - m_PrevTime).count();
-        std::cout << m_ElapsedTime << "\n";
         m_PrevTime = m_CurrTime;
     }
 

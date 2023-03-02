@@ -36,8 +36,8 @@ namespace dae
 		void EndUpdate();
 		void Render() const;
 
-		template <typename T>
-		std::shared_ptr<T> AddComponent();
+		template <typename T, typename Arg>
+		std::shared_ptr<T> AddComponent(Arg&& args);
 
 		template<typename T>
 		std::weak_ptr<T> GetComponent() const;
@@ -63,16 +63,16 @@ namespace dae
 		static const int m_NrOfComponentTypes;
 	};
 
-	template <typename T>
-	std::shared_ptr<T> GameObject::AddComponent()
+	template <typename T, typename Arg>
+	std::shared_ptr<T> GameObject::AddComponent(Arg&& gameObj)
 	{
 		//Compile time check to make sure T is a component
 		AssertType<T>();
 
 		//Get Component type
-		ComponentType componentType{ GetComponentType<T>() };
+		ComponentType componentType{ GetComponentType<T>() }; 
 
-		std::shared_ptr<T> pComponent{ std::make_shared<T>() };
+		std::shared_ptr<T> pComponent{ std::make_shared<T>(std::forward<Arg>(gameObj)) };
 
 		std::list<std::shared_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
 		componentList.push_back(pComponent);

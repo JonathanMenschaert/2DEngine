@@ -9,7 +9,7 @@ namespace dae
 	class RenderComponent final : public BaseComponent
 	{
 	public:
-		RenderComponent() = default;
+		RenderComponent(std::shared_ptr<GameObject> pGameObject);
 		virtual ~RenderComponent() = default;
 		RenderComponent(const RenderComponent& component) = delete;
 		RenderComponent(RenderComponent&& component) noexcept = delete;
