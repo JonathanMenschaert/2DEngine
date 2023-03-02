@@ -107,6 +107,11 @@ void dae::GameObject::AddChild(std::weak_ptr<GameObject> child)
 	m_Children.push_back(child);
 }
 
+std::list<std::weak_ptr<dae::GameObject>>& dae::GameObject::GetChildren()
+{
+	return m_Children;
+}
+
 void dae::GameObject::DestroyComponents()
 {
 	for (auto& componentPair : m_Components)

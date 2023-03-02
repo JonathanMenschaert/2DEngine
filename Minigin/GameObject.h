@@ -37,7 +37,10 @@ namespace dae
 		void EndUpdate();
 		void Render() const;
 
+		std::list<std::weak_ptr<GameObject>>& GetChildren();
+
 		std::shared_ptr<dae::GameObject> GetParent();
+
 		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition);
 
 		template <typename T, typename Arg>

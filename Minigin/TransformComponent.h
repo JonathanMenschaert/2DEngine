@@ -14,14 +14,18 @@ namespace dae
 		TransformComponent& operator=(const TransformComponent& component) = delete;
 		TransformComponent& operator=(TransformComponent&& component) noexcept = delete;
 
+		void Init() override;
+
 		void SetLocalPosition(const glm::vec2& position);
 		void SetLocalPosition(const glm::vec3& position);
 		const glm::vec3& GetLocalPosition() const;
 		const glm::vec3& GetWorldPosition();
+		float GetDistanceToParent() const;
 
 	private:
+		void SetFlagDirty();
 		void UpdateWorldPosition();
-
+		float m_Magnitude{};
 		bool m_NeedsUpdate{ false };
 		glm::vec3 m_WorldPosition{};
 		glm::vec3 m_LocalPosition{};
