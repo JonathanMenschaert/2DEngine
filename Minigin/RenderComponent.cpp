@@ -16,7 +16,7 @@ void dae::RenderComponent::Render() const
 	auto pTransform{ GetGameObject()->GetComponent<TransformComponent>()};
 	if (pTransform.expired()) return;
 
-	const auto& translation{ pTransform.lock()->GetTranslation() };
+	const auto& translation{ pTransform.lock()->GetWorldPosition() };
 
 	Renderer::GetInstance().RenderTexture(*m_pTexture, translation.x, translation.y);
 }

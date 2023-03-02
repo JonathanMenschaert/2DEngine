@@ -22,7 +22,7 @@ namespace dae
 	};
 
 	class Texture2D;
-	class GameObject final
+	class GameObject final : public std::enable_shared_from_this<GameObject>
 	{
 	public:
 		GameObject();
@@ -36,6 +36,9 @@ namespace dae
 		void BeginUpdate();
 		void EndUpdate();
 		void Render() const;
+
+		std::shared_ptr<dae::GameObject> GetParent();
+		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition);
 
 		template <typename T, typename Arg>
 		std::shared_ptr<T> AddComponent(Arg&& args);
@@ -52,6 +55,10 @@ namespace dae
 	private:
 		void DestroyComponents();
 
+		bool IsValidParentOrNull(std::weak_ptr<GameObject> pParent);
+		void RemoveChild(std::weak_ptr<GameObject> child);
+		void AddChild(std::weak_ptr<GameObject> child);
+
 		template <typename T>
 		void AssertType() const;
 		
@@ -60,6 +67,9 @@ namespace dae
 
 		bool m_ComponentsMarkedForDeath;
 		std::unordered_map<ComponentType, std::list<std::shared_ptr<BaseComponent>>> m_Components;
+
+		std::weak_ptr<GameObject> m_pParent{};
+		std::list<std::weak_ptr<GameObject>> m_Children;
 
 		static const int m_NrOfComponentTypes;
 	};
@@ -71,7 +81,7 @@ namespace dae
 		AssertType<T>();
 
 		//Get Component type
-		ComponentType componentType{ GetComponentType<T>() }; 
+		ComponentType componentType{ GetComponentType<T>() }; 	
 
 		std::shared_ptr<T> pComponent{ std::make_shared<T>(std::forward<Arg>(gameObj)) };
 
