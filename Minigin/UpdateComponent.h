@@ -8,7 +8,7 @@ namespace dae
 	public:
 
 		UpdateComponent() = default;
-		~UpdateComponent() = default;
+		virtual ~UpdateComponent() = default;
 		UpdateComponent(const UpdateComponent& component) = delete;
 		UpdateComponent(UpdateComponent&& component) noexcept = delete;
 		UpdateComponent& operator=(const UpdateComponent& component) = delete;

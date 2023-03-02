@@ -8,7 +8,7 @@ namespace dae
 	{
 	public:
 		TransformComponent() = default;
-		~TransformComponent() = default;
+		virtual ~TransformComponent() = default;
 		TransformComponent(const TransformComponent& component) = delete;
 		TransformComponent(TransformComponent&& component) noexcept = delete;
 		TransformComponent& operator=(const TransformComponent& component) = delete;

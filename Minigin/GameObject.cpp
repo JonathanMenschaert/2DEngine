@@ -12,7 +12,7 @@ dae::GameObject::GameObject()
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
 		//Initialize a list in the map per component type
-		m_Components[static_cast<ComponentType>(i)];
+		m_Components[static_cast<ComponentType>(i)] = std::list<std::shared_ptr<BaseComponent>>{};
 	}
 }
 

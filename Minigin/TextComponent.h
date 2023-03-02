@@ -12,7 +12,7 @@ namespace dae
 	{
 	public:
 		TextComponent();
-		~TextComponent() = default;
+		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& component) = delete;
 		TextComponent(TextComponent&& component) noexcept = delete;
 		TextComponent& operator=(const TextComponent& component) = delete;

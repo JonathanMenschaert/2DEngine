@@ -7,7 +7,7 @@ namespace dae
 	{
 	public:
 		FPSComponent();
-		~FPSComponent() = default;
+		virtual ~FPSComponent() = default;
 		FPSComponent(const FPSComponent& component) = delete;
 		FPSComponent(FPSComponent&& component) noexcept = delete;
 		FPSComponent& operator=(const FPSComponent& component) = delete;

@@ -10,7 +10,7 @@ namespace dae
 	{
 	public:
 		RenderComponent() = default;
-		~RenderComponent() = default;
+		virtual ~RenderComponent() = default;
 		RenderComponent(const RenderComponent& component) = delete;
 		RenderComponent(RenderComponent&& component) noexcept = delete;
 		RenderComponent& operator=(const RenderComponent& component) = delete;

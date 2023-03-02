@@ -8,7 +8,7 @@ namespace dae
 	{
 	public:
 		BaseComponent();
-		~BaseComponent() = default;
+		virtual ~BaseComponent() = default;
 		BaseComponent(const BaseComponent& baseComponent) = delete;
 		BaseComponent(BaseComponent&& baseComponent) noexcept = delete;
 		BaseComponent& operator=(const BaseComponent& baseComponent) = delete;
