@@ -17,6 +17,10 @@ namespace dae
 		m_pGameObject = pGameObject;
 	}*/
 
+	void BaseComponent::Init()
+	{
+	}
+
 	void BaseComponent::Update()
 	{
 	}

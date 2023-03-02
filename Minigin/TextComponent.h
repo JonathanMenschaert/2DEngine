@@ -18,6 +18,7 @@ namespace dae
 		TextComponent& operator=(const TextComponent& component) = delete;
 		TextComponent& operator=(TextComponent&& component) noexcept = delete;
 
+		void Init() override;
 		void Update() override;
 
 		void SetText(const std::string& text);

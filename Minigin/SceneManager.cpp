@@ -1,6 +1,14 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
+void dae::SceneManager::Init()
+{
+	for (auto& scene : m_scenes)
+	{
+		scene->Init();
+	}
+}
+
 void dae::SceneManager::BeginUpdate()
 {
 	for(auto& scene : m_scenes)
@@ -17,7 +25,7 @@ void dae::SceneManager::EndUpdate()
 	}
 }
 
-void dae::SceneManager::Render()
+void dae::SceneManager::Render() const
 {
 	for (const auto& scene : m_scenes)
 	{

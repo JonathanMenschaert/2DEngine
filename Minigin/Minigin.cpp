@@ -86,7 +86,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 	auto& time = Time::GetInstance();
 	time.Reset();
-	// todo: this update loop could use some work.
+	sceneManager.Init();
 
 	const int targetFps{ 144 };
 	const auto desiredFrameTime{ std::chrono::milliseconds(1000 / targetFps)};

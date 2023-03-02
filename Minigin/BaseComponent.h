@@ -13,9 +13,8 @@ namespace dae
 		BaseComponent(BaseComponent&& baseComponent) noexcept = delete;
 		BaseComponent& operator=(const BaseComponent& baseComponent) = delete;
 		BaseComponent& operator=(BaseComponent&& baseComponent) noexcept = delete;
-
-		//void SetParent(std::weak_ptr<GameObject> pGameObject);
-
+		
+		virtual void Init();
 		virtual void Update();
 		virtual void Render() const;
 

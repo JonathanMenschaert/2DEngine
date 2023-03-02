@@ -14,6 +14,15 @@ dae::TextComponent::TextComponent(std::shared_ptr<GameObject> pGameObject)
 {
 }
 
+void dae::TextComponent::Init()
+{
+	auto pGameObject{ GetGameObject() };
+	if (!pGameObject->HasComponent<RenderComponent>())
+	{
+		pGameObject->AddComponent<RenderComponent>(pGameObject);
+	}
+}
+
 void dae::TextComponent::Update()
 {
 	if (m_NeedsUpdate && m_Text.size() > 0) UpdateTexture();

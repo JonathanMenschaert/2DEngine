@@ -8,11 +8,22 @@ const int dae::GameObject::m_NrOfComponentTypes{ static_cast<int>(ComponentType:
 dae::GameObject::GameObject()
 	:m_ComponentsMarkedForDeath{false}
 {
-	
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
 		//Initialize a list in the map per component type
 		m_Components[static_cast<ComponentType>(i)] = std::list<std::shared_ptr<BaseComponent>>{};
+	}
+}
+
+void dae::GameObject::Init()
+{
+	for (int i{}; i < m_NrOfComponentTypes; ++i)
+	{
+		ComponentType componentType{ static_cast<ComponentType>(i) };
+		for (auto& pComponent : m_Components[componentType])
+		{
+			pComponent->Init();
+		}
 	}
 }
 
