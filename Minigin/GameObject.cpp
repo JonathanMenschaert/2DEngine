@@ -20,7 +20,7 @@ void dae::GameObject::Init()
 
 	if (!HasComponent<TransformComponent>())
 	{
-		AddComponent<TransformComponent>(shared_from_this());
+		AddComponent<TransformComponent>();
 	}
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{

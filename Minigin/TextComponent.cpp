@@ -19,7 +19,7 @@ void dae::TextComponent::Init()
 	auto pGameObject{ GetGameObject() };
 	if (!pGameObject->HasComponent<RenderComponent>())
 	{
-		pGameObject->AddComponent<RenderComponent>(pGameObject);
+		pGameObject->AddComponent<RenderComponent>();
 	}
 }
 

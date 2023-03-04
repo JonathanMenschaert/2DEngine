@@ -43,8 +43,8 @@ namespace dae
 
 		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition);
 
-		template <typename T, typename Arg>
-		std::shared_ptr<T> AddComponent(Arg&& args);
+		template <typename T>
+		std::shared_ptr<T> AddComponent();
 
 		template<typename T>
 		std::weak_ptr<T> GetComponent() const;
@@ -64,7 +64,7 @@ namespace dae
 
 		template <typename T>
 		void AssertType() const;
-		
+
 		template <typename T>
 		ComponentType GetComponentType() const;
 
@@ -77,8 +77,8 @@ namespace dae
 		static const int m_NrOfComponentTypes;
 	};
 
-	template <typename T, typename Arg>
-	std::shared_ptr<T> GameObject::AddComponent(Arg&& gameObj)
+	template <typename T>
+	std::shared_ptr<T> GameObject::AddComponent()
 	{
 		//Compile time check to make sure T is a component
 		AssertType<T>();
@@ -86,7 +86,7 @@ namespace dae
 		//Get Component type
 		ComponentType componentType{ GetComponentType<T>() }; 	
 
-		std::shared_ptr<T> pComponent{ std::make_shared<T>(std::forward<Arg>(gameObj)) };
+		std::shared_ptr<T> pComponent{ std::make_shared<T>(shared_from_this()) };
 
 		std::list<std::shared_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
 		componentList.push_back(pComponent);
