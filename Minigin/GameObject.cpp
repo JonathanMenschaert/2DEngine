@@ -99,7 +99,7 @@ void dae::GameObject::RemoveChild(std::weak_ptr<GameObject> child)
 {
 	m_Children.erase(std::remove_if(m_Children.begin(), m_Children.end(), [&child](const auto& childObj) {
 		return childObj.lock() == child.lock();
-		}));
+		}), m_Children.end());
 }
 
 void dae::GameObject::AddChild(std::weak_ptr<GameObject> child)
@@ -122,7 +122,7 @@ void dae::GameObject::DestroyComponents()
 			componentList.erase(std::remove_if(componentList.begin(), componentList.end(), [](auto& element)
 				{
 					return element->IsMarkedForDeath();
-				}));
+				}), componentList.end());
 		}
 	}
 	m_ComponentsMarkedForDeath = false;

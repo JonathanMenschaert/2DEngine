@@ -144,13 +144,16 @@ namespace dae
 
 		//Loop over all components to find the correct component to remove
 		//All instances of the component T will be marked for death
-		for (const std::shared_ptr<BaseComponent>& pComponent : m_Components)
+		for (auto& componentPair : m_Components)
 		{
-			std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
-			if (pRequestedComponent)
+			for (std::shared_ptr<BaseComponent> pComponent : componentPair.second)
 			{
-				pRequestedComponent->MarkForDeath();
-				m_ComponentsMarkedForDeath = true;
+				std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
+				if (pRequestedComponent)
+				{
+					pRequestedComponent->MarkForDeath();
+					m_ComponentsMarkedForDeath = true;
+				}
 			}
 		}
 	}
