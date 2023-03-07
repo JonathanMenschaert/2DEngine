@@ -29,7 +29,7 @@ void dae::FPSComponent::Update()
 	{
 		const int fps{ static_cast<int>(1.f / elapsedTime) };
 		m_FPSRollingAverage.push_back(fps);
-		std::cout << fps << "\n";
+
 		int containerSize{ static_cast<int>(m_FPSRollingAverage.size()) };
 		if (containerSize > m_MaxStoredFPS)
 		{
