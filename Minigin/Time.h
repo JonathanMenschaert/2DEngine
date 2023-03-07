@@ -19,7 +19,7 @@ namespace dae
 		void Update();
 		
 		float GetElapsedTime() const;
-		const std::chrono::high_resolution_clock::time_point& GetTime() const;
+		const std::chrono::high_resolution_clock::time_point& CurrentTime() const;
 		const std::chrono::high_resolution_clock::time_point Now() const;
 
 	protected:

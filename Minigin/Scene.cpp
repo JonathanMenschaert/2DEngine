@@ -32,19 +32,19 @@ void dae::Scene::Init()
 	}
 }
 
-void Scene::BeginUpdate()
+void Scene::Update()
 {
 	for(auto& object : m_objects)
 	{
-		object->BeginUpdate();
+		object->Update();
 	}
 }
 
-void dae::Scene::EndUpdate()
+void dae::Scene::LateUpdate()
 {
 	for (auto& object : m_objects)
 	{
-		object->EndUpdate();
+		object->LateUpdate();
 	}
 }
 

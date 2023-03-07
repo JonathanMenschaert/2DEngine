@@ -33,8 +33,8 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 		void Init();
-		void BeginUpdate();
-		void EndUpdate();
+		void Update();
+		void LateUpdate();
 		void Render() const;
 
 		std::list<std::weak_ptr<GameObject>>& GetChildren();

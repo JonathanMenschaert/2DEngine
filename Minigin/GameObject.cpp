@@ -32,7 +32,7 @@ void dae::GameObject::Init()
 	}
 }
 
-void dae::GameObject::BeginUpdate()
+void dae::GameObject::Update()
 {
 	for (auto& pComponent : m_Components[ComponentType::Update])
 	{
@@ -40,7 +40,7 @@ void dae::GameObject::BeginUpdate()
 	}
 }
 
-void dae::GameObject::EndUpdate()
+void dae::GameObject::LateUpdate()
 {
 	if (m_ComponentsMarkedForDeath) DestroyComponents();
 }

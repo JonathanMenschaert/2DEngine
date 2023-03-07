@@ -9,19 +9,19 @@ void dae::SceneManager::Init()
 	}
 }
 
-void dae::SceneManager::BeginUpdate()
+void dae::SceneManager::Update()
 {
 	for(auto& scene : m_scenes)
 	{
-		scene->BeginUpdate();
+		scene->Update();
 	}
 }
 
-void dae::SceneManager::EndUpdate()
+void dae::SceneManager::LateUpdate()
 {
 	for (auto& scene : m_scenes)
 	{
-		scene->EndUpdate();
+		scene->LateUpdate();
 	}
 }
 

@@ -2,7 +2,10 @@
 #include "GameObject.h"
 #include <sstream>
 #include "Time.h"
-
+#include <numeric>
+#include <algorithm>
+#include <functional>
+#include <iostream>
 dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pGameObject)
 	:UpdateComponent(pGameObject)
 	,m_pTextComponent{}
@@ -25,8 +28,17 @@ void dae::FPSComponent::Update()
 	if (m_UpdateTimer >= m_MaxTimer)
 	{
 		const int fps{ static_cast<int>(1.f / elapsedTime) };
+		m_FPSRollingAverage.push_back(fps);
+		std::cout << fps << "\n";
+		if (m_FPSRollingAverage.size() > m_MaxStoredFPS)
+		{
+			m_FPSRollingAverage.pop_front();
+		}
+
+		int averageFps = std::accumulate(m_FPSRollingAverage.begin(), m_FPSRollingAverage.end(), 0) / static_cast<int>(m_FPSRollingAverage.size());
 		std::stringstream text{};
-		text << fps << " FPS";
+
+		text << averageFps << " FPS";
 
 		m_pTextComponent.lock()->SetText(text.str());
 

@@ -13,8 +13,8 @@ namespace dae
 		void RemoveAll();
 
 		void Init();
-		void BeginUpdate();
-		void EndUpdate();
+		void Update();
+		void LateUpdate();
 		void Render() const;
 
 		~Scene();

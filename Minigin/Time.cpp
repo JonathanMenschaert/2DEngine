@@ -25,7 +25,7 @@ namespace dae
         return m_ElapsedTime;
     }
 
-    const std::chrono::high_resolution_clock::time_point& Time::GetTime() const
+    const std::chrono::high_resolution_clock::time_point& Time::CurrentTime() const
     {
         return m_CurrTime;
     }

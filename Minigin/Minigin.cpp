@@ -95,12 +95,11 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	{
 		time.Update();
 		doContinue = input.ProcessInput();
-		sceneManager.BeginUpdate();
-		sceneManager.EndUpdate();
+		sceneManager.Update();
+		sceneManager.LateUpdate();
 		renderer.Render();
 		
-		const auto sleepTime = time.GetTime() - time.Now() + desiredFrameTime;
-		//TODO: cache lock of weak pointer
+		const auto sleepTime = time.CurrentTime() - time.Now() + desiredFrameTime;
 		std::this_thread::sleep_for(sleepTime);
 	}
 }
