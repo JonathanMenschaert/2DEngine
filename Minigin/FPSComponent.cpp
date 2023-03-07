@@ -30,12 +30,13 @@ void dae::FPSComponent::Update()
 		const int fps{ static_cast<int>(1.f / elapsedTime) };
 		m_FPSRollingAverage.push_back(fps);
 		std::cout << fps << "\n";
-		if (m_FPSRollingAverage.size() > m_MaxStoredFPS)
+		int containerSize{ static_cast<int>(m_FPSRollingAverage.size()) };
+		if (containerSize > m_MaxStoredFPS)
 		{
 			m_FPSRollingAverage.pop_front();
 		}
 
-		int averageFps = std::accumulate(m_FPSRollingAverage.begin(), m_FPSRollingAverage.end(), 0) / static_cast<int>(m_FPSRollingAverage.size());
+		int averageFps = std::accumulate(m_FPSRollingAverage.begin(), m_FPSRollingAverage.end(), 0) / containerSize;
 		std::stringstream text{};
 
 		text << averageFps << " FPS";
