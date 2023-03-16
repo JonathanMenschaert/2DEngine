@@ -2,7 +2,6 @@
 #include <string>
 #include <memory>
 #include "GameObject.h"
-#include "Transform.h"
 
 namespace dae
 {
@@ -26,7 +25,6 @@ namespace dae
 	private:
 		bool m_needsUpdate;
 		std::string m_text;
-		Transform m_transform{};
 		std::shared_ptr<Font> m_font;
 		std::shared_ptr<Texture2D> m_textTexture;
 	};

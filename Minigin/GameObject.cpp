@@ -53,6 +53,18 @@ void dae::GameObject::Render() const
 	}
 }
 
+void dae::GameObject::OnGui()
+{
+	for (auto& componentPair : m_Components)
+	{
+		auto& componentList{ componentPair.second };
+		for (auto& component : componentList)
+		{
+			component->OnGui();
+		}
+	}
+}
+
 
 std::shared_ptr<dae::GameObject> dae::GameObject::GetParent()
 {

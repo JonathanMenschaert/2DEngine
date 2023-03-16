@@ -28,6 +28,10 @@ namespace dae
 	void BaseComponent::Render() const
 	{
 	}
+	void BaseComponent::OnGui()
+	{
+	}
+
 	void BaseComponent::MarkForDeath()
 	{
 		m_Alive = false;

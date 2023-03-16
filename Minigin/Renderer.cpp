@@ -1,8 +1,9 @@
+
+#include <imgui.h>
 #include <stdexcept>
 #include "Renderer.h"
 #include "SceneManager.h"
 #include "Texture2D.h"
-#include "imgui.h"
 #include <backends/imgui_impl_sdl2.h>
 #include <backends/imgui_impl_opengl2.h>
 
@@ -46,7 +47,7 @@ void dae::Renderer::Render()
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 
-	// hint: something should come here :)
+	SceneManager::GetInstance().OnGui();
 
 	if (m_showDemo)
 		ImGui::ShowDemoWindow(&m_showDemo);

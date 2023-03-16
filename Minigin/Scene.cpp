@@ -56,3 +56,11 @@ void Scene::Render() const
 	}
 }
 
+void dae::Scene::OnGui()
+{
+	for (auto& object : m_objects)
+	{
+		object->OnGui();
+	}
+}
+

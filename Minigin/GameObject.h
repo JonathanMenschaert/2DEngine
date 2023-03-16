@@ -1,6 +1,5 @@
 #pragma once
 #include <memory>
-#include "Transform.h"
 #include <vector>
 #include <list>
 #include <unordered_map>
@@ -36,6 +35,7 @@ namespace dae
 		void Update();
 		void LateUpdate();
 		void Render() const;
+		void OnGui();
 
 		std::list<std::weak_ptr<GameObject>>& GetChildren();
 

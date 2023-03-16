@@ -17,6 +17,7 @@ namespace dae
 		virtual void Init();
 		virtual void Update();
 		virtual void Render() const;
+		virtual void OnGui();
 
 		void MarkForDeath();
 		bool IsMarkedForDeath();
