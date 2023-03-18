@@ -96,7 +96,7 @@
     <ClInclude Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="TrashTheCacheComponent.h">
+    <ClInclude Include="DearImGuiComponent.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TextObject.h">
@@ -185,7 +185,7 @@
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="TrashTheCacheComponent.cpp">
+    <ClCompile Include="DearImGuiComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="TextObject.cpp">

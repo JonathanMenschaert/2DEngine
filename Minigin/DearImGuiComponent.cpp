@@ -1,5 +1,5 @@
 
-#include "TrashTheCacheComponent.h"
+#include "DearImGuiComponent.h"
 #include <chrono>
 #include <numeric>
 #include <algorithm>
@@ -7,15 +7,15 @@
 
 
 
-dae::TrashTheCacheComponent::TrashTheCacheComponent(std::shared_ptr<GameObject> pGameObject)
+dae::DearImGuiComponent::DearImGuiComponent(std::shared_ptr<GameObject> pGameObject)
     :BaseComponent{pGameObject}
-    ,m_AmountOfIntegerMeasurements{3}
-    ,m_AmountOfGameObjectMeasurements{3}
+    ,m_AmountOfIntegerMeasurements{10}
+    ,m_AmountOfGameObjectMeasurements{10}
     ,m_SampleSize{ static_cast<int>(powf(2, 26))}
 {
 }
 
-void dae::TrashTheCacheComponent::OnGui()
+void dae::DearImGuiComponent::OnGui()
 {
 	RenderIntegerBuffer();
     RenderGameobjectBuffer();
@@ -23,7 +23,7 @@ void dae::TrashTheCacheComponent::OnGui()
 
 
 
-void dae::TrashTheCacheComponent::RenderIntegerBuffer()
+void dae::DearImGuiComponent::RenderIntegerBuffer()
 {
     const ImGuiViewport* pViewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(pViewport->WorkPos);
@@ -55,7 +55,7 @@ void dae::TrashTheCacheComponent::RenderIntegerBuffer()
     ImGui::End();
 }
 
-void dae::TrashTheCacheComponent::RenderGameobjectBuffer()
+void dae::DearImGuiComponent::RenderGameobjectBuffer()
 {
     const ImGuiViewport* pViewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(ImVec2{ pViewport->WorkPos.x + 310, pViewport->WorkPos.y });
@@ -98,13 +98,14 @@ void dae::TrashTheCacheComponent::RenderGameobjectBuffer()
     if (!m_GameObjectMeasurements.empty() && !m_GameObjectAltMeasurements.empty())
     {
         auto it{ std::max_element(m_GameObjectMeasurements.begin(), m_GameObjectMeasurements.end()) };
-        DrawMultiPlot(m_GameObjectMeasurements.size(), 2, *it, { ImColor{ 0.f, 1.f, 0.f }, ImColor{0.f, 0.f, 1.f} });
+        DrawMultiPlot({m_GameObjectMeasurements, m_GameObjectAltMeasurements},
+            m_GameObjectMeasurements.size(), 2, *it, { ImColor{ 0.f, 1.f, 0.f }, ImColor{0.f, 0.f, 1.f} });
     }
 
     ImGui::End();
 }
 
-void dae::TrashTheCacheComponent::DrawPlot(const float* data, size_t size, int count, float maxValue, const ImColor& color) const
+void dae::DearImGuiComponent::DrawPlot(const float* data, size_t size, int count, float maxValue, const ImColor& color) const
 {
     const size_t verticalLineIdx{ 4 };
     const int plotAmount{ 1 };
@@ -134,12 +135,12 @@ void dae::TrashTheCacheComponent::DrawPlot(const float* data, size_t size, int c
 }
 
 
-void dae::TrashTheCacheComponent::DrawMultiPlot(size_t size, int count, float maxValue, const std::vector<ImColor>& colors) const
+void dae::DearImGuiComponent::DrawMultiPlot(const std::vector<std::vector<float>>& measurements, size_t size, int count, float maxValue, const std::vector<ImColor>& colors) const
 {
     const size_t verticalLineIdx{ 4 };
     const int plotAmount{ 2 };
     ImU32 plotColor[plotAmount]{ colors[0], colors[1]};
-    const float* data[plotAmount]{ m_GameObjectMeasurements.data(), m_GameObjectAltMeasurements.data() };
+    const float* data[plotAmount]{ measurements[0].data(), measurements[1].data()};
 
     ImGui::PlotConfig::Values values{};
     values.ys_list = data;
@@ -163,7 +164,7 @@ void dae::TrashTheCacheComponent::DrawMultiPlot(size_t size, int count, float ma
     ImGui::Plot("doubleplotter", plotConfig);
 }
 
-void dae::TrashTheCacheComponent::MeasureIntegerBuffer()
+void dae::DearImGuiComponent::MeasureIntegerBuffer()
 {
     m_IntegerMeasurements.clear();
     int* buffer{ new int[m_SampleSize] };
@@ -194,7 +195,7 @@ void dae::TrashTheCacheComponent::MeasureIntegerBuffer()
     delete[] buffer;
 }
 
-void dae::TrashTheCacheComponent::MeasureGameObjectBuffer()
+void dae::DearImGuiComponent::MeasureGameObjectBuffer()
 {
     m_GameObjectMeasurements.clear();
     GameObject3D* buffer{ new GameObject3D[m_SampleSize] };
@@ -223,7 +224,7 @@ void dae::TrashTheCacheComponent::MeasureGameObjectBuffer()
     delete[] buffer;
 }
 
-void dae::TrashTheCacheComponent::MeasureGameObjectAltBuffer()
+void dae::DearImGuiComponent::MeasureGameObjectAltBuffer()
 {
     m_GameObjectAltMeasurements.clear();
     GameObject3DAlt* buffer{ new GameObject3DAlt[m_SampleSize] };

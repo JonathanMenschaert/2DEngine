@@ -29,15 +29,15 @@ namespace dae
 		int ID{};
 	};
 
-	class TrashTheCacheComponent : public BaseComponent
+	class DearImGuiComponent : public BaseComponent
 	{
 	public:
-		TrashTheCacheComponent(std::shared_ptr<GameObject> pGameObject);
-		virtual ~TrashTheCacheComponent() = default;
-		TrashTheCacheComponent(const TrashTheCacheComponent& component) = delete;
-		TrashTheCacheComponent(TrashTheCacheComponent&& component) noexcept = delete;
-		TrashTheCacheComponent& operator=(const TrashTheCacheComponent& component) = delete;
-		TrashTheCacheComponent& operator=(TrashTheCacheComponent&& component) noexcept = delete;
+		DearImGuiComponent(std::shared_ptr<GameObject> pGameObject);
+		virtual ~DearImGuiComponent() = default;
+		DearImGuiComponent(const DearImGuiComponent& component) = delete;
+		DearImGuiComponent(DearImGuiComponent&& component) noexcept = delete;
+		DearImGuiComponent& operator=(const DearImGuiComponent& component) = delete;
+		DearImGuiComponent& operator=(DearImGuiComponent&& component) noexcept = delete;
 
 		virtual void OnGui() override;
 
@@ -51,7 +51,7 @@ namespace dae
 		void MeasureGameObjectAltBuffer();
 
 		void DrawPlot(const float* data, size_t size, int count, float maxValue, const ImColor& color) const;
-		void DrawMultiPlot(size_t size, int count, float maxValue, const std::vector<ImColor>& colors) const;
+		void DrawMultiPlot(const std::vector<std::vector<float>>& measurements, size_t size, int count, float maxValue, const std::vector<ImColor>& colors) const;
 
 		const int m_SampleSize;
 		int m_AmountOfIntegerMeasurements;
