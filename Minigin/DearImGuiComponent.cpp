@@ -11,7 +11,7 @@ dae::DearImGuiComponent::DearImGuiComponent(std::shared_ptr<GameObject> pGameObj
     :BaseComponent{pGameObject}
     ,m_AmountOfIntegerMeasurements{10}
     ,m_AmountOfGameObjectMeasurements{10}
-    ,m_SampleSize{ static_cast<int>(powf(2, 26))}
+    ,m_SampleSize{ 10'000'000}
 {
 }
 
@@ -97,6 +97,7 @@ void dae::DearImGuiComponent::RenderGameobjectBuffer()
 
     if (!m_GameObjectMeasurements.empty() && !m_GameObjectAltMeasurements.empty())
     {
+        ImGui::Text("Combined:");
         auto it{ std::max_element(m_GameObjectMeasurements.begin(), m_GameObjectMeasurements.end()) };
         DrawMultiPlot({m_GameObjectMeasurements, m_GameObjectAltMeasurements},
             m_GameObjectMeasurements.size(), 2, *it, { ImColor{ 0.f, 1.f, 0.f }, ImColor{0.f, 0.f, 1.f} });
@@ -107,7 +108,6 @@ void dae::DearImGuiComponent::RenderGameobjectBuffer()
 
 void dae::DearImGuiComponent::DrawPlot(const float* data, size_t size, int count, float maxValue, const ImColor& color) const
 {
-    const size_t verticalLineIdx{ 4 };
     const int plotAmount{ 1 };
     ImU32 plotColor[plotAmount]{ color };
 
@@ -117,6 +117,7 @@ void dae::DearImGuiComponent::DrawPlot(const float* data, size_t size, int count
     values.ys_count = count;
     values.colors = plotColor;
 
+    const size_t verticalLineIdx{ 4 };
     ImGui::PlotConfig::VerticalLines verticalLines{};
     verticalLines.show = true;
     verticalLines.indices = &verticalLineIdx;
@@ -137,7 +138,6 @@ void dae::DearImGuiComponent::DrawPlot(const float* data, size_t size, int count
 
 void dae::DearImGuiComponent::DrawMultiPlot(const std::vector<std::vector<float>>& measurements, size_t size, int count, float maxValue, const std::vector<ImColor>& colors) const
 {
-    const size_t verticalLineIdx{ 4 };
     const int plotAmount{ 2 };
     ImU32 plotColor[plotAmount]{ colors[0], colors[1]};
     const float* data[plotAmount]{ measurements[0].data(), measurements[1].data()};
@@ -148,6 +148,7 @@ void dae::DearImGuiComponent::DrawMultiPlot(const std::vector<std::vector<float>
     values.ys_count = count;
     values.colors = plotColor;
 
+    const size_t verticalLineIdx{ 4 };
     ImGui::PlotConfig::VerticalLines verticalLines{};
     verticalLines.show = true;
     verticalLines.indices = &verticalLineIdx;
@@ -167,7 +168,7 @@ void dae::DearImGuiComponent::DrawMultiPlot(const std::vector<std::vector<float>
 void dae::DearImGuiComponent::MeasureIntegerBuffer()
 {
     m_IntegerMeasurements.clear();
-    int* buffer{ new int[m_SampleSize] };
+    int* buffer{ new int[m_SampleSize]{} };
 
     for (int stepSize{ 1 }; stepSize <= 1024; stepSize *= 2)
     {
@@ -198,7 +199,7 @@ void dae::DearImGuiComponent::MeasureIntegerBuffer()
 void dae::DearImGuiComponent::MeasureGameObjectBuffer()
 {
     m_GameObjectMeasurements.clear();
-    GameObject3D* buffer{ new GameObject3D[m_SampleSize] };
+    GameObject3D* buffer{ new GameObject3D[m_SampleSize]{} };
 
     for (int stepSize{ 1 }; stepSize <= 1024; stepSize *= 2)
     {
@@ -227,7 +228,7 @@ void dae::DearImGuiComponent::MeasureGameObjectBuffer()
 void dae::DearImGuiComponent::MeasureGameObjectAltBuffer()
 {
     m_GameObjectAltMeasurements.clear();
-    GameObject3DAlt* buffer{ new GameObject3DAlt[m_SampleSize] };
+    GameObject3DAlt* buffer{ new GameObject3DAlt[m_SampleSize]{} };
 
     for (int stepSize{ 1 }; stepSize <= 1024; stepSize *= 2)
     {
