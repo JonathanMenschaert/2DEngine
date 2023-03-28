@@ -1,35 +1,37 @@
 #include <SDL.h>
 #include "InputManager.h"
 #include <backends/imgui_impl_sdl2.h>
-#include "Gamepad.h"
-#include "Command.h"
+#include <iostream>
 
 bool dae::InputManager::ProcessInput()
 {
 	m_KeyboardKeysUp.clear();
 	m_KeyboardKeysDown.clear();
 	SDL_Event e;
+	
 	while (SDL_PollEvent(&e)) {
-		ImGui_ImplSDL2_ProcessEvent(&e);
+		
+		SDL_Keycode key{ e.key.keysym.sym };
 		switch (e.type)
 		{
 		case SDL_QUIT:
 			return false;
 		case SDL_KEYDOWN:
-			if (!m_KeyboardKeysHold.contains(e.key.keysym.sym))
+			if (!m_KeyboardKeysHold.contains(key))
 			{
-				m_KeyboardKeysDown.insert(e.key.keysym.sym);
-				m_KeyboardKeysHold.insert(e.key.keysym.sym);
+				m_KeyboardKeysDown.insert(key);
+				m_KeyboardKeysHold.insert(key);
 			}
 			break;
 		case SDL_KEYUP:
-			if (m_KeyboardKeysHold.contains(e.key.keysym.sym))
+			if (m_KeyboardKeysHold.contains(key))
 			{
-				m_KeyboardKeysDown.insert(e.key.keysym.sym);
-				m_KeyboardKeysHold.erase(e.key.keysym.sym);
+				m_KeyboardKeysDown.insert(key);
+				m_KeyboardKeysHold.erase(key);
 			}
 			break;
 		}
+		ImGui_ImplSDL2_ProcessEvent(&e);
 	}	
 
 	for (const auto& pGamepad : m_Gamepads)
@@ -40,15 +42,7 @@ bool dae::InputManager::ProcessInput()
 	for (const auto& keyboardButton : m_KeyboardCommands)
 	{
 		const auto& keyboardCommand{ keyboardButton.second };
-		if (keyboardCommand.first == InteractionType::Press && m_KeyboardKeysDown.contains(keyboardButton.first))
-		{
-			keyboardCommand.second->Execute();
-		}
-		else if (keyboardCommand.first == InteractionType::Hold && m_KeyboardKeysHold.contains(keyboardButton.first))
-		{
-			keyboardCommand.second->Execute();
-		}
-		else if (keyboardCommand.first == InteractionType::Release && m_KeyboardKeysUp.contains(keyboardButton.first))
+		if (ShouldExecuteCommand(keyboardCommand.first, keyboardButton.first))
 		{
 			keyboardCommand.second->Execute();
 		}
@@ -58,19 +52,10 @@ bool dae::InputManager::ProcessInput()
 	{
 		const auto& gamepadButton{ gamepadCommand.first };
 		const unsigned int gamepadIdx{ gamepadCommand.second.first };
-		if (gamepadButton.second == InteractionType::Hold && m_Gamepads[gamepadIdx]->IsPressed(gamepadButton.first))
+		auto& command{ gamepadCommand.second.second };
+		if (ShouldExecuteCommand(gamepadButton.second, gamepadButton.first, gamepadIdx))
 		{
-			gamepadCommand.second.second->Execute();
-		}
-
-		else if (gamepadButton.second == InteractionType::Press && m_Gamepads[gamepadIdx]->IsDown(gamepadButton.first))
-		{
-			gamepadCommand.second.second->Execute();
-		}
-
-		else if (gamepadButton.second == InteractionType::Release && m_Gamepads[gamepadIdx]->IsUp(gamepadButton.first))
-		{
-			gamepadCommand.second.second->Execute();
+			command->Execute();
 		}
 	}
 
@@ -78,14 +63,49 @@ bool dae::InputManager::ProcessInput()
 	{
 		const auto& gamepadButton{ gamepadCommand.first };
 		const unsigned int gamepadIdx{ gamepadCommand.second.first };
-		if (m_Gamepads[gamepadIdx]->GetAxis(gamepadButton) > 0.f)
+		if (abs(m_Gamepads[gamepadIdx]->GetAxis(gamepadButton)) > 0.f)
 		{
 			gamepadCommand.second.second->Execute();
 		}
 	}
 
-
 	return true;
+}
+
+bool dae::InputManager::ShouldExecuteCommand(InteractionType type, SDL_Keycode key) const
+{	
+	SDL_Keycode keyboardKey{ static_cast<SDL_KeyCode>(key) };
+	switch (type)
+	{
+	case InteractionType::Press:
+		if (m_KeyboardKeysDown.contains(keyboardKey)) return true;
+		break;
+	case InteractionType::Release:
+		if (m_KeyboardKeysUp.contains(keyboardKey)) return true;
+		break;
+	case InteractionType::Hold:
+		if (m_KeyboardKeysHold.contains(keyboardKey)) return true;
+		break;
+	}
+	
+	return false;
+}
+
+bool dae::InputManager::ShouldExecuteCommand(InteractionType type, Gamepad::DigitalButton key, unsigned int gamepadIdx) const
+{
+	switch (type)
+	{
+	case InteractionType::Press:
+		if (m_Gamepads[gamepadIdx]->IsDown(key)) return true;
+		break;
+	case InteractionType::Release:
+		if (m_Gamepads[gamepadIdx]->IsUp(key)) return true;
+		break;
+	case InteractionType::Hold:
+		if (m_Gamepads[gamepadIdx]->IsPressed(key)) return true;
+		break;
+	}
+	return false;
 }
 
 void dae::InputManager::AddControllerById(unsigned int gamepadIdx)
@@ -107,14 +127,19 @@ void dae::InputManager::BindKeyboardCommand(InteractionType type, SDL_Keycode ke
 	m_KeyboardCommands[key] = std::make_pair(type, std::move(pCommand));
 }
 
-void dae::InputManager::BindDigitalCommand(unsigned int controllerIdx, InteractionType type, Gamepad::DigitalButton key, std::unique_ptr<Command> pCommand)
+void dae::InputManager::BindDigitalCommand(unsigned int gamepadIdx, InteractionType type, Gamepad::DigitalButton key, std::unique_ptr<Command> pCommand)
 {
-	AddControllerById(controllerIdx);
-	m_DigitalGamepadCommands[std::make_pair(key, type)] = std::make_pair(controllerIdx, std::move(pCommand));
+	AddControllerById(gamepadIdx);
+	m_DigitalGamepadCommands[std::make_pair(key, type)] = std::make_pair(gamepadIdx, std::move(pCommand));
 }
 
-void dae::InputManager::BindAnalogCommand(unsigned int controllerIdx, dae::Gamepad::AnalogButton key, std::unique_ptr<dae::Command> pCommand)
+void dae::InputManager::BindAnalogCommand(unsigned int gamepadIdx, dae::Gamepad::AnalogButton key, std::unique_ptr<Command> pCommand)
 {
-	AddControllerById(controllerIdx);
-	m_AnalogGamepadCommands[key] = std::make_pair(controllerIdx, std::move(pCommand));
+	AddControllerById(gamepadIdx);
+	m_AnalogGamepadCommands[key] = std::make_pair(gamepadIdx, std::move(pCommand));
+}
+
+float dae::InputManager::GetAnalogValue(Gamepad::AnalogButton button, unsigned int gamepadIdx) const
+{
+	return m_Gamepads[gamepadIdx]->GetAxis(button);
 }

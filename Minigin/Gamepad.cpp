@@ -3,6 +3,7 @@
 #include <XInput.h>
 #include "Gamepad.h"
 #include <algorithm>
+
 using namespace dae;
 class Gamepad::GamepadImpl
 {
@@ -54,8 +55,8 @@ public:
 		const BYTE maxValue{ static_cast<BYTE>(MAXBYTE) };
 		const BYTE deadZoneValue{ static_cast<BYTE>(m_TriggerDeadzone * maxValue) };
 		const BYTE triggerClamped{ std::clamp(trigger, deadZoneValue, maxValue) };
-
-		return static_cast<float>(triggerClamped) / static_cast<float>(maxValue - deadZoneValue);
+		
+		return static_cast<float>(triggerClamped - deadZoneValue) / static_cast<float>(maxValue - deadZoneValue);
 	}
 
 	float GetStick(SHORT stick) const
@@ -65,12 +66,12 @@ public:
 
 		SHORT sign{ stick >= 0 ? 1 : -1 };
 
-		const SHORT stickClamped{ std::clamp(stick, deadZoneValue, maxValue) };
-
+		const SHORT stickClamped{ std::clamp(static_cast<SHORT>(abs(stick)), deadZoneValue, maxValue) };
+		
 		return static_cast<float>(stickClamped - deadZoneValue) / static_cast<float>((maxValue - deadZoneValue) * sign);		
 	}
 
-	float GetAxis(AnalogButton axis) const
+	float GetAnalogValue(AnalogButton axis) const
 	{
 		switch (axis)
 		{
@@ -108,47 +109,47 @@ private:
 };
 
 Gamepad::Gamepad(unsigned int controllerIdx)
-{
-	pImpl = new GamepadImpl(controllerIdx);
+	: m_pImpl{ std::make_unique<GamepadImpl>(controllerIdx)}
+{	
 }
 
 Gamepad::~Gamepad()
 {
-	delete pImpl;
+	//Default constructor needs to be defined, otherwise compiler errors are generated.
 }
 
 void Gamepad::Update()
 {
-	pImpl->Update();
+	m_pImpl->Update();
 }
 
 bool Gamepad::IsDown(DigitalButton button) const
 {
-	return pImpl->IsDownThisFrame(static_cast<unsigned int>(button));
+	return m_pImpl->IsDownThisFrame(static_cast<unsigned int>(button));
 }
 
 bool Gamepad::IsUp(DigitalButton button) const
 {
-	return pImpl->IsUpThisFrame(static_cast<unsigned int>(button));
+	return m_pImpl->IsUpThisFrame(static_cast<unsigned int>(button));
 }
 
 bool Gamepad::IsPressed(DigitalButton button) const
 {
-	return pImpl->IsPressed(static_cast<unsigned int>(button));
+	return m_pImpl->IsPressed(static_cast<unsigned int>(button));
 }
 
 void dae::Gamepad::SetStickDeadzone(float percentage)
 {
-	pImpl->SetStickDeadzone(percentage);
+	m_pImpl->SetStickDeadzone(percentage);
 }
 
 float dae::Gamepad::GetAxis(AnalogButton button) const
 {
-	return pImpl->GetAxis(button);
+	return m_pImpl->GetAnalogValue(button);
 }
 
 void dae::Gamepad::SetTriggerDeadzone(float percentage)
 {
-	pImpl->SetTriggerDeadzone(percentage);
+	m_pImpl->SetTriggerDeadzone(percentage);
 }
 

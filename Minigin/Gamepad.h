@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+
 namespace dae
 {
 	class Gamepad final
@@ -51,7 +53,7 @@ namespace dae
 		explicit Gamepad(unsigned int controllerIdx);
 		~Gamepad();
 	private:		
-		GamepadImpl* pImpl;
+		 std::unique_ptr<GamepadImpl> m_pImpl;
 	};
 }
 
