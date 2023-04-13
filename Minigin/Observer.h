@@ -1,4 +1,6 @@
 #pragma once
+
+#include "Event.h"
 namespace dae
 {
 	class Observer

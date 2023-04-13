@@ -1,0 +1,46 @@
+#pragma once
+#include "glm/glm.hpp"
+#include "BaseComponent.h"
+#include <string>
+#include <vector>
+#include "Subject.h"
+namespace dae
+{
+	class RectCollisionComponent : public BaseComponent, public Subject
+	{
+	public:
+
+		enum class CollisionType
+		{
+			DynamicCollision,
+			Trigger,
+			StaticCollision
+		};
+		
+		~RectCollisionComponent() = default;
+		RectCollisionComponent(const RectCollisionComponent& baseComponent) = delete;
+		RectCollisionComponent(RectCollisionComponent&& baseComponent) noexcept = delete;
+		RectCollisionComponent& operator=(const RectCollisionComponent& baseComponent) = delete;
+		RectCollisionComponent& operator=(RectCollisionComponent&& baseComponent) noexcept = delete;
+
+		virtual void Init() override;
+
+		
+		void SetExtend(const glm::vec2& extend);
+		void SetLayers(const std::vector<std::string>& layers);
+		void SetCollisionType(CollisionType type);
+		void AddCollisionOffset(const glm::vec2& offset);
+
+		const std::vector<std::string>& GetLayers() const;
+		const glm::vec4& GetCollisionBox() const;
+		const glm::vec2& GetExtend() const;
+		CollisionType GetCollisionType() const;
+
+	private:
+		glm::vec4 m_CollisionBox{};
+		glm::vec2 m_Extend{};
+		std::vector<std::string> m_Layers{};
+		CollisionType m_CollisonType{CollisionType::StaticCollision};
+	};
+}
+

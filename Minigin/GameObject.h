@@ -37,6 +37,8 @@ namespace dae
 		void Render() const;
 		void OnGui();
 
+		TransformComponent* GetTransform() const;
+
 		std::list<std::weak_ptr<GameObject>>& GetChildren();
 
 		std::shared_ptr<dae::GameObject> GetParent();
@@ -73,6 +75,8 @@ namespace dae
 
 		std::weak_ptr<GameObject> m_pParent{};
 		std::list<std::weak_ptr<GameObject>> m_Children;
+
+		std::shared_ptr<TransformComponent> m_pTransform;
 
 		static const int m_NrOfComponentTypes;
 	};

@@ -17,9 +17,9 @@ namespace dae
 		void Init() override;
 
 		void SetLocalPosition(const glm::vec2& position);
-		void SetLocalPosition(const glm::vec3& position);
-		const glm::vec3& GetLocalPosition() const;
-		const glm::vec3& GetWorldPosition();
+		void Translate(const glm::vec2& offset);
+		const glm::vec2& GetLocalPosition() const;
+		const glm::vec2& GetWorldPosition();
 		float GetDistanceToParent() const;
 
 	private:
@@ -27,8 +27,8 @@ namespace dae
 		void UpdateWorldPosition();
 		float m_Magnitude{};
 		bool m_NeedsUpdate{ false };
-		glm::vec3 m_WorldPosition{};
-		glm::vec3 m_LocalPosition{};
+		glm::vec2 m_WorldPosition{};
+		glm::vec2 m_LocalPosition{};
 	};
 }
 

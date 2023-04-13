@@ -6,7 +6,7 @@ namespace dae
 	class Gamepad final
 	{
 	public:
-		class GamepadImpl;
+		
 		enum class AnalogButton
 		{
 			LeftTrigger,
@@ -52,8 +52,9 @@ namespace dae
 
 		explicit Gamepad(unsigned int controllerIdx);
 		~Gamepad();
-	private:		
-		 std::unique_ptr<GamepadImpl> m_pImpl;
+	private:	
+		class GamepadImpl;
+		std::unique_ptr<GamepadImpl> m_pImpl;
 	};
 }
 

@@ -22,6 +22,7 @@ void dae::GameObject::Init()
 	{
 		AddComponent<TransformComponent>();
 	}
+	m_pTransform = GetComponent<TransformComponent>().lock();
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
 		ComponentType componentType{ static_cast<ComponentType>(i) };
@@ -63,6 +64,11 @@ void dae::GameObject::OnGui()
 			component->OnGui();
 		}
 	}
+}
+
+dae::TransformComponent* dae::GameObject::GetTransform() const
+{
+	return m_pTransform.get();
 }
 
 

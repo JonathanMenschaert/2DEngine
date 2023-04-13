@@ -7,5 +7,5 @@ dae::Event::Event(const char* eventName)
 
 bool dae::Event::operator==(const Event& rhs) const
 {
-    return m_EventName == rhs;
+    return m_EventName == rhs.m_EventName;
 }
