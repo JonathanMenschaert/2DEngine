@@ -12,6 +12,7 @@
 #include "Physics.h"
 #include "Time.h"
 #include <chrono>
+#include "steam_api.h"
 
 SDL_Window* g_window{};
 
@@ -95,6 +96,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	bool doContinue = true;
 	while (doContinue)
 	{
+		SteamAPI_RunCallbacks();
 		time.Update();
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
