@@ -24,7 +24,7 @@ void dae::RotatorComponent::Update()
 		glm::mat4 rotationMat{ 1 };
 		rotationMat = glm::rotate(rotationMat, glm::radians(m_RotationSpeed * Time::GetInstance().GetElapsedTime()), glm::vec3(0.f, 0.f, 1.f));
 		
-		m_pTransform->SetLocalPosition(glm::vec3{ rotationMat * glm::vec4{vec, 1.f} });
+		m_pTransform->SetLocalPosition(glm::vec3{ rotationMat * glm::vec4{vec, 0.f, 1.f} });
 	}
 }
 

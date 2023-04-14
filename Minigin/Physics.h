@@ -17,10 +17,12 @@ namespace dae
 		Physics& operator=(Physics& physics) noexcept = delete;
 
 		void HandleCollision();
+
 		void AddPhysicsCollider(RectCollisionComponent* rectCollider);
 
 	private:
 		glm::vec2 CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2);
+		bool HasTriggered(const glm::vec4& box1, const glm::vec4& box2);
 		bool CompareLayers(const std::vector<std::string>& layers1, const std::vector<std::string>& layers2) const;
 
 		std::vector<RectCollisionComponent*> m_DynamicColliders;

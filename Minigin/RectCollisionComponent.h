@@ -6,7 +6,7 @@
 #include "Subject.h"
 namespace dae
 {
-	class RectCollisionComponent : public BaseComponent, public Subject
+	class RectCollisionComponent : public BaseComponent
 	{
 	public:
 
@@ -17,11 +17,12 @@ namespace dae
 			StaticCollision
 		};
 		
+		RectCollisionComponent(std::shared_ptr<GameObject> pGameObject);
 		~RectCollisionComponent() = default;
-		RectCollisionComponent(const RectCollisionComponent& baseComponent) = delete;
-		RectCollisionComponent(RectCollisionComponent&& baseComponent) noexcept = delete;
-		RectCollisionComponent& operator=(const RectCollisionComponent& baseComponent) = delete;
-		RectCollisionComponent& operator=(RectCollisionComponent&& baseComponent) noexcept = delete;
+		RectCollisionComponent(const RectCollisionComponent& rectComponent) = delete;
+		RectCollisionComponent(RectCollisionComponent&& rectComponent) noexcept = delete;
+		RectCollisionComponent& operator=(const RectCollisionComponent& rectComponent) = delete;
+		RectCollisionComponent& operator=(RectCollisionComponent&& rectComponent) noexcept = delete;
 
 		virtual void Init() override;
 
@@ -32,7 +33,7 @@ namespace dae
 		void AddCollisionOffset(const glm::vec2& offset);
 
 		const std::vector<std::string>& GetLayers() const;
-		const glm::vec4& GetCollisionBox() const;
+		glm::vec4 GetCollisionBox() const;
 		const glm::vec2& GetExtend() const;
 		CollisionType GetCollisionType() const;
 
