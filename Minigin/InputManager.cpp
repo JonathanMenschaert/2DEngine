@@ -26,7 +26,7 @@ bool dae::InputManager::ProcessInput()
 		case SDL_KEYUP:
 			if (m_KeyboardKeysHold.contains(key))
 			{
-				m_KeyboardKeysDown.insert(key);
+				m_KeyboardKeysUp.insert(key);
 				m_KeyboardKeysHold.erase(key);
 			}
 			break;
@@ -50,10 +50,10 @@ bool dae::InputManager::ProcessInput()
 
 	for (const auto& gamepadCommand : m_DigitalGamepadCommands)
 	{
-		const auto& gamepadButton{ gamepadCommand.first };
-		const unsigned int gamepadIdx{ gamepadCommand.second.first };
+		
+		const unsigned int gamepadIdx{ gamepadCommand.first.first };
 		auto& command{ gamepadCommand.second.second };
-		if (ShouldExecuteCommand(gamepadButton.second, gamepadButton.first, gamepadIdx))
+		if (ShouldExecuteCommand(gamepadCommand.second.first, gamepadCommand.first.second, gamepadIdx))
 		{
 			command->Execute();
 		}
@@ -61,11 +61,11 @@ bool dae::InputManager::ProcessInput()
 
 	for (const auto& gamepadCommand : m_AnalogGamepadCommands)
 	{
-		const auto& gamepadButton{ gamepadCommand.first };
-		const unsigned int gamepadIdx{ gamepadCommand.second.first };
+		const auto& gamepadButton{ gamepadCommand.first.second };
+		const unsigned int gamepadIdx{ gamepadCommand.first.first };
 		if (abs(m_Gamepads[gamepadIdx]->GetAxis(gamepadButton)) > 0.f)
 		{
-			gamepadCommand.second.second->Execute();
+			gamepadCommand.second->Execute();
 		}
 	}
 
@@ -130,13 +130,13 @@ void dae::InputManager::BindKeyboardCommand(InteractionType type, SDL_Keycode ke
 void dae::InputManager::BindDigitalCommand(unsigned int gamepadIdx, InteractionType type, Gamepad::DigitalButton key, std::unique_ptr<Command> pCommand)
 {
 	AddControllerById(gamepadIdx);
-	m_DigitalGamepadCommands[std::make_pair(key, type)] = std::make_pair(gamepadIdx, std::move(pCommand));
+	m_DigitalGamepadCommands[std::make_pair(gamepadIdx, key)] = std::make_pair(type, std::move(pCommand));
 }
 
 void dae::InputManager::BindAnalogCommand(unsigned int gamepadIdx, dae::Gamepad::AnalogButton key, std::unique_ptr<Command> pCommand)
 {
 	AddControllerById(gamepadIdx);
-	m_AnalogGamepadCommands[key] = std::make_pair(gamepadIdx, std::move(pCommand));
+	m_AnalogGamepadCommands[std::make_pair(gamepadIdx, key)] = std::move(pCommand);
 }
 
 float dae::InputManager::GetAnalogValue(Gamepad::AnalogButton button, unsigned int gamepadIdx) const

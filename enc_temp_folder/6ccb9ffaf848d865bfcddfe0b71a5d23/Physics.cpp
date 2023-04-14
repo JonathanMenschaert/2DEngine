@@ -34,7 +34,7 @@ void dae::Physics::HandleCollision()
 			{
 				if (HasTriggered(collider->GetCollisionBox(), other->GetCollisionBox()))
 				{
-					
+					std::cout << "Triggered\n";
 				}
 			}
 		}
