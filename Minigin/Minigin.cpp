@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Physics.h"
 #include "Time.h"
 #include <chrono>
 
@@ -85,6 +86,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 	auto& time = Time::GetInstance();
+	auto& physics = Physics::GetInstance();
 	time.Reset();
 	sceneManager.Init();
 
@@ -97,6 +99,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 		sceneManager.LateUpdate();
+		physics.HandleCollision();
 		renderer.Render();
 		
 		const auto sleepTime = time.CurrentTime() - time.Now() + desiredFrameTime;

@@ -7,7 +7,7 @@ namespace dae
 	{
 	public:
 		virtual ~Observer() = default;
-		virtual void Notify(const Event& event) = 0;
+		virtual void Notify(const Event& e) = 0;
 	};
 }
 
