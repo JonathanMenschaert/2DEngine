@@ -112,7 +112,8 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)3rdParty\steamworks\redistributable_bin\*.dll $(OutputPath) /Y</Command>
+      <Command>xcopy $(SolutionDir)3rdParty\steamworks\redistributable_bin\*.dll $(OutputPath) /Y
+xcopy $(SolutionDir)\3rdParty\steamworks\steam_appid.txt $(OutputPath) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,7 +135,8 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\3rdParty\steamworks\redistributable_bin\win64\*.dll $(OutputPath) /Y</Command>
+      <Command>xcopy $(SolutionDir)\3rdParty\steamworks\redistributable_bin\win64\*.dll $(OutputPath) /Y
+xcopy $(SolutionDir)\3rdParty\steamworks\steam_appid.txt $(OutputPath) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -160,7 +162,8 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)3rdParty\steamworks\redistributable_bin\*.dll $(OutputPath) /Y</Command>
+      <Command>xcopy $(SolutionDir)3rdParty\steamworks\redistributable_bin\*.dll $(OutputPath) /Y
+xcopy $(SolutionDir)\3rdParty\steamworks\steam_appid.txt $(OutputPath) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,7 +189,8 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\3rdParty\steamworks\redistributable_bin\win64\*.dll $(OutputPath) /Y</Command>
+      <Command>xcopy $(SolutionDir)\3rdParty\steamworks\redistributable_bin\win64\*.dll $(OutputPath) /Y
+xcopy $(SolutionDir)\3rdParty\steamworks\steam_appid.txt $(OutputPath) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
