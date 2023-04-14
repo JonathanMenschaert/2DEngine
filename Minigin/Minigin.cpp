@@ -98,8 +98,8 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		time.Update();
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
-		sceneManager.LateUpdate();
 		physics.HandleCollision();
+		sceneManager.LateUpdate();
 		renderer.Render();
 		
 		const auto sleepTime = time.CurrentTime() - time.Now() + desiredFrameTime;

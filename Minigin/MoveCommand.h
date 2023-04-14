@@ -13,6 +13,7 @@ namespace dae
 		virtual void Execute() override;
 
 	private:
+		GameObject* m_pActor;
 		const float m_Speed;
 		const glm::vec2 m_Direction;
 	};

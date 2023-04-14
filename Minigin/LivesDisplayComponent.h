@@ -1,20 +1,26 @@
 #pragma once
 #include "BaseComponent.h"
 #include "Observer.h"
+#include "TextComponent.h"
 
 namespace dae
 {
-	class LivesDisplayComponent : public BaseComponent, public Observer
+
+	class LivesDisplayComponent final : public BaseComponent, public Observer<int>
 	{
 	public:
 		LivesDisplayComponent(std::shared_ptr<GameObject> pGameObject);
-		~LivesDisplayComponent() = default;
+		virtual ~LivesDisplayComponent() = default;
 		LivesDisplayComponent(const LivesDisplayComponent& rectComponent) = delete;
 		LivesDisplayComponent(LivesDisplayComponent&& rectComponent) noexcept = delete;
 		LivesDisplayComponent& operator=(const LivesDisplayComponent& rectComponent) = delete;
 		LivesDisplayComponent& operator=(LivesDisplayComponent&& rectComponent) noexcept = delete;
 
-		void Notify(const Event& e);
+		void Init() override;
+		void Notify(const Event<int>& e) override;
+
+	private:
+		TextComponent* m_pText;
 	};
 }
 

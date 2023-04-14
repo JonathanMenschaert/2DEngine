@@ -39,11 +39,13 @@ namespace dae
 
 		TransformComponent* GetTransform() const;
 
-		std::list<std::weak_ptr<GameObject>>& GetChildren();
+		std::list<std::shared_ptr<GameObject>>& GetChildren();
 
 		std::shared_ptr<dae::GameObject> GetParent();
 
 		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition);
+
+		void Destroy();
 
 		template <typename T>
 		std::shared_ptr<T> AddComponent();
@@ -59,10 +61,10 @@ namespace dae
 
 	private:
 		void DestroyComponents();
-
+		void DestroyChildren();
 		bool IsValidParentOrNull(std::weak_ptr<GameObject> pParent);
-		void RemoveChild(std::weak_ptr<GameObject> child);
-		void AddChild(std::weak_ptr<GameObject> child);
+		void RemoveChild(std::shared_ptr<GameObject> child);
+		void AddChild(std::shared_ptr<GameObject> child);
 
 		template <typename T>
 		void AssertType() const;
@@ -70,11 +72,12 @@ namespace dae
 		template <typename T>
 		ComponentType GetComponentType() const;
 
+		bool m_ObjectMarkedForDeath;
 		bool m_ComponentsMarkedForDeath;
 		std::unordered_map<ComponentType, std::list<std::shared_ptr<BaseComponent>>> m_Components;
 
 		std::weak_ptr<GameObject> m_pParent{};
-		std::list<std::weak_ptr<GameObject>> m_Children;
+		std::list<std::shared_ptr<GameObject>> m_Children;
 
 		std::shared_ptr<TransformComponent> m_pTransform;
 

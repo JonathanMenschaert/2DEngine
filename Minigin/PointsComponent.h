@@ -5,7 +5,7 @@ namespace dae
 	class PointsComponent final : public BaseComponent
 	{
 	public:
-		~PointsComponent() = default;
+		virtual ~PointsComponent() = default;
 		PointsComponent(const PointsComponent& baseComponent) = delete;
 		PointsComponent(PointsComponent&& baseComponent) noexcept = delete;
 		PointsComponent& operator=(const PointsComponent& baseComponent) = delete;

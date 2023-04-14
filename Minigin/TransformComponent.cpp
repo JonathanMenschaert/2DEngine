@@ -19,7 +19,7 @@ void dae::TransformComponent::SetLocalPosition(const glm::vec2& position)
 	//Propagate dirty flag down to children
 	for (auto& child : GetGameObject()->GetChildren())
 	{
-		child.lock()->GetComponent<TransformComponent>().lock()->SetFlagDirty();
+		child->GetComponent<TransformComponent>().lock()->SetFlagDirty();
 	}
 }
 

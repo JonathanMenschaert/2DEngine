@@ -5,12 +5,8 @@ namespace dae
 	class Command
 	{
 	public:
-		Command(GameObject* pActor);
+		Command() = default;
 		virtual ~Command() = default;
 		virtual void Execute() = 0;
-	protected:
-		GameObject* GetActor() const;
-	private:
-		GameObject* m_pActor{ nullptr };
 	};
 }

@@ -6,7 +6,7 @@
 #include "Subject.h"
 namespace dae
 {
-	class RectCollisionComponent : public BaseComponent
+	class RectCollisionComponent final : public BaseComponent
 	{
 	public:
 
@@ -36,6 +36,8 @@ namespace dae
 		glm::vec4 GetCollisionBox() const;
 		const glm::vec2& GetExtend() const;
 		CollisionType GetCollisionType() const;
+
+
 
 	private:
 		glm::vec4 m_CollisionBox{};

@@ -1,7 +1,7 @@
 #include "MoveCommand.h"
 #include "Time.h"
 dae::MoveCommand::MoveCommand(GameObject* pActor, float speed, const glm::vec2& direction)
-	: Command(pActor)
+	: m_pActor{ pActor }
 	, m_Speed{speed}
 	, m_Direction{ direction }
 {
@@ -9,7 +9,7 @@ dae::MoveCommand::MoveCommand(GameObject* pActor, float speed, const glm::vec2& 
 
 void dae::MoveCommand::Execute()
 {
-	auto pTransform{ GetActor()->GetComponent<TransformComponent>().lock()};
+	auto pTransform{ m_pActor->GetComponent<TransformComponent>().lock()};
 	glm::vec2 pos{ pTransform->GetLocalPosition() };
 	
 	glm::vec2 direction = m_Direction;

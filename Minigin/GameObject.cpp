@@ -7,6 +7,7 @@ const int dae::GameObject::m_NrOfComponentTypes{ static_cast<int>(ComponentType:
 
 dae::GameObject::GameObject()
 	:m_ComponentsMarkedForDeath{false}
+	,m_ObjectMarkedForDeath{false}
 {	
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
@@ -31,6 +32,11 @@ void dae::GameObject::Init()
 			pComponent->Init();
 		}
 	}
+
+	for (auto& pChild : m_Children)
+	{
+		pChild->Init();
+	}
 }
 
 void dae::GameObject::Update()
@@ -39,11 +45,17 @@ void dae::GameObject::Update()
 	{
 		pComponent->Update();
 	}
+
+	for (auto& pChild : m_Children)
+	{
+		pChild->Update();
+	}
 }
 
 void dae::GameObject::LateUpdate()
 {
 	if (m_ComponentsMarkedForDeath) DestroyComponents();
+	DestroyChildren();
 }
 
 void dae::GameObject::Render() const
@@ -51,6 +63,11 @@ void dae::GameObject::Render() const
 	for (const auto& pComponent : m_Components.at(ComponentType::Render))
 	{
 		pComponent->Render();
+	}
+
+	for (auto& pChild : m_Children)
+	{
+		pChild->Render();
 	}
 }
 
@@ -63,6 +80,11 @@ void dae::GameObject::OnGui()
 		{
 			component->OnGui();
 		}
+	}
+
+	for (auto& pChild : m_Children)
+	{
+		pChild->OnGui();
 	}
 }
 
@@ -108,27 +130,38 @@ void dae::GameObject::SetParent(std::shared_ptr<GameObject> pParent, bool keepWo
 	}
 }
 
+void dae::GameObject::Destroy()
+{
+	m_ObjectMarkedForDeath = true;
+	for (auto& pChild : m_Children)
+	{
+		pChild->Destroy();
+	}
+}
+
 bool dae::GameObject::IsValidParentOrNull(std::weak_ptr<GameObject> pParent)
 {
 	return true;
 }
 
-void dae::GameObject::RemoveChild(std::weak_ptr<GameObject> child)
+void dae::GameObject::RemoveChild(std::shared_ptr<GameObject> child)
 {
 	m_Children.erase(std::remove_if(m_Children.begin(), m_Children.end(), [&child](const auto& childObj) {
-		return childObj.lock() == child.lock();
+		return childObj == child;
 		}), m_Children.end());
 }
 
-void dae::GameObject::AddChild(std::weak_ptr<GameObject> child)
+void dae::GameObject::AddChild(std::shared_ptr<GameObject> child)
 {
 	m_Children.push_back(child);
 }
 
-std::list<std::weak_ptr<dae::GameObject>>& dae::GameObject::GetChildren()
+std::list<std::shared_ptr<dae::GameObject>>& dae::GameObject::GetChildren()
 {
 	return m_Children;
 }
+
+
 
 void dae::GameObject::DestroyComponents()
 {
@@ -137,11 +170,19 @@ void dae::GameObject::DestroyComponents()
 		auto& componentList{ componentPair.second };
 		if (componentList.size() > 0)
 		{
-			componentList.erase(std::remove_if(componentList.begin(), componentList.end(), [](auto& element)
+			componentList.erase(std::remove_if(componentList.begin(), componentList.end(), [](auto& pElement)
 				{
-					return element->IsMarkedForDeath();
+					return pElement->IsMarkedForDeath();
 				}), componentList.end());
 		}
 	}
 	m_ComponentsMarkedForDeath = false;
+}
+
+void dae::GameObject::DestroyChildren()
+{	
+	m_Children.erase(std::remove_if(m_Children.begin(), m_Children.end(), [](const auto& pElement)
+		{
+			return pElement->m_ObjectMarkedForDeath;
+		}), m_Children.end());
 }
