@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Events">
       <UniqueIdentifier>{99867da4-1793-4f28-8f5f-a7091e6d45d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Achievements">
+      <UniqueIdentifier>{443c1dc7-4169-4c55-bc1b-9d12f0304ec7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -159,6 +162,15 @@
     <ClInclude Include="DebugScoreCommand.h">
       <Filter>Source Files\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Achievement.h">
+      <Filter>Source Files\Achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="SteamClient.h">
+      <Filter>Source Files\Achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="WinAchievementComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -289,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="DebugScoreCommand.cpp">
       <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SteamClient.cpp">
+      <Filter>Source Files\Achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="WinAchievementComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "ScoreComponent.h"
-
+#include "SteamClient.h"
+#include "Achievement.h"
 dae::ScoreComponent::ScoreComponent(std::shared_ptr<GameObject> pGameObject)
 	:BaseComponent(pGameObject)
 	,m_Score{0}
