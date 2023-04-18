@@ -9,7 +9,7 @@ namespace dae
 	class Physics final : public Singleton<Physics>
 	{
 	public:
-		Physics() = default;
+		Physics();
 		~Physics() = default;
 		Physics(const Physics& physics) = delete;
 		Physics(Physics&& physics) noexcept = delete;
@@ -23,11 +23,14 @@ namespace dae
 	private:
 		glm::vec2 CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2);
 		bool HasTriggered(const glm::vec4& box1, const glm::vec4& box2);
+		bool HasCollided(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset);
 		bool CompareLayers(const std::vector<std::string>& layers1, const std::vector<std::string>& layers2) const;
 
 		std::vector<RectCollisionComponent*> m_DynamicColliders;
 		std::vector<RectCollisionComponent*> m_StaticColliders;
 		std::vector<RectCollisionComponent*> m_TriggerColliders;
+
+		const glm::vec2 m_ZeroOffset;
 	};
 }
 
