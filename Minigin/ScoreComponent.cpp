@@ -19,7 +19,7 @@ void dae::ScoreComponent::AddScore(int score)
 
 void dae::ScoreComponent::UpdateScore()
 {
-	Event<int> e{ "ScoreChangedEvent", m_Score };
+	Event<int> e{ m_Score };
 	NotifyObservers(e);
 }
 

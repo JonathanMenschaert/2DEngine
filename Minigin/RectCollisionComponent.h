@@ -6,6 +6,8 @@
 #include "Subject.h"
 namespace dae
 {
+
+
 	class RectCollisionComponent final : public BaseComponent
 	{
 	public:

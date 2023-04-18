@@ -1,6 +1,7 @@
 #include "RectCollisionComponent.h"
 #include "Physics.h"
 #include "GameObject.h"
+
 dae::RectCollisionComponent::RectCollisionComponent(std::shared_ptr<GameObject> pGameObject)
     :BaseComponent(pGameObject)
 {

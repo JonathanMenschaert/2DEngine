@@ -18,7 +18,7 @@ void dae::LivesComponent::AddLife(int lives)
 
 void dae::LivesComponent::UpdateLives()
 {
-	Event<int> e{ "LifeChangedEvent", m_Lives };
+	Event<int> e{ m_Lives };
 	NotifyObservers(e);
 }
 

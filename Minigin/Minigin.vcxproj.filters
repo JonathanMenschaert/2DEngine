@@ -171,6 +171,9 @@
     <ClInclude Include="WinAchievementComponent.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="HowToPlayComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -306,6 +309,9 @@
       <Filter>Source Files\Achievements</Filter>
     </ClCompile>
     <ClCompile Include="WinAchievementComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HowToPlayComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
