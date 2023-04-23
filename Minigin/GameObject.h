@@ -43,7 +43,7 @@ namespace dae
 
 		std::shared_ptr<dae::GameObject> GetParent();
 
-		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition);
+		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition = true);
 
 		void Destroy();
 
