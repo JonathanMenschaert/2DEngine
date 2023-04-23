@@ -7,7 +7,7 @@ namespace dae
 	{
 	public:
 
-		UpdateComponent(std::shared_ptr<GameObject> pGameObject);
+		UpdateComponent(GameObject* pGameObject);
 		virtual ~UpdateComponent() = default;
 		UpdateComponent(const UpdateComponent& component) = delete;
 		UpdateComponent(UpdateComponent&& component) noexcept = delete;

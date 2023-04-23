@@ -6,7 +6,7 @@ namespace dae
 	class HowToPlayComponent : public BaseComponent
 	{
 	public:
-		HowToPlayComponent(std::shared_ptr<GameObject> pGameObject);
+		HowToPlayComponent(GameObject* pGameObject);
 		virtual ~HowToPlayComponent() = default;
 		HowToPlayComponent(const HowToPlayComponent& component) = delete;
 		HowToPlayComponent(HowToPlayComponent&& component) noexcept = delete;

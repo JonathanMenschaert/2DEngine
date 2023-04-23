@@ -4,15 +4,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-dae::RotatorComponent::RotatorComponent(std::shared_ptr<GameObject> pGameObject)
-	:UpdateComponent(pGameObject)
+dae::RotatorComponent::RotatorComponent(GameObject* pGameObject)
+	:UpdateComponent{ pGameObject }
 	,m_RotationSpeed{90.f}
 {
 }
 
 void dae::RotatorComponent::Init()
 {
-	m_pTransform = GetGameObject()->GetComponent<TransformComponent>().lock();
+	m_pTransform = GetGameObject()->GetComponent<TransformComponent>();
 	
 }
 

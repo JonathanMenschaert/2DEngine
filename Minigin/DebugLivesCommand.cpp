@@ -8,7 +8,7 @@ dae::DebugLivesCommand::DebugLivesCommand(GameObject* pActor)
 
 void dae::DebugLivesCommand::Execute()
 {
-	auto pLives{ m_pActor->GetComponent<dae::LivesComponent>().lock()};
+	auto pLives{ m_pActor->GetComponent<dae::LivesComponent>()};
 	if (pLives)
 	{
 		pLives->AddLife(-1);

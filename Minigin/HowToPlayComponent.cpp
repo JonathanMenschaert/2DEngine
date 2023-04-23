@@ -2,8 +2,9 @@
 #include "imgui.h"
 #include "GameObject.h"
 #include "glm/glm.hpp"
-dae::HowToPlayComponent::HowToPlayComponent(std::shared_ptr<GameObject> pGameObject)
-	:BaseComponent(pGameObject)
+
+dae::HowToPlayComponent::HowToPlayComponent(GameObject* pGameObject)
+	:BaseComponent{ pGameObject }
 {
 	
 }
@@ -28,5 +29,5 @@ void dae::HowToPlayComponent::OnGui()
 
 void dae::HowToPlayComponent::Init()
 {
-	m_pTransform = GetGameObject()->GetComponent<TransformComponent>().lock().get();
+	m_pTransform = GetGameObject()->GetComponent<TransformComponent>();
 }

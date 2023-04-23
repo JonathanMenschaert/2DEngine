@@ -7,7 +7,7 @@ namespace dae
 	class LivesComponent : public BaseComponent, public Subject<int>
 	{
 	public:
-		LivesComponent(std::shared_ptr<GameObject> pGameObject);
+		LivesComponent(GameObject* pGameObject);
 		~LivesComponent() = default;
 		LivesComponent(const LivesComponent& rectComponent) = delete;
 		LivesComponent(LivesComponent&& rectComponent) noexcept = delete;

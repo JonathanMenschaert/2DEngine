@@ -23,11 +23,11 @@ namespace dae
 		bool IsMarkedForDeath();
 
 	protected:
-		explicit BaseComponent(std::shared_ptr<GameObject> pGameObject);
-		std::shared_ptr<GameObject> GetGameObject() const;
+		explicit BaseComponent(GameObject* pGameObject);
+		GameObject* GetGameObject() const;
 
 	private:
-		std::weak_ptr<GameObject> m_pGameObject;
+		GameObject* m_pGameObject;
 		bool m_Alive = true;
 	};
 }

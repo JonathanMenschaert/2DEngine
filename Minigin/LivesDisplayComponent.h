@@ -9,7 +9,7 @@ namespace dae
 	class LivesDisplayComponent final : public BaseComponent, public Observer<int>
 	{
 	public:
-		LivesDisplayComponent(std::shared_ptr<GameObject> pGameObject);
+		LivesDisplayComponent(GameObject* pGameObject);
 		virtual ~LivesDisplayComponent() = default;
 		LivesDisplayComponent(const LivesDisplayComponent& rectComponent) = delete;
 		LivesDisplayComponent(LivesDisplayComponent&& rectComponent) noexcept = delete;

@@ -8,7 +8,7 @@ namespace dae
 	class ScoreDisplayComponent : public BaseComponent, public Observer<int>
 	{
 	public:
-		ScoreDisplayComponent(std::shared_ptr<GameObject> pGameObject);
+		ScoreDisplayComponent(GameObject* pGameObject);
 		~ScoreDisplayComponent() = default;
 		ScoreDisplayComponent(const ScoreDisplayComponent& rectComponent) = delete;
 		ScoreDisplayComponent(ScoreDisplayComponent&& rectComponent) noexcept = delete;

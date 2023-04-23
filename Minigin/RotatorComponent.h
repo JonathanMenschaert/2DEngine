@@ -6,7 +6,7 @@ namespace dae
 	class RotatorComponent final : public UpdateComponent
 	{
 	public:
-		RotatorComponent(std::shared_ptr<GameObject> pGameObject);
+		RotatorComponent(GameObject* pGameObject);
 		virtual ~RotatorComponent() = default;
 		RotatorComponent(const RotatorComponent& component) = delete;
 		RotatorComponent(RotatorComponent&& component) noexcept = delete;
@@ -19,7 +19,7 @@ namespace dae
 		void SetRotationSpeed(float degPerSec);
 
 	private:
-		std::shared_ptr<TransformComponent> m_pTransform{};		
+		TransformComponent* m_pTransform{};		
 		float m_RotationSpeed;
 	};
 }

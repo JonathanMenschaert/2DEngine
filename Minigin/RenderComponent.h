@@ -9,7 +9,7 @@ namespace dae
 	class RenderComponent final : public BaseComponent
 	{
 	public:
-		RenderComponent(std::shared_ptr<GameObject> pGameObject);
+		RenderComponent(GameObject* pGameObject);
 		virtual ~RenderComponent() = default;
 		RenderComponent(const RenderComponent& component) = delete;
 		RenderComponent(RenderComponent&& component) noexcept = delete;
@@ -17,11 +17,13 @@ namespace dae
 		RenderComponent& operator=(RenderComponent&& component) noexcept = delete;
 
 		void Render() const override;
+		void Init() override;
 		void SetTexture(std::shared_ptr<Texture2D> pTexture);
 		void SetTexture(const std::string& fileName);
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture{};
+		TransformComponent* m_pTransform{};
 	};
 }
 

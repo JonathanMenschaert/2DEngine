@@ -6,8 +6,7 @@
 #include <functional>
 
 
-
-dae::DearImGuiComponent::DearImGuiComponent(std::shared_ptr<GameObject> pGameObject)
+dae::DearImGuiComponent::DearImGuiComponent(GameObject* pGameObject)
     :BaseComponent{pGameObject}
     ,m_AmountOfIntegerMeasurements{10}
     ,m_AmountOfGameObjectMeasurements{10}

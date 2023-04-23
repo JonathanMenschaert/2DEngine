@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <functional>
 #include <iostream>
-dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pGameObject)
-	:UpdateComponent(pGameObject)
+dae::FPSComponent::FPSComponent(GameObject* pGameObject)
+	:UpdateComponent{ pGameObject }
 	,m_pTextComponent{}
 	,m_MaxTimer{1.f}
 {
@@ -18,7 +18,7 @@ dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pGameObject)
 
 void dae::FPSComponent::Update()
 {
-	if (m_pTextComponent.expired())
+	if (!m_pTextComponent)
 	{
 		m_pTextComponent = GetGameObject()->GetComponent<TextComponent>();
 	}
@@ -41,7 +41,7 @@ void dae::FPSComponent::Update()
 
 		text << averageFps << " FPS";
 
-		m_pTextComponent.lock()->SetText(text.str());
+		m_pTextComponent->SetText(text.str());
 
 		m_UpdateTimer -= m_MaxTimer;
 	}

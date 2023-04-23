@@ -48,10 +48,10 @@ namespace dae
 		void Destroy();
 
 		template <typename T>
-		std::shared_ptr<T> AddComponent();
+		T* AddComponent();
 
 		template<typename T>
-		std::weak_ptr<T> GetComponent() const;
+		T* GetComponent() const;
 
 		template<typename T>
 		void RemoveComponent();
@@ -74,18 +74,18 @@ namespace dae
 
 		bool m_ObjectMarkedForDeath;
 		bool m_ComponentsMarkedForDeath;
-		std::unordered_map<ComponentType, std::list<std::shared_ptr<BaseComponent>>> m_Components;
+		std::unordered_map<ComponentType, std::list<std::unique_ptr<BaseComponent>>> m_Components;
 
 		std::weak_ptr<GameObject> m_pParent{};
 		std::list<std::shared_ptr<GameObject>> m_Children;
 
-		std::shared_ptr<TransformComponent> m_pTransform;
+		TransformComponent* m_pTransform;
 
 		static const int m_NrOfComponentTypes;
 	};
 
 	template <typename T>
-	std::shared_ptr<T> GameObject::AddComponent()
+	T* GameObject::AddComponent()
 	{
 		//Compile time check to make sure T is a component
 		AssertType<T>();
@@ -93,15 +93,17 @@ namespace dae
 		//Get Component type
 		ComponentType componentType{ GetComponentType<T>() }; 	
 
-		std::shared_ptr<T> pComponent{ std::make_shared<T>(shared_from_this()) };
+		std::unique_ptr<T> pComponent{ std::make_unique<T>(shared_from_this().get())};
 
-		std::list<std::shared_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
-		componentList.push_back(pComponent);
-		return pComponent;
+		T* pComponentRaw = pComponent.get();
+
+		std::list<std::unique_ptr<BaseComponent>>& componentList{ m_Components[componentType] };
+		componentList.push_back(std::move(pComponent));
+		return pComponentRaw;
 	}
 
 	template<typename T>
-	std::weak_ptr<T> GameObject::GetComponent() const
+	T* GameObject::GetComponent() const
 	{
 		//Compile time check to make sure T is a component
 		AssertType<T>();
@@ -112,14 +114,13 @@ namespace dae
 		//Loop over all components to find the requested component
 		for (const auto& pComponent : m_Components.at(componentType))
 		{
-			std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
+			T* pRequestedComponent{ dynamic_cast<T*>(pComponent.get()) };
 			if (pRequestedComponent)
 			{
-				std::weak_ptr<T> pWeakComponent{ pRequestedComponent };
-				return pWeakComponent;
+				return pRequestedComponent;
 			}
 		}
-		return std::weak_ptr<T>();
+		return nullptr;
 	}
 
 	template<typename T>
@@ -134,7 +135,7 @@ namespace dae
 		//Loop over all components to find the requested component
 		for (const auto& pComponent : m_Components.at(componentType))
 		{
-			std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
+			T* pRequestedComponent{ dynamic_cast<T*>(pComponent.get()) };
 			if (pRequestedComponent)
 			{
 				return true;
@@ -147,21 +148,13 @@ namespace dae
 	void GameObject::RemoveComponent()
 	{
 		//Compile time check to make sure T is a component
-		static_assert(std::is_base_of<BaseComponent, T>::value, "T is not derived from BaseComponent!");
+		AssertType<T>();
 
-		//Loop over all components to find the correct component to remove
-		//All instances of the component T will be marked for death
-		for (auto& componentPair : m_Components)
+		T* pComponentRaw{ GetComponent<T>() };
+		if (pComponentRaw)
 		{
-			for (std::shared_ptr<BaseComponent> pComponent : componentPair.second)
-			{
-				std::shared_ptr<T> pRequestedComponent{ std::dynamic_pointer_cast<T>(pComponent) };
-				if (pRequestedComponent)
-				{
-					pRequestedComponent->MarkForDeath();
-					m_ComponentsMarkedForDeath = true;
-				}
-			}
+			pComponentRaw->MarkForDeath();
+			m_ComponentsMarkedForDeath = true;
 		}
 	}
 

@@ -1,7 +1,7 @@
 #include "LivesDisplayComponent.h"
 #include "GameObject.h"
 #include <sstream>
-dae::LivesDisplayComponent::LivesDisplayComponent(std::shared_ptr<GameObject> pGameObject)
+dae::LivesDisplayComponent::LivesDisplayComponent(GameObject* pGameObject)
 	:BaseComponent(pGameObject)
 	,m_pText{nullptr}
 {
@@ -9,7 +9,7 @@ dae::LivesDisplayComponent::LivesDisplayComponent(std::shared_ptr<GameObject> pG
 
 void dae::LivesDisplayComponent::Init()
 {
-	m_pText = GetGameObject()->GetComponent<TextComponent>().lock().get();
+	m_pText = GetGameObject()->GetComponent<TextComponent>();
 }
 
 void dae::LivesDisplayComponent::Notify(const Event<int>& e)

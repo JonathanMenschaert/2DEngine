@@ -12,7 +12,7 @@ dae::GameObject::GameObject()
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
 		//Initialize a list in the map per component type
-		m_Components[static_cast<ComponentType>(i)] = std::list<std::shared_ptr<BaseComponent>>{};
+		m_Components[static_cast<ComponentType>(i)] = std::list<std::unique_ptr<BaseComponent>>{};
 	}
 }
 
@@ -23,7 +23,7 @@ void dae::GameObject::Init()
 	{
 		AddComponent<TransformComponent>();
 	}
-	m_pTransform = GetComponent<TransformComponent>().lock();
+	m_pTransform = GetComponent<TransformComponent>();
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
 		ComponentType componentType{ static_cast<ComponentType>(i) };
@@ -90,7 +90,7 @@ void dae::GameObject::OnGui()
 
 dae::TransformComponent* dae::GameObject::GetTransform() const
 {
-	return m_pTransform.get();
+	return m_pTransform;
 }
 
 
@@ -104,7 +104,7 @@ void dae::GameObject::SetParent(std::shared_ptr<GameObject> pParent, bool keepWo
 	if (!IsValidParentOrNull(pParent)) return;
 	
 	
-	std::shared_ptr<TransformComponent> pTransform{ GetComponent<TransformComponent>() };
+	TransformComponent* pTransform{ GetComponent<TransformComponent>() };
 
 	if (!pParent)
 	{
@@ -114,7 +114,7 @@ void dae::GameObject::SetParent(std::shared_ptr<GameObject> pParent, bool keepWo
 	{
 		if (keepWorldPosition)
 		{
-			std::shared_ptr<TransformComponent> pParentTransform{ pParent->GetComponent<TransformComponent>() };
+			TransformComponent* pParentTransform{ pParent->GetComponent<TransformComponent>() };
 			pTransform->SetLocalPosition(pTransform->GetLocalPosition() - pParentTransform->GetWorldPosition());
 		}
 	}
@@ -160,7 +160,6 @@ std::list<std::shared_ptr<dae::GameObject>>& dae::GameObject::GetChildren()
 {
 	return m_Children;
 }
-
 
 
 void dae::GameObject::DestroyComponents()

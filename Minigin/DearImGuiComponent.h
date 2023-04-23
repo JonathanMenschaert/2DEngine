@@ -4,6 +4,7 @@
 #include <string>
 #include "imgui.h"
 #include "imgui_plot.h"
+#include "GameObject.h"
 namespace dae
 {
 	struct Transform
@@ -32,7 +33,7 @@ namespace dae
 	class DearImGuiComponent : public BaseComponent
 	{
 	public:
-		DearImGuiComponent(std::shared_ptr<GameObject> pGameObject);
+		DearImGuiComponent(GameObject* pGameObject);
 		virtual ~DearImGuiComponent() = default;
 		DearImGuiComponent(const DearImGuiComponent& component) = delete;
 		DearImGuiComponent(DearImGuiComponent&& component) noexcept = delete;

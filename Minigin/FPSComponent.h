@@ -2,12 +2,13 @@
 #include "UpdateComponent.h"
 #include "TextComponent.h"
 #include <deque>
+
 namespace dae
 {
 	class FPSComponent final : public UpdateComponent
 	{
 	public:
-		FPSComponent(std::shared_ptr<GameObject> pGameObject);
+		FPSComponent(GameObject* pGameObject);
 		virtual ~FPSComponent() = default;
 		FPSComponent(const FPSComponent& component) = delete;
 		FPSComponent(FPSComponent&& component) noexcept = delete;
@@ -20,7 +21,7 @@ namespace dae
 	private:
 		const int m_MaxStoredFPS{ 10 };
 		std::deque<int> m_FPSRollingAverage{};
-		std::weak_ptr<TextComponent> m_pTextComponent{};
+		TextComponent* m_pTextComponent{};
 		float m_UpdateTimer;
 		float m_MaxTimer;
 	};

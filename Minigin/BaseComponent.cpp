@@ -2,20 +2,15 @@
 
 namespace dae
 {
-	BaseComponent::BaseComponent(std::shared_ptr<GameObject> pGameObject)
+	BaseComponent::BaseComponent(GameObject* pGameObject)
 		:m_pGameObject{pGameObject}
 	{
 	}
 
-	std::shared_ptr<GameObject> BaseComponent::GetGameObject() const
+	GameObject* BaseComponent::GetGameObject() const
 	{
-		return m_pGameObject.lock();
+		return m_pGameObject;
 	}
-
-	/*void BaseComponent::SetParent(std::weak_ptr<GameObject> pGameObject)
-	{
-		m_pGameObject = pGameObject;
-	}*/
 
 	void BaseComponent::Init()
 	{

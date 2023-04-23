@@ -2,14 +2,14 @@
 #include "Gameobject.h"
 #include <sstream>
 
-dae::ScoreDisplayComponent::ScoreDisplayComponent(std::shared_ptr<GameObject> pGameObject)
+dae::ScoreDisplayComponent::ScoreDisplayComponent(GameObject* pGameObject)
 	:BaseComponent(pGameObject)
 {
 }
 
 void dae::ScoreDisplayComponent::Init()
 {
-	m_pText = GetGameObject()->GetComponent<TextComponent>().lock().get();
+	m_pText = GetGameObject()->GetComponent<TextComponent>();
 }
 
 void dae::ScoreDisplayComponent::Notify(const Event<int>& e)

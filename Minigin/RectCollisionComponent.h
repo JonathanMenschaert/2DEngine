@@ -19,7 +19,7 @@ namespace dae
 			StaticCollision
 		};
 		
-		RectCollisionComponent(std::shared_ptr<GameObject> pGameObject);
+		RectCollisionComponent(GameObject* pGameObject);
 		~RectCollisionComponent() = default;
 		RectCollisionComponent(const RectCollisionComponent& rectComponent) = delete;
 		RectCollisionComponent(RectCollisionComponent&& rectComponent) noexcept = delete;

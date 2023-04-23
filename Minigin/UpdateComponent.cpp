@@ -1,6 +1,6 @@
 #include "UpdateComponent.h"
 
-dae::UpdateComponent::UpdateComponent(std::shared_ptr<GameObject> pGameObject)
+dae::UpdateComponent::UpdateComponent(GameObject* pGameObject)
 	:BaseComponent(pGameObject)
 {
 }

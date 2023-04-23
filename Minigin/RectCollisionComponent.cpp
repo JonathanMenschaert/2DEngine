@@ -2,8 +2,8 @@
 #include "Physics.h"
 #include "GameObject.h"
 
-dae::RectCollisionComponent::RectCollisionComponent(std::shared_ptr<GameObject> pGameObject)
-    :BaseComponent(pGameObject)
+dae::RectCollisionComponent::RectCollisionComponent(GameObject* pGameObject)
+    :BaseComponent{ pGameObject }
 {
 }
 void dae::RectCollisionComponent::Init()

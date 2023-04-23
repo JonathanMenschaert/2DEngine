@@ -9,7 +9,7 @@ dae::MoveCommand::MoveCommand(GameObject* pActor, float speed, const glm::vec2& 
 
 void dae::MoveCommand::Execute()
 {
-	auto pTransform{ m_pActor->GetComponent<TransformComponent>().lock()};
+	auto pTransform{ m_pActor->GetComponent<TransformComponent>()};
 	glm::vec2 pos{ pTransform->GetLocalPosition() };
 	
 	glm::vec2 direction = m_Direction;

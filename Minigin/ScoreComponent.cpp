@@ -1,7 +1,7 @@
 #include "ScoreComponent.h"
 #include "Achievement.h"
 
-dae::ScoreComponent::ScoreComponent(std::shared_ptr<GameObject> pGameObject)
+dae::ScoreComponent::ScoreComponent(GameObject* pGameObject)
 	:BaseComponent(pGameObject)
 	,m_Score{0}
 {

@@ -1,8 +1,8 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
-dae::TransformComponent::TransformComponent(std::shared_ptr<GameObject> pGameObject)
-	:BaseComponent(pGameObject)
+dae::TransformComponent::TransformComponent(GameObject* pGameObject)
+	:BaseComponent{ pGameObject }
 {
 }
 
@@ -19,7 +19,7 @@ void dae::TransformComponent::SetLocalPosition(const glm::vec2& position)
 	//Propagate dirty flag down to children
 	for (auto& child : GetGameObject()->GetChildren())
 	{
-		child->GetComponent<TransformComponent>().lock()->SetFlagDirty();
+		child->GetComponent<TransformComponent>()->SetFlagDirty();
 	}
 }
 
@@ -63,7 +63,7 @@ void dae::TransformComponent::UpdateWorldPosition()
 	}
 	else
 	{
-		m_WorldPosition = pParentObj->GetComponent<TransformComponent>().lock()->GetWorldPosition() + m_LocalPosition;
+		m_WorldPosition = pParentObj->GetComponent<TransformComponent>()->GetWorldPosition() + m_LocalPosition;
 	}
 	m_Magnitude = glm::length(m_LocalPosition);
 	m_NeedsUpdate = false;

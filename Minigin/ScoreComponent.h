@@ -7,7 +7,7 @@ namespace dae
 	class ScoreComponent final : public BaseComponent, public Subject<int>
 	{
 	public:
-		ScoreComponent(std::shared_ptr<GameObject> pGameObject);
+		ScoreComponent(GameObject* pGameObject);
 		virtual ~ScoreComponent() = default;
 		ScoreComponent(const ScoreComponent& rectComponent) = delete;
 		ScoreComponent(ScoreComponent&& rectComponent) noexcept = delete;

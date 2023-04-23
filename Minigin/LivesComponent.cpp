@@ -1,7 +1,7 @@
 #include "LivesComponent.h"
 
-dae::LivesComponent::LivesComponent(std::shared_ptr<GameObject> pGameObject)
-	:BaseComponent(pGameObject)
+dae::LivesComponent::LivesComponent(GameObject* pGameObject)
+	:BaseComponent{ pGameObject }
 	,m_Lives{0}
 {
 }

@@ -5,18 +5,23 @@
 #include <glm/glm.hpp>
 #include <iostream>
 
-dae::RenderComponent::RenderComponent(std::shared_ptr<GameObject> pGameObject)
+dae::RenderComponent::RenderComponent(GameObject* pGameObject)
 	:BaseComponent(pGameObject)
 {
+}
+
+void dae::RenderComponent::Init()
+{
+	m_pTransform = GetGameObject()->GetComponent<TransformComponent>();
 }
 
 void dae::RenderComponent::Render() const
 {
 	if (!m_pTexture) return;
-	auto pTransform{ GetGameObject()->GetComponent<TransformComponent>()};
-	if (pTransform.expired()) return;
+	
+	if (!m_pTransform) return;
 
-	const auto& translation{ pTransform.lock()->GetWorldPosition() };
+	const auto& translation{ m_pTransform->GetWorldPosition() };
 
 	Renderer::GetInstance().RenderTexture(*m_pTexture, translation.x, translation.y);
 }

@@ -7,7 +7,7 @@
 #include "GameObject.h"
 #include "RenderComponent.h"
 
-dae::TextComponent::TextComponent(std::shared_ptr<GameObject> pGameObject)
+dae::TextComponent::TextComponent(GameObject* pGameObject)
 	:UpdateComponent(pGameObject)
 	,m_TextColor{SDL_Color{}}
 	,m_NeedsUpdate{true}
@@ -68,6 +68,6 @@ void dae::TextComponent::UpdateTexture()
 	}
 	SDL_FreeSurface(pSurface);
 
-	GetGameObject()->GetComponent<RenderComponent>().lock()->SetTexture(std::make_shared<Texture2D>(pTexture));
+	GetGameObject()->GetComponent<RenderComponent>()->SetTexture(std::make_shared<Texture2D>(pTexture));
 	m_NeedsUpdate = false;
 }
