@@ -3,7 +3,7 @@
 #include "GameObject.h"
 namespace dae
 {
-	class DebugScoreCommand : public Command
+	class DebugScoreCommand final : public Command
 	{
 	public:
 		DebugScoreCommand(GameObject* pActor, int score);

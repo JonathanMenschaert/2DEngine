@@ -8,6 +8,7 @@ namespace dae
 	class Subject
 	{
 	public:
+		virtual ~Subject() = default;
 		void AddObserver(Observer<T>* observer);
 		void RemoveObserver(Observer<T>* observer);
 

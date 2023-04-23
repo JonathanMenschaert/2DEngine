@@ -165,12 +165,6 @@
     <ClInclude Include="Achievement.h">
       <Filter>Source Files\Achievements</Filter>
     </ClInclude>
-    <ClInclude Include="SteamClient.h">
-      <Filter>Source Files\Achievements</Filter>
-    </ClInclude>
-    <ClInclude Include="WinAchievementComponent.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="HowToPlayComponent.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
@@ -304,12 +298,6 @@
     </ClCompile>
     <ClCompile Include="DebugScoreCommand.cpp">
       <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="SteamClient.cpp">
-      <Filter>Source Files\Achievements</Filter>
-    </ClCompile>
-    <ClCompile Include="WinAchievementComponent.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="HowToPlayComponent.cpp">
       <Filter>Source Files\Components</Filter>

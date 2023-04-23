@@ -3,7 +3,7 @@
 #include "GameObject.h"
 namespace dae
 {
-	class DebugLivesCommand : public Command
+	class DebugLivesCommand final : public Command
 	{
 	public:
 		DebugLivesCommand(GameObject* pActor);

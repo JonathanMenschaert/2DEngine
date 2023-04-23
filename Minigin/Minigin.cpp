@@ -12,7 +12,6 @@
 #include "Physics.h"
 #include "Time.h"
 #include <chrono>
-#include "steam_api.h"
 
 SDL_Window* g_window{};
 
