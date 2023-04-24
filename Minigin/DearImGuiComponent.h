@@ -2,8 +2,8 @@
 #include "BaseComponent.h"
 #include <vector>
 #include <string>
-#include "imgui.h"
-#include "imgui_plot.h"
+#include <imgui.h>
+#include <imgui_plot.h>
 #include "GameObject.h"
 namespace dae
 {

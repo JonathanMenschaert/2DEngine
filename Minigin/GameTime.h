@@ -5,15 +5,15 @@
 
 namespace dae
 {
-	class Time final : public Singleton<Time>
+	class GameTime final : public Singleton<GameTime>
 	{
 	public:
-		Time();
-		~Time() = default;
-		Time(const Time& time) = delete;
-		Time(Time&& time) noexcept = delete;
-		Time& operator=(const Time& time) = delete;
-		Time& operator=(Time& time) noexcept = delete;
+		GameTime();
+		~GameTime() = default;
+		GameTime(const GameTime& time) = delete;
+		GameTime(GameTime&& time) noexcept = delete;
+		GameTime& operator=(const GameTime& time) = delete;
+		GameTime& operator=(GameTime& time) noexcept = delete;
 
 		void Reset();
 		void Update();

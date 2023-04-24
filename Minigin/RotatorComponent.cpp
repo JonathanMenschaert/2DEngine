@@ -1,6 +1,6 @@
 #include "RotatorComponent.h"
 #include "GameObject.h"
-#include "Time.h"
+#include "GameTime.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -22,7 +22,7 @@ void dae::RotatorComponent::Update()
 	{
 		auto vec = m_pTransform->GetLocalPosition();
 		glm::mat4 rotationMat{ 1 };
-		rotationMat = glm::rotate(rotationMat, glm::radians(m_RotationSpeed * Time::GetInstance().GetElapsedTime()), glm::vec3(0.f, 0.f, 1.f));
+		rotationMat = glm::rotate(rotationMat, glm::radians(m_RotationSpeed * GameTime::GetInstance().GetElapsedTime()), glm::vec3(0.f, 0.f, 1.f));
 		
 		m_pTransform->SetLocalPosition(glm::vec3{ rotationMat * glm::vec4{vec, 0.f, 1.f} });
 	}

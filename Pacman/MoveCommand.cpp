@@ -1,5 +1,5 @@
 #include "MoveCommand.h"
-#include "Time.h"
+#include "GameTime.h"
 dae::MoveCommand::MoveCommand(GameObject* pActor, float speed, const glm::vec2& direction)
 	: m_pActor{ pActor }
 	, m_Speed{speed}
@@ -14,6 +14,6 @@ void dae::MoveCommand::Execute()
 	
 	glm::vec2 direction = m_Direction;
 	direction.y *= -1;
-	pos += direction * m_Speed * Time::GetInstance().GetElapsedTime();
+	pos += direction * m_Speed * GameTime::GetInstance().GetElapsedTime();
 	pTransform->SetLocalPosition(pos);
 }

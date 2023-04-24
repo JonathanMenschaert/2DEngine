@@ -1,7 +1,7 @@
 #include "FPSComponent.h"
 #include "GameObject.h"
 #include <sstream>
-#include "Time.h"
+#include "GameTime.h"
 #include <numeric>
 #include <algorithm>
 #include <functional>
@@ -23,7 +23,7 @@ void dae::FPSComponent::Update()
 		m_pTextComponent = GetGameObject()->GetComponent<TextComponent>();
 	}
 
-	const float elapsedTime{ Time::GetInstance().GetElapsedTime() };
+	const float elapsedTime{ GameTime::GetInstance().GetElapsedTime() };
 	m_UpdateTimer += elapsedTime;
 	if (m_UpdateTimer >= m_MaxTimer)
 	{
