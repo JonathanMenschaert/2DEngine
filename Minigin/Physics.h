@@ -8,7 +8,8 @@ namespace dae
 {
 	class Physics final : public Singleton<Physics>
 	{
-	public:
+	public:		
+
 		Physics();
 		~Physics() = default;
 		Physics(const Physics& physics) = delete;
@@ -19,9 +20,10 @@ namespace dae
 		void HandleCollision();
 
 		void AddPhysicsCollider(RectCollisionComponent* rectCollider);
+		void RemovePhysicsCollider(RectCollisionComponent* rectCollider);
 
 	private:
-		glm::vec2 CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2);
+		bool CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset);
 		bool HasTriggered(const glm::vec4& box1, const glm::vec4& box2);
 		bool HasCollided(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset);
 		bool CompareLayers(const std::vector<std::string>& layers1, const std::vector<std::string>& layers2) const;

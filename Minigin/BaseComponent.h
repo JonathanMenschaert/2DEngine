@@ -21,10 +21,10 @@ namespace dae
 
 		void MarkForDeath();
 		bool IsMarkedForDeath();
+		GameObject* GetGameObject() const;
 
 	protected:
 		explicit BaseComponent(GameObject* pGameObject);
-		GameObject* GetGameObject() const;
 
 	private:
 		GameObject* m_pGameObject;

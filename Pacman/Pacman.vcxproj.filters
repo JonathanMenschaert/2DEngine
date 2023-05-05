@@ -13,59 +13,74 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{2969b62c-6c26-4a8b-9ad2-90cd2affc56d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pacman.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PointsComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreDisplayComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LivesDisplayComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DebugScoreCommand.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="LivesComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LivesDisplayComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="DebugLivesCommand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="DebugScoreCommand.cpp">
+    <ClCompile Include="ScoreDisplayComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PointsComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PickupComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PointsComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreDisplayComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MoveCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LivesDisplayComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LivesComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DebugLivesCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="DebugScoreCommand.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LivesComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LivesDisplayComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PickupComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreDisplayComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

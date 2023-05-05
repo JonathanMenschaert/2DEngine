@@ -4,23 +4,28 @@
 #include <string>
 #include <vector>
 #include "Subject.h"
+
 namespace dae
 {
 
+	enum class CollisionType
+	{
+		DynamicCollision,
+		Trigger,
+		StaticCollision
+	};
 
-	class RectCollisionComponent final : public BaseComponent
+	struct CollisionData
+	{
+		CollisionType type;
+		GameObject* pGameObject;
+	};
+
+	class RectCollisionComponent final : public BaseComponent, public Subject<CollisionData>
 	{
 	public:
-
-		enum class CollisionType
-		{
-			DynamicCollision,
-			Trigger,
-			StaticCollision
-		};
-		
 		RectCollisionComponent(GameObject* pGameObject);
-		~RectCollisionComponent() = default;
+		~RectCollisionComponent();
 		RectCollisionComponent(const RectCollisionComponent& rectComponent) = delete;
 		RectCollisionComponent(RectCollisionComponent&& rectComponent) noexcept = delete;
 		RectCollisionComponent& operator=(const RectCollisionComponent& rectComponent) = delete;
@@ -39,7 +44,7 @@ namespace dae
 		const glm::vec2& GetExtend() const;
 		CollisionType GetCollisionType() const;
 
-
+		void TriggerCollisionEvent(GameObject* pGameObj, CollisionType type);
 
 	private:
 		glm::vec4 m_CollisionBox{};

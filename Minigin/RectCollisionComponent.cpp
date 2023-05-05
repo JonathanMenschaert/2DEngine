@@ -6,6 +6,10 @@ dae::RectCollisionComponent::RectCollisionComponent(GameObject* pGameObject)
     :BaseComponent{ pGameObject }
 {
 }
+dae::RectCollisionComponent::~RectCollisionComponent()
+{
+    Physics::GetInstance().RemovePhysicsCollider(this);
+}
 void dae::RectCollisionComponent::Init()
 {
     Physics::GetInstance().AddPhysicsCollider(this);
@@ -54,7 +58,18 @@ const glm::vec2& dae::RectCollisionComponent::GetExtend() const
     return m_Extend;
 }
 
-dae::RectCollisionComponent::CollisionType dae::RectCollisionComponent::GetCollisionType() const
+dae::CollisionType dae::RectCollisionComponent::GetCollisionType() const
 {
     return m_CollisonType;
+}
+
+void dae::RectCollisionComponent::TriggerCollisionEvent(GameObject* pGameObj, CollisionType type)
+{
+    CollisionData data{};
+    data.type = type;
+    data.pGameObject = pGameObj;
+
+    Event<dae::CollisionData> collisionEvent{data};
+
+    NotifyObservers(collisionEvent);
 }

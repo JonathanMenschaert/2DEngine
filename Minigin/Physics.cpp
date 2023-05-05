@@ -25,7 +25,9 @@ void dae::Physics::HandleCollision()
 			{
 				collisionOffset *= 0.5f;
 				collider->AddCollisionOffset(collisionOffset);
+				collider->TriggerCollisionEvent(other->GetGameObject(), CollisionType::DynamicCollision);
 				other->AddCollisionOffset(-collisionOffset);
+				other->TriggerCollisionEvent(collider->GetGameObject(), CollisionType::DynamicCollision);
 			}
 		}
 
@@ -37,7 +39,8 @@ void dae::Physics::HandleCollision()
 			}
 			if (CompareLayers(layers, other->GetLayers()))
 			{
-				collider->AddCollisionOffset(CalculateCollisionOffset(collisionBox, other->GetCollisionBox()));
+				collider->AddCollisionOffset(collisionOffset);
+				collider->TriggerCollisionEvent(other->GetGameObject(), CollisionType::StaticCollision);
 			}
 		}
 
@@ -47,7 +50,8 @@ void dae::Physics::HandleCollision()
 			{
 				if (CompareLayers(layers, other->GetLayers()))
 				{				
-					
+					collider->TriggerCollisionEvent(other->GetGameObject(), CollisionType::Trigger);
+					//std::cout << "Trigger hit\n";
 				}
 			}
 		}
@@ -59,13 +63,13 @@ void dae::Physics::AddPhysicsCollider(RectCollisionComponent* rectCollider)
 {
 	switch (rectCollider->GetCollisionType())
 	{
-	case RectCollisionComponent::CollisionType::DynamicCollision:
+	case CollisionType::DynamicCollision:
 		m_DynamicColliders.push_back(rectCollider);
 		break;
-	case RectCollisionComponent::CollisionType::Trigger:
+	case CollisionType::Trigger:
 		m_TriggerColliders.push_back(rectCollider);
 		break;
-	case RectCollisionComponent::CollisionType::StaticCollision:
+	case CollisionType::StaticCollision:
 		m_StaticColliders.push_back(rectCollider);
 		break;
 	default:
@@ -73,39 +77,80 @@ void dae::Physics::AddPhysicsCollider(RectCollisionComponent* rectCollider)
 	}
 }
 
+void dae::Physics::RemovePhysicsCollider(RectCollisionComponent* rectCollider)
+{
+	switch (rectCollider->GetCollisionType())
+	{
+	case CollisionType::DynamicCollision:
+		if (m_DynamicColliders.size() == 0)
+		{
+			return;
+		}
+		m_DynamicColliders.erase(std::remove(m_DynamicColliders.begin(), m_DynamicColliders.end(), rectCollider), m_DynamicColliders.end());
+		break;
+	case CollisionType::Trigger:
+		if (m_TriggerColliders.size() == 0)
+		{
+			return;
+		}
+		m_TriggerColliders.erase(std::remove(m_TriggerColliders.begin(), m_TriggerColliders.end(), rectCollider), m_TriggerColliders.end());
+		break;
+	case CollisionType::StaticCollision:
+		if (m_StaticColliders.size() == 0)
+		{
+			return;
+		}
+		m_StaticColliders.erase(std::remove(m_StaticColliders.begin(), m_StaticColliders.end(), rectCollider), m_StaticColliders.end());
+		break;
+	default:
+		break;
+	}
+}
 
-glm::vec2 dae::Physics::CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2)
+
+bool dae::Physics::CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset)
 {
 	glm::vec2 offset{};
 	const bool isBoxCollidingLeft{ box1.x >= box2.x && box1.x <= box2.z };
 	const bool isBoxCollidingRight{ box1.z >= box2.x && box1.z <= box2.z };
 	const bool isBoxCollidingTop{ box1.y >= box2.y && box1.y <= box2.w };
 	const bool isBoxCollidingBottom{ box1.w >= box2.y && box1.w <= box2.w };
+	const bool isBoxCollidingLeftRight{ box1.x <= box2.x && box1.z >= box2.z };
+	const bool isBoxCollidingTopBottom{ box1.y <= box2.y && box1.w >= box2.w };
 
 	float offsetX = 0.0f;
 	float offsetY = 0.0f;
 
-	if (isBoxCollidingRight && (isBoxCollidingBottom || isBoxCollidingTop))
+	if (isBoxCollidingRight && (isBoxCollidingBottom || isBoxCollidingTop || isBoxCollidingTopBottom))
 	{
 		offsetX = box2.x - box1.z;
 	}
-	else if (isBoxCollidingLeft && (isBoxCollidingBottom || isBoxCollidingTop))
+	else if (isBoxCollidingLeft && (isBoxCollidingBottom || isBoxCollidingTop || isBoxCollidingTopBottom))
 	{
 		offsetX = box2.z - box1.x;
 	}
 	
-	if (isBoxCollidingBottom && (isBoxCollidingRight || isBoxCollidingLeft))
+	if (isBoxCollidingBottom && (isBoxCollidingRight || isBoxCollidingLeft || isBoxCollidingLeftRight))
 	{
 		offsetY = box2.y - box1.w;
 	}
-	else if (isBoxCollidingTop && (isBoxCollidingRight || isBoxCollidingLeft))
+	else if (isBoxCollidingTop && (isBoxCollidingRight || isBoxCollidingLeft || isBoxCollidingLeftRight))
 	{
 		offsetY = box2.w - box1.y;
 	}
 
 	if (!(offsetX == offsetY && offsetX == 0.f))
 	{
-		if (abs(offsetX) < abs(offsetY))
+		
+		if (isBoxCollidingLeftRight)
+		{
+			offset.y = offsetY;
+		}
+		else if (isBoxCollidingTopBottom)
+		{
+			offset.x = offsetX;
+		}
+		else if (abs(offsetX) < abs(offsetY))
 		{
 			offset.x = offsetX;
 		}
@@ -113,20 +158,22 @@ glm::vec2 dae::Physics::CalculateCollisionOffset(const glm::vec4& box1, const gl
 		{
 			offset.y = offsetY;
 		}
+		collisionOffset = offset;
+		return true;
 	}
 
-	return offset;
+	return false;	
 }
 
 bool dae::Physics::HasTriggered(const glm::vec4& box1, const glm::vec4& box2)
 {
-	glm::vec2 collisionOffset = CalculateCollisionOffset(box1, box2);
-	return collisionOffset != m_ZeroOffset;
+	glm::vec2 collisionOffset{};
+	return CalculateCollisionOffset(box1, box2, collisionOffset);
 }
 
 bool dae::Physics::HasCollided(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset)
 {
-	collisionOffset = CalculateCollisionOffset(box1, box2);
+	CalculateCollisionOffset(box1, box2, collisionOffset);
 	return collisionOffset != m_ZeroOffset;
 }
 

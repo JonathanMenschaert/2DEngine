@@ -31,6 +31,8 @@
 #include <unordered_map>
 #include "Achievement.h"
 #include "HowToPlayComponent.h"
+#include "PickupComponent.h"
+#include "PlayerComponent.h"
 
 void load()
 {
@@ -39,6 +41,8 @@ void load()
 	auto sceneRoot = std::make_shared<dae::GameObject>();
 	sceneRoot->AddComponent<dae::TransformComponent>();
 	scene.Add(sceneRoot);
+
+
 	//Background object
 	auto bgObj = std::make_shared<dae::GameObject>();
 	auto bgRender = bgObj->AddComponent<dae::RenderComponent>();
@@ -47,6 +51,14 @@ void load()
 	auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
 	bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
 	bgObj->SetParent(sceneRoot);
+
+	
+	//How to play
+	auto howToPlayObj = std::make_shared < dae::GameObject>();
+	auto htpTrans = howToPlayObj->AddComponent<dae::TransformComponent>();
+	htpTrans->SetLocalPosition(glm::vec2{ 10.f, 30.f });
+	howToPlayObj->AddComponent<dae::HowToPlayComponent>();
+	howToPlayObj->SetParent(sceneRoot);
 
 	//Fps Object
 	auto fpsObj = std::make_shared<dae::GameObject>();
@@ -66,11 +78,11 @@ void load()
 	//Pacman
 	auto player1Obj = std::make_shared<dae::GameObject>();
 	auto player1Col = player1Obj->AddComponent<dae::RectCollisionComponent>();
-	player1Col->SetCollisionType(dae::RectCollisionComponent::CollisionType::DynamicCollision);
+	player1Col->SetCollisionType(dae::CollisionType::DynamicCollision);
 	player1Col->SetExtend(glm::vec2{ 10, 10 });
 	player1Col->SetLayers(std::vector<std::string>{"enemy", "pickup", "wall1"});
 	auto player1Trans = player1Obj->AddComponent<dae::TransformComponent>();
-	player1Trans->SetLocalPosition(glm::vec2{ 250.f, 300.f });
+	player1Trans->SetLocalPosition(glm::vec2{ 250.f, 250.f });
 
 	auto player1Render = player1Obj->AddComponent<dae::RenderComponent>();
 	player1Render->SetTexture("pacman.png");
@@ -79,6 +91,9 @@ void load()
 	player1Lives->AddLife(3);
 
 	auto player1Score = player1Obj->AddComponent<dae::ScoreComponent>();
+
+	auto player1Player = player1Obj->AddComponent<dae::PlayerComponent>();
+	player1Col->AddObserver(player1Player);
 	player1Obj->SetParent(sceneRoot);
 
 	//Bind keys
@@ -103,7 +118,7 @@ void load()
 	//Pacman 2
 	auto player2Obj = std::make_shared<dae::GameObject>();
 	auto player2Col = player2Obj->AddComponent<dae::RectCollisionComponent>();
-	player2Col->SetCollisionType(dae::RectCollisionComponent::CollisionType::DynamicCollision);
+	player2Col->SetCollisionType(dae::CollisionType::DynamicCollision);
 	player2Col->SetExtend(glm::vec2{ 10, 10 });
 	player2Col->SetLayers(std::vector<std::string>{"enemy", "pickup", "wall1"});
 	auto player2Trans = player2Obj->AddComponent<dae::TransformComponent>();
@@ -116,36 +131,44 @@ void load()
 	player2Lives->AddLife(3);
 
 	auto player2Score = player2Obj->AddComponent<dae::ScoreComponent>();
+
+	auto player2Player = player1Obj->AddComponent<dae::PlayerComponent>();
+	player2Col->AddObserver(player2Player);
+
 	player2Obj->SetParent(sceneRoot);
 
 	//Bind Controller keys
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
+	/*inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player2Obj.get()));
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 10));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));
+	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
 
 
 	//Pacdot
 	auto pacdotObj = std::make_shared<dae::GameObject>();
 	auto pacdotCol = pacdotObj->AddComponent<dae::RectCollisionComponent>();
-	pacdotCol->SetCollisionType(dae::RectCollisionComponent::CollisionType::Trigger);
+	pacdotCol->SetCollisionType(dae::CollisionType::Trigger);
 	pacdotCol->SetExtend(glm::vec2{ 5, 5 });
 	pacdotCol->SetLayers(std::vector<std::string>{"enemy", "pickup", "wall1"});
 	auto pacdotTrans = pacdotObj->AddComponent<dae::TransformComponent>();
 	pacdotTrans->SetLocalPosition(glm::vec2{ 300.f, 250.f });
 
 	auto pacdotRender = pacdotObj->AddComponent<dae::RenderComponent>();
-	pacdotRender->SetTexture("pacdot.png");
+	pacdotRender->SetTexture("pacman.png");
+
+	auto pacDotPoints = pacdotObj->AddComponent<dae::PickupComponent>();
+	pacDotPoints->SetPoints(10);
+
 	pacdotObj->SetParent(sceneRoot);
 
 	//Ghost
 	auto ghostObj = std::make_shared<dae::GameObject>();
 	auto ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
-	ghostCol->SetCollisionType(dae::RectCollisionComponent::CollisionType::Trigger);
-	ghostCol->SetExtend(glm::vec2{ 10, 10 });
+	ghostCol->SetCollisionType(dae::CollisionType::StaticCollision);
+	ghostCol->SetExtend(glm::vec2{ 5, 5 });
 	ghostCol->SetLayers(std::vector<std::string>{"enemy", "wall2"});
 	auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
 	ghostTrans->SetLocalPosition(glm::vec2{ 300.f, 350.f });
@@ -231,13 +254,6 @@ void load()
 	score2Obj->SetParent(hud2Obj, false);
 	player2Score->AddObserver(score2);
 	hud2Obj->SetParent(sceneRoot);
-
-	//How to play
-	auto howToPlayObj = std::make_shared < dae::GameObject>();
-	auto htpTrans = howToPlayObj->AddComponent<dae::TransformComponent>();
-	htpTrans->SetLocalPosition(glm::vec2{ 10.f, 30.f });
-	howToPlayObj->AddComponent<dae::HowToPlayComponent>();
-	howToPlayObj->SetParent(sceneRoot);
 }
 
 
