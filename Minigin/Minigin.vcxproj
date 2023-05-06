@@ -239,6 +239,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClInclude Include="Physics.h" />
     <ClInclude Include="RectCollisionComponent.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="TextureRenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RotatorComponent.h" />
@@ -286,6 +287,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="RectCollisionComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="TextureRenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RotatorComponent.cpp" />

@@ -8,6 +8,7 @@ const int dae::GameObject::m_NrOfComponentTypes{ static_cast<int>(ComponentType:
 dae::GameObject::GameObject()
 	:m_ComponentsMarkedForDeath{false}
 	,m_ObjectMarkedForDeath{false}
+	,m_pTransform{nullptr}
 {	
 	for (int i{}; i < m_NrOfComponentTypes; ++i)
 	{
@@ -56,6 +57,11 @@ void dae::GameObject::LateUpdate()
 {
 	if (m_ComponentsMarkedForDeath) DestroyComponents();
 	DestroyChildren();
+
+	for (auto& pChild : m_Children)
+	{
+		pChild->LateUpdate();
+	}
 }
 
 void dae::GameObject::Render() const

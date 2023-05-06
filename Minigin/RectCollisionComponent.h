@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "Subject.h"
-
+#include "RenderComponent.h"
 namespace dae
 {
 
@@ -21,7 +21,7 @@ namespace dae
 		GameObject* pGameObject;
 	};
 
-	class RectCollisionComponent final : public BaseComponent, public Subject<CollisionData>
+	class RectCollisionComponent final : public RenderComponent, public Subject<CollisionData>
 	{
 	public:
 		RectCollisionComponent(GameObject* pGameObject);
@@ -34,7 +34,7 @@ namespace dae
 		virtual void Init() override;
 
 		
-		void SetExtend(const glm::vec2& extend);
+		void SetCollisionBox(const glm::vec2& size, const glm::vec2& offset = {});
 		void SetLayers(const std::vector<std::string>& layers);
 		void SetCollisionType(CollisionType type);
 		void AddCollisionOffset(const glm::vec2& offset);
@@ -45,10 +45,12 @@ namespace dae
 		CollisionType GetCollisionType() const;
 
 		void TriggerCollisionEvent(GameObject* pGameObj, CollisionType type);
+		virtual void Render() const override;
 
 	private:
+		glm::vec2 m_Offset{};
 		glm::vec4 m_CollisionBox{};
-		glm::vec2 m_Extend{};
+		glm::vec2 m_Size{};
 		std::vector<std::string> m_Layers{};
 		CollisionType m_CollisonType{CollisionType::StaticCollision};
 	};

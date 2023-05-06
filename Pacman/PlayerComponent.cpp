@@ -20,11 +20,13 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 
 	if (pickup)
 	{
-		//add score
-		//data.pGameObject->Destroy();
 		auto pos{ GetGameObject()->GetTransform()->GetWorldPosition()};
-		std::cout << "Triggered! :" << pos.x << ", " << pos.y << "\n";
+		//add score
+		//std::cout << "Triggered! :" << pos.x << ", " << pos.y << "\n";
+		data.pGameObject->Destroy();
+		
 	}
+	//
 }
 
 

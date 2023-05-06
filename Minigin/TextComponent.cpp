@@ -5,7 +5,7 @@
 #include "Font.h"
 #include "Texture2D.h"
 #include "GameObject.h"
-#include "RenderComponent.h"
+#include "TextureRenderComponent.h"
 
 dae::TextComponent::TextComponent(GameObject* pGameObject)
 	:UpdateComponent(pGameObject)
@@ -17,9 +17,9 @@ dae::TextComponent::TextComponent(GameObject* pGameObject)
 void dae::TextComponent::Init()
 {
 	auto pGameObject{ GetGameObject() };
-	if (!pGameObject->HasComponent<RenderComponent>())
+	if (!pGameObject->HasComponent<TextureRenderComponent>())
 	{
-		pGameObject->AddComponent<RenderComponent>();
+		pGameObject->AddComponent<TextureRenderComponent>();
 	}
 }
 
@@ -68,6 +68,6 @@ void dae::TextComponent::UpdateTexture()
 	}
 	SDL_FreeSurface(pSurface);
 
-	GetGameObject()->GetComponent<RenderComponent>()->SetTexture(std::make_shared<Texture2D>(pTexture));
+	GetGameObject()->GetComponent<TextureRenderComponent>()->SetTexture(std::make_shared<Texture2D>(pTexture));
 	m_NeedsUpdate = false;
 }

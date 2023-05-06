@@ -12,7 +12,7 @@
 #include "TransformComponent.h"
 #include "FPSComponent.h"
 #include "TextComponent.h"
-#include "RenderComponent.h"
+#include "TextureRenderComponent.h"
 #include "RotatorComponent.h"
 #include "DearImGuiComponent.h"
 #include "InputManager.h"
@@ -33,6 +33,7 @@
 #include "HowToPlayComponent.h"
 #include "PickupComponent.h"
 #include "PlayerComponent.h"
+#include "MapGeneratorComponent.h"
 
 void load()
 {
@@ -45,27 +46,75 @@ void load()
 
 	//Background object
 	auto bgObj = std::make_shared<dae::GameObject>();
-	auto bgRender = bgObj->AddComponent<dae::RenderComponent>();
+	auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
 	bgRender->SetTexture("background.tga");
 
 	auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
 	bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
 	bgObj->SetParent(sceneRoot);
 
+	//Map gameobject
+	//Errors galore expected
+
+	auto mapObj = std::make_shared<dae::GameObject>();
+	auto mapTrans = mapObj->AddComponent<dae::TransformComponent>();
+	mapTrans->SetLocalPosition(glm::vec2{ 75.f, 50.f });
+	auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
+
+	std::vector<int> tileData
+	{
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+		2, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 2, 
+		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+		2, 4, 2, 0, 0, 2, 4, 2, 0, 0, 0, 2, 4, 2, 2, 4, 2, 0, 0, 0, 2, 4, 2, 0, 0, 2, 4, 2,
+		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+		2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+		2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+		2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+		2, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 2,
+		2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 0, 0, 0, 0, 0, 
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 3, 3, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
+		2, 1, 1, 1, 1, 1, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 1, 1, 1, 1, 1, 2,
+		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
+		2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+		2, 5, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 5, 2,
+		2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+		2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+		2, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 2,
+		2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2,
+		2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2,
+		2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+
+	};
+
+	mapGen->LoadMap(28, 5, 16, tileData, std::vector<std::string>{"wall.png", "path.png"});
+
+	mapObj->SetParent(sceneRoot);
+
 	
 	//How to play
-	auto howToPlayObj = std::make_shared < dae::GameObject>();
+	/*auto howToPlayObj = std::make_shared < dae::GameObject>();
 	auto htpTrans = howToPlayObj->AddComponent<dae::TransformComponent>();
 	htpTrans->SetLocalPosition(glm::vec2{ 10.f, 30.f });
 	howToPlayObj->AddComponent<dae::HowToPlayComponent>();
-	howToPlayObj->SetParent(sceneRoot);
+	howToPlayObj->SetParent(sceneRoot);*/
 
 	//Fps Object
 	auto fpsObj = std::make_shared<dae::GameObject>();
 	auto fpsTrans = fpsObj->AddComponent<dae::TransformComponent>();
 	fpsTrans->SetLocalPosition(glm::vec2{ 10.f, 10.f });
 
-	fpsObj->AddComponent<dae::RenderComponent>();
+	fpsObj->AddComponent<dae::TextureRenderComponent>();
 
 	auto fpsText = fpsObj->AddComponent<dae::TextComponent>();
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
@@ -79,12 +128,12 @@ void load()
 	auto player1Obj = std::make_shared<dae::GameObject>();
 	auto player1Col = player1Obj->AddComponent<dae::RectCollisionComponent>();
 	player1Col->SetCollisionType(dae::CollisionType::DynamicCollision);
-	player1Col->SetExtend(glm::vec2{ 10, 10 });
-	player1Col->SetLayers(std::vector<std::string>{"enemy", "pickup", "wall1"});
+	player1Col->SetCollisionBox(glm::vec2{ 16, 16 });
+	player1Col->SetLayers(std::vector<std::string>{"player1"});
 	auto player1Trans = player1Obj->AddComponent<dae::TransformComponent>();
 	player1Trans->SetLocalPosition(glm::vec2{ 250.f, 250.f });
 
-	auto player1Render = player1Obj->AddComponent<dae::RenderComponent>();
+	auto player1Render = player1Obj->AddComponent<dae::TextureRenderComponent>();
 	player1Render->SetTexture("pacman.png");
 
 	auto player1Lives = player1Obj->AddComponent<dae::LivesComponent>();
@@ -119,12 +168,12 @@ void load()
 	auto player2Obj = std::make_shared<dae::GameObject>();
 	auto player2Col = player2Obj->AddComponent<dae::RectCollisionComponent>();
 	player2Col->SetCollisionType(dae::CollisionType::DynamicCollision);
-	player2Col->SetExtend(glm::vec2{ 10, 10 });
-	player2Col->SetLayers(std::vector<std::string>{"enemy", "pickup", "wall1"});
+	player2Col->SetCollisionBox(glm::vec2{ 16, 16 });
+	player2Col->SetLayers(std::vector<std::string>{"player2"});
 	auto player2Trans = player2Obj->AddComponent<dae::TransformComponent>();
 	player2Trans->SetLocalPosition(glm::vec2{ 250.f, 300.f });
 
-	auto player2Render = player2Obj->AddComponent<dae::RenderComponent>();
+	auto player2Render = player2Obj->AddComponent<dae::TextureRenderComponent>();
 	player2Render->SetTexture("pacman.png");
 
 	auto player2Lives = player2Obj->AddComponent<dae::LivesComponent>();
@@ -132,7 +181,7 @@ void load()
 
 	auto player2Score = player2Obj->AddComponent<dae::ScoreComponent>();
 
-	auto player2Player = player1Obj->AddComponent<dae::PlayerComponent>();
+	auto player2Player = player2Obj->AddComponent<dae::PlayerComponent>();
 	player2Col->AddObserver(player2Player);
 
 	player2Obj->SetParent(sceneRoot);
@@ -146,34 +195,17 @@ void load()
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 10));
 	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
 
-
-	//Pacdot
-	auto pacdotObj = std::make_shared<dae::GameObject>();
-	auto pacdotCol = pacdotObj->AddComponent<dae::RectCollisionComponent>();
-	pacdotCol->SetCollisionType(dae::CollisionType::Trigger);
-	pacdotCol->SetExtend(glm::vec2{ 5, 5 });
-	pacdotCol->SetLayers(std::vector<std::string>{"enemy", "pickup", "wall1"});
-	auto pacdotTrans = pacdotObj->AddComponent<dae::TransformComponent>();
-	pacdotTrans->SetLocalPosition(glm::vec2{ 300.f, 250.f });
-
-	auto pacdotRender = pacdotObj->AddComponent<dae::RenderComponent>();
-	pacdotRender->SetTexture("pacman.png");
-
-	auto pacDotPoints = pacdotObj->AddComponent<dae::PickupComponent>();
-	pacDotPoints->SetPoints(10);
-
-	pacdotObj->SetParent(sceneRoot);
-
+	
 	//Ghost
 	auto ghostObj = std::make_shared<dae::GameObject>();
 	auto ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
-	ghostCol->SetCollisionType(dae::CollisionType::StaticCollision);
-	ghostCol->SetExtend(glm::vec2{ 5, 5 });
-	ghostCol->SetLayers(std::vector<std::string>{"enemy", "wall2"});
+	ghostCol->SetCollisionType(dae::CollisionType::Trigger);
+	ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
+	ghostCol->SetLayers(std::vector<std::string>{"player1", "player2"});
 	auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
 	ghostTrans->SetLocalPosition(glm::vec2{ 300.f, 350.f });
 
-	auto ghostRender = ghostObj->AddComponent<dae::RenderComponent>();
+	auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
 	ghostRender->SetTexture("ghost.png");
 	ghostObj->SetParent(sceneRoot);
 
@@ -191,7 +223,7 @@ void load()
 	lives1StreamText << "Lives: " << player1Lives->GetLives();
 	lives1Text->SetText(lives1StreamText.str());
 
-	lives1Obj->AddComponent<dae::RenderComponent>();
+	lives1Obj->AddComponent<dae::TextureRenderComponent>();
 	auto lives1Trans = lives1Obj->AddComponent<dae::TransformComponent>();
 	auto lives1 = lives1Obj->AddComponent<dae::LivesDisplayComponent>();
 	lives1Trans->SetLocalPosition(glm::vec2{ 0.f, 100.f });
@@ -207,7 +239,7 @@ void load()
 	score1StreamText << "Score: " << player1Score->GetScore();
 	score1Text->SetText(score1StreamText.str());
 
-	score1Obj->AddComponent<dae::RenderComponent>();
+	score1Obj->AddComponent<dae::TextureRenderComponent>();
 	auto score1Trans = score1Obj->AddComponent<dae::TransformComponent>();
 	auto score1 = score1Obj->AddComponent<dae::ScoreDisplayComponent>();
 	score1Trans->SetLocalPosition(glm::vec2{ 0.f, 120.f });
@@ -230,7 +262,7 @@ void load()
 	lives2StreamText << "Lives: " << player2Lives->GetLives();
 	lives2Text->SetText(lives2StreamText.str());
 
-	lives2Obj->AddComponent<dae::RenderComponent>();
+	lives2Obj->AddComponent<dae::TextureRenderComponent>();
 	auto lives2Trans = lives2Obj->AddComponent<dae::TransformComponent>();
 	auto lives2 = lives2Obj->AddComponent<dae::LivesDisplayComponent>();
 	lives2Trans->SetLocalPosition(glm::vec2{ 0.f, 160.f });
@@ -238,7 +270,7 @@ void load()
 	lives2Obj->SetParent(hud2Obj, false);
 	player2Lives->AddObserver(lives2);
 
-	auto score2Obj = std::make_shared < dae::GameObject>();
+	auto score2Obj = std::make_shared<dae::GameObject>();
 	auto score2Text = score2Obj->AddComponent<dae::TextComponent>();
 	score2Text->SetFont(font);
 	score2Text->SetColor(255, 255, 0, 255);
@@ -246,7 +278,7 @@ void load()
 	score2StreamText << "Score: " << player2Score->GetScore();
 	score2Text->SetText(score2StreamText.str());
 
-	score2Obj->AddComponent<dae::RenderComponent>();
+	score2Obj->AddComponent<dae::TextureRenderComponent>();
 	auto score2Trans = score2Obj->AddComponent<dae::TransformComponent>();
 	auto score2 = score2Obj->AddComponent<dae::ScoreDisplayComponent>();
 	score2Trans->SetLocalPosition(glm::vec2{ 0.f, 180.f });

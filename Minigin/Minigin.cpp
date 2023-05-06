@@ -57,7 +57,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		640,
-		480,
+		640,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 
@@ -90,12 +90,11 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	time.Reset();
 	sceneManager.Init();
 
-	const int targetFps{ 144 };
+	const int targetFps{ 144};
 	const auto desiredFrameTime{ std::chrono::milliseconds(1000 / targetFps)};
 	bool doContinue = true;
 	while (doContinue)
 	{
-		//SteamAPI_RunCallbacks();
 		time.Update();
 		doContinue = input.ProcessInput();
 		sceneManager.Update();

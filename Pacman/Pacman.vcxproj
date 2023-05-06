@@ -165,6 +165,8 @@
     <ClCompile Include="DebugScoreCommand.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
+    <ClCompile Include="MapGeneratorComponent.cpp" />
+    <ClCompile Include="MapRenderComponent.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PickupComponent.cpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="DebugScoreCommand.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
+    <ClInclude Include="MapGeneratorComponent.h" />
+    <ClInclude Include="MapRenderComponent.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
