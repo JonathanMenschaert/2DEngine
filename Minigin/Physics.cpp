@@ -37,6 +37,7 @@ void dae::Physics::HandleCollision()
 			{
 				continue;
 			}
+			auto test = other->GetCollisionBox();
 			if (CompareLayers(layers, other->GetLayers()))
 			{
 				collider->AddCollisionOffset(collisionOffset);
@@ -162,6 +163,7 @@ bool dae::Physics::CalculateCollisionOffset(const glm::vec4& box1, const glm::ve
 		return true;
 	}
 
+	collisionOffset = offset;
 	return false;	
 }
 
@@ -172,9 +174,8 @@ bool dae::Physics::HasTriggered(const glm::vec4& box1, const glm::vec4& box2)
 }
 
 bool dae::Physics::HasCollided(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset)
-{
-	CalculateCollisionOffset(box1, box2, collisionOffset);
-	return collisionOffset != m_ZeroOffset;
+{	
+	return CalculateCollisionOffset(box1, box2, collisionOffset);
 }
 
 bool dae::Physics::CompareLayers(const std::vector<std::string>& layers1, const std::vector<std::string>& layers2) const
