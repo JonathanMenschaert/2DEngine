@@ -147,22 +147,22 @@ void load()
 
 	//Bind keys
 	const float speed{ 100.f };
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Hold, SDLK_w, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Hold, SDLK_a, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Hold, SDLK_s, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Hold, SDLK_d, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Press, SDLK_e, std::make_unique<dae::DebugLivesCommand>(player1Obj.get()));
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Press, SDLK_o, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 10));
-	inputManager.BindKeyboardCommand(dae::InputManager::InteractionType::Press, SDLK_p, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_w, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_a, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_s, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_d, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_e, std::make_unique<dae::DebugLivesCommand>(player1Obj.get()));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_o, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 10));
+	inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_p, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
 
 	//Bind Controller keys
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player1Obj.get()));
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 10));
-	inputManager.BindDigitalCommand(0, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player1Obj.get()));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 10));
+	inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
 
 	//Pacman 2
 	auto player2Obj = std::make_shared<dae::GameObject>();
@@ -187,13 +187,13 @@ void load()
 	player2Obj->SetParent(sceneRoot);
 
 	//Bind Controller keys
-	/*inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player2Obj.get()));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 10));
-	inputManager.BindDigitalCommand(1, dae::InputManager::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
+	/*inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
+	inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
+	inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
+	inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
+	inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player2Obj.get()));
+	inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 10));
+	inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
 
 	
 	//Ghost

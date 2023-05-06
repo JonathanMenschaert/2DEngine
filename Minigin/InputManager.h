@@ -9,16 +9,17 @@
 
 namespace dae
 {
+	enum class InteractionType
+	{
+		Press,
+		Release,
+		Hold
+	};
+
 	class InputManager final : public Singleton<InputManager>
 	{
 	public:
-		enum class InteractionType
-		{
-			Press,
-			Release,
-			Hold
-		};
-
+		
 		bool ProcessInput();
 		void BindKeyboardCommand(InteractionType type, SDL_Keycode key, std::unique_ptr<Command> pCommand);
 		void BindDigitalCommand(unsigned int gamepadIdx, InteractionType type, Gamepad::DigitalButton key, std::unique_ptr<Command> pCommand);
