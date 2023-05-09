@@ -64,35 +64,35 @@ void load()
 	std::vector<int> tileData
 	{
 		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-		2, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 2, 
+		2, 5, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 5, 2, 
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 0, 0, 2, 4, 2, 0, 0, 0, 2, 4, 2, 2, 4, 2, 0, 0, 0, 2, 4, 2, 0, 0, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
-		2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
-		2, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 2,
 		2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2,
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 0, 0, 0, 0, 0, 
-		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 3, 3, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
-		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
-		2, 1, 1, 1, 1, 1, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 1, 1, 1, 1, 1, 2,
-		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 6, 4, 4, 4, 6, 6, 4, 4, 4, 6, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 1, 1, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 8, 1, 3, 3, 1, 8, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
+		2, 1, 1, 1, 1, 1, 6, 4, 4, 6, 2, 1, 1, 1, 1, 1, 1, 2, 6, 4, 4, 6, 1, 1, 1, 1, 1, 2,
+		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 8, 1, 3, 3, 1, 8, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 6, 4, 4, 4, 4, 4, 4, 4, 4, 6, 2, 2, 4, 2, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
 		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
-		2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 2, 2, 4, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 6, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
-		2, 5, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 5, 2,
+		2, 5, 4, 4, 2, 2, 4, 4, 4, 6, 4, 4, 6, 7, 7, 4, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 5, 2,
 		2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
 		2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
-		2, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 2, 2, 4, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 2,
 		2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2,
-		2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 2,
 		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
 
 	};
@@ -131,7 +131,7 @@ void load()
 	player1Col->SetCollisionBox(glm::vec2{ 16, 16 });
 	player1Col->SetLayers(std::vector<std::string>{"player1"});
 	auto player1Trans = player1Obj->AddComponent<dae::TransformComponent>();
-	player1Trans->SetLocalPosition(glm::vec2{ 250.f, 250.f });
+	player1Trans->SetLocalPosition(mapGen->GetPlayerSpawns());
 
 	auto player1Render = player1Obj->AddComponent<dae::TextureRenderComponent>();
 	player1Render->SetTexture("pacman.png");
@@ -143,7 +143,7 @@ void load()
 
 	auto player1Player = player1Obj->AddComponent<dae::PlayerComponent>();
 	player1Col->AddObserver(player1Player);
-	player1Obj->SetParent(sceneRoot);
+	player1Obj->SetParent(mapObj, false);
 
 	//Bind keys
 	const float speed{ 100.f };
@@ -165,7 +165,7 @@ void load()
 	inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
 
 	//Pacman 2
-	auto player2Obj = std::make_shared<dae::GameObject>();
+	/*auto player2Obj = std::make_shared<dae::GameObject>();
 	auto player2Col = player2Obj->AddComponent<dae::RectCollisionComponent>();
 	player2Col->SetCollisionType(dae::CollisionType::DynamicCollision);
 	player2Col->SetCollisionBox(glm::vec2{ 16, 16 });
@@ -184,7 +184,7 @@ void load()
 	auto player2Player = player2Obj->AddComponent<dae::PlayerComponent>();
 	player2Col->AddObserver(player2Player);
 
-	player2Obj->SetParent(sceneRoot);
+	player2Obj->SetParent(sceneRoot);*/
 
 	//Bind Controller keys
 	/*inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
@@ -196,18 +196,21 @@ void load()
 	inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
 
 	
-	//Ghost
-	auto ghostObj = std::make_shared<dae::GameObject>();
-	auto ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
-	ghostCol->SetCollisionType(dae::CollisionType::Trigger);
-	ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
-	ghostCol->SetLayers(std::vector<std::string>{"player1", "player2"});
-	auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
-	ghostTrans->SetLocalPosition(glm::vec2{ 300.f, 350.f });
+	//Ghosts
+	for (auto& position : mapGen->GetGhostSpawns())
+	{
+		auto ghostObj = std::make_shared<dae::GameObject>();
+		auto ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
+		ghostCol->SetCollisionType(dae::CollisionType::Trigger);
+		ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
+		ghostCol->SetLayers(std::vector<std::string>{"player1", "player2"});
+		auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
+		ghostTrans->SetLocalPosition(position);
 
-	auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
-	ghostRender->SetTexture("ghost.png");
-	ghostObj->SetParent(sceneRoot);
+		auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
+		ghostRender->SetTexture("ghost.png");
+		ghostObj->SetParent(mapObj, false);
+	}
 
 	//Hud Player 1
 	auto hud1Obj = std::make_shared<dae::GameObject>();
@@ -249,7 +252,7 @@ void load()
 	hud1Obj->SetParent(sceneRoot);
 
 	//Hud Player 2
-	auto hud2Obj = std::make_shared<dae::GameObject>();
+	/*auto hud2Obj = std::make_shared<dae::GameObject>();
 	font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
 	auto hud2Trans = hud2Obj->AddComponent<dae::TransformComponent>();
 	hud2Trans->SetLocalPosition(glm::vec2{ 10.f, 0.f });
@@ -285,7 +288,7 @@ void load()
 
 	score2Obj->SetParent(hud2Obj, false);
 	player2Score->AddObserver(score2);
-	hud2Obj->SetParent(sceneRoot);
+	hud2Obj->SetParent(sceneRoot);*/
 }
 
 

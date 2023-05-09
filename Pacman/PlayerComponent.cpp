@@ -23,8 +23,7 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 		auto pos{ GetGameObject()->GetTransform()->GetWorldPosition()};
 		//add score
 		//std::cout << "Triggered! :" << pos.x << ", " << pos.y << "\n";
-		data.pGameObject->Destroy();
-		
+		data.pGameObject->Destroy();		
 	}
 	//
 }

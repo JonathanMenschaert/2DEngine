@@ -23,9 +23,12 @@ void dae::MapRenderComponent::Render() const
 			texture = m_Textures[0];
 			break;
 		case TileData::Path:
-		case TileData::PathCollision:
+		case TileData::Path_AI:
 		case TileData::PacDot:
-		case TileData::PowerPellet:
+		case TileData::PacDot_AI:
+		case TileData::PowerPellet_AI:
+		case TileData::PlayerSpawn:
+		case TileData::GhostSpawn:
 			texture = m_Textures[1];
 			break;
 		default:

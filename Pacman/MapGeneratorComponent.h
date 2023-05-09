@@ -2,6 +2,7 @@
 #include "BaseComponent.h"
 #include <vector>
 #include <string>
+#include "glm/glm.hpp"
 namespace dae
 {
 
@@ -10,9 +11,12 @@ namespace dae
 		Wall = 0,
 		Path = 1,
 		WallCollision = 2,
-		PathCollision = 3,
+		Path_AI = 3,
 		PacDot = 4,
-		PowerPellet = 5
+		PowerPellet_AI = 5,
+		PacDot_AI = 6,
+		PlayerSpawn = 7,
+		GhostSpawn = 8
 	};
 
 	class MapGeneratorComponent final : public BaseComponent
@@ -25,7 +29,15 @@ namespace dae
 		MapGeneratorComponent& operator=(const MapGeneratorComponent& rectComponent) = delete;
 		MapGeneratorComponent& operator=(MapGeneratorComponent&& rectComponent) noexcept = delete;
 
+
+		const glm::vec2& GetPlayerSpawns() const;
+		const std::vector<glm::vec2>& GetGhostSpawns() const;
+
 		void LoadMap(int width, int height, int tileSize, const std::vector<int>& tileData, const std::vector<std::string>& textureFiles);
+
+	private:
+		glm::vec2 m_PlayerSpawns{};
+		std::vector<glm::vec2> m_GhostSpawns{};
 	};
 
 

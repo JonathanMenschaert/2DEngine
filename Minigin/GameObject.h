@@ -54,6 +54,9 @@ namespace dae
 		T* GetComponent() const;
 
 		template<typename T>
+		T* GetComponentInParent() const;
+
+		template<typename T>
 		void RemoveComponent();
 
 		template<typename T>
@@ -120,6 +123,17 @@ namespace dae
 				return pRequestedComponent;
 			}
 		}
+		return nullptr;
+	}
+
+	template<typename T>
+	T* GameObject::GetComponentInParent() const
+	{
+		if (!m_pParent.expired())
+		{
+			return m_pParent.lock()->GetComponent<T>();
+		}
+		
 		return nullptr;
 	}
 
