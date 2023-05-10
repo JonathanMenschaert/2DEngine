@@ -57,6 +57,9 @@
     <ClCompile Include="MapRenderComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GhostControllerComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveCommand.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="MapRenderComponent.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostControllerComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

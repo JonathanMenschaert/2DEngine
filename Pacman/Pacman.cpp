@@ -34,6 +34,7 @@
 #include "PickupComponent.h"
 #include "PlayerComponent.h"
 #include "MapGeneratorComponent.h"
+#include "GhostControllerComponent.h"
 
 void load()
 {
@@ -44,14 +45,14 @@ void load()
 	scene.Add(sceneRoot);
 
 
-	//Background object
-	auto bgObj = std::make_shared<dae::GameObject>();
-	auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
-	bgRender->SetTexture("background.tga");
+	////Background object
+	//auto bgObj = std::make_shared<dae::GameObject>();
+	//auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
+	//bgRender->SetTexture("background.tga");
 
-	auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
-	bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
-	bgObj->SetParent(sceneRoot);
+	//auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
+	//bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
+	//bgObj->SetParent(sceneRoot);
 
 	//Map gameobject
 	//Errors galore expected
@@ -68,13 +69,13 @@ void load()
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 0, 0, 2, 4, 2, 0, 0, 0, 2, 4, 2, 2, 4, 2, 0, 0, 0, 2, 4, 2, 0, 0, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
-		2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 6, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
-		2, 6, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 6, 2,
 		2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2,
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 0, 0, 0, 0, 0, 
-		0, 0, 0, 0, 0, 2, 4, 2, 2, 6, 4, 4, 4, 6, 6, 4, 4, 4, 6, 2, 2, 4, 2, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 2, 4, 2, 2, 6, 4, 4, 6, 6, 6, 6, 4, 4, 6, 2, 2, 4, 2, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 1, 1, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
 		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 8, 1, 3, 3, 1, 8, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
 		2, 1, 1, 1, 1, 1, 6, 4, 4, 6, 2, 1, 1, 1, 1, 1, 1, 2, 6, 4, 4, 6, 1, 1, 1, 1, 1, 2,
@@ -83,13 +84,13 @@ void load()
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 6, 4, 4, 4, 4, 4, 4, 4, 4, 6, 2, 2, 4, 2, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 0, 0, 0, 0, 0,
 		2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2,
-		2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 2, 2, 4, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 6, 2,
+		2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 6, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
-		2, 5, 4, 4, 2, 2, 4, 4, 4, 6, 4, 4, 6, 7, 7, 4, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 5, 2,
+		2, 5, 4, 6, 2, 2, 6, 4, 4, 6, 4, 4, 6, 7, 7, 6, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 5, 2,
 		2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
 		2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
-		2, 6, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 2,
+		2, 6, 4, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 4, 6, 2,
 		2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2,
 		2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2,
 		2, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 2,
@@ -209,6 +210,7 @@ void load()
 
 		auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
 		ghostRender->SetTexture("ghost.png");
+		ghostObj->AddComponent<dae::GhostControllerComponent>();
 		ghostObj->SetParent(mapObj, false);
 	}
 
@@ -294,6 +296,7 @@ void load()
 
 int main(int, char* []) {
 	dae::Minigin engine{ "../Data/" };
+	std::srand(static_cast<int>(std::time(nullptr)));
 	engine.Run(load);
 	return 0;
 }

@@ -90,16 +90,23 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutputPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Minigin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutputPath);$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Minigin.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.dll $(OutputPath)/R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x86\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_ttf\x86\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -109,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -118,9 +125,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutputPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Minigin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutputPath);$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Minigin.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.dll $(OutputPath)/R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x86\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_ttf\x86\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -128,16 +142,23 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutputPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Minigin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutputPath);$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Minigin.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll $(OutputPath)/R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_ttf\x64\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -147,7 +168,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -156,13 +177,21 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutputPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Minigin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutputPath);$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Minigin.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll $(OutputPath)/R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_ttf\x64\*.dll $(OutputPath) /R /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DebugLivesCommand.cpp" />
     <ClCompile Include="DebugScoreCommand.cpp" />
+    <ClCompile Include="GhostControllerComponent.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
     <ClCompile Include="MapGeneratorComponent.cpp" />
@@ -178,6 +207,7 @@
   <ItemGroup>
     <ClInclude Include="DebugLivesCommand.h" />
     <ClInclude Include="DebugScoreCommand.h" />
+    <ClInclude Include="GhostControllerComponent.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
     <ClInclude Include="MapGeneratorComponent.h" />

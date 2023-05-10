@@ -13,7 +13,7 @@ void dae::MapRenderComponent::Render() const
 
 	for (size_t idx{}; idx < m_TileData.size(); ++idx)
 	{
-		//glm::vec2{ (idx % width) * tileSize + halfSize, (idx / width) * tileSize + halfSize }
+		//Hardcoded texture ids will be changed later
 		TileData tileData{ static_cast<TileData>(m_TileData[idx]) };
 		std::shared_ptr<Texture2D> texture{};
 		switch(tileData)

@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Achievements">
       <UniqueIdentifier>{443c1dc7-4169-4c55-bc1b-9d12f0304ec7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Sounds">
+      <UniqueIdentifier>{d6025f51-8bba-4f99-8fb6-8b927b60eaf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -148,6 +151,12 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="GraphComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Source Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -168,9 +177,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
@@ -261,6 +267,15 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="GraphComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
