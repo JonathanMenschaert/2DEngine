@@ -205,6 +205,11 @@ void load()
 		ghostCol->SetCollisionType(dae::CollisionType::Trigger);
 		ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
 		ghostCol->SetLayers(std::vector<std::string>{"player1", "player2"});
+
+		ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
+		ghostCol->SetCollisionType(dae::CollisionType::DynamicCollision);
+		ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
+		ghostCol->SetLayers(std::vector<std::string>{"enemy"});
 		auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
 		ghostTrans->SetLocalPosition(position);
 

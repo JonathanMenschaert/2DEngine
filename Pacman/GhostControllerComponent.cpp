@@ -3,7 +3,7 @@
 dae::GhostControllerComponent::GhostControllerComponent(GameObject* pGameObject)
 	:UpdateComponent{pGameObject}
 	,m_Speed{10.f}
-	,m_AcceptanceRadius{5.f}
+	,m_AcceptanceRadius{1.5f}
 {
 	m_pUpCommand = std::make_unique<MoveCommand>(GetGameObject(), m_Speed, glm::vec2{0.f, 1.f});
 	m_pDownCommand = std::make_unique<MoveCommand>(GetGameObject(), m_Speed, glm::vec2{ 0.f, -1.f });
