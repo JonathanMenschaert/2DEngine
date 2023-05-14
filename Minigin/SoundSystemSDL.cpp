@@ -149,7 +149,7 @@ private:
 		}
 	}
 
-	void HandleSoundEnd(int channel)
+	void HandleSoundEnd(int/* channel*/)
 	{
 
 	}
