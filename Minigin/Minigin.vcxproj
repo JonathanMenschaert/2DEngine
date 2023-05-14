@@ -242,6 +242,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="SoundSystem.h" />
+    <ClInclude Include="SoundSystemSDL.h" />
     <ClInclude Include="TextureRenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -293,6 +294,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
+    <ClCompile Include="SoundSystemSDL.cpp" />
     <ClCompile Include="TextureRenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

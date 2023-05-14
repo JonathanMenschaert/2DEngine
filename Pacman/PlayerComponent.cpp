@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "PickupComponent.h"
 #include <iostream>
+#include <ServiceLocator.h>
 dae::PlayerComponent::PlayerComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
 {
@@ -23,7 +24,8 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 		auto pos{ GetGameObject()->GetTransform()->GetWorldPosition()};
 		//add score
 		//std::cout << "Triggered! :" << pos.x << ", " << pos.y << "\n";
-		data.pGameObject->Destroy();		
+		data.pGameObject->Destroy();
+		ServiceLocator::GetSoundSystem().Play(0, 100);
 	}
 	//
 }

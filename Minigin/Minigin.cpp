@@ -12,6 +12,8 @@
 #include "Physics.h"
 #include "GameTime.h"
 #include <chrono>
+#include "ServiceLocator.h"
+#include "SoundSystemSDL.h"
 
 SDL_Window* g_window{};
 
@@ -68,6 +70,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	Renderer::GetInstance().Init(g_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
+	ServiceLocator::RegisterSoundSystem<SoundSystemSDL>();
 }
 
 dae::Minigin::~Minigin()
