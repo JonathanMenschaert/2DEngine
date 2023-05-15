@@ -28,7 +28,6 @@ public:
 			return;
 		}
 
-		m_IsActive = true;
 		m_Thread = std::jthread{ [&] {HandleSound(); } };
 		
 
@@ -101,12 +100,12 @@ private:
 	struct Sound
 	{
 		Mix_Chunk* soundData{};
-		std::vector<int> channels{};
+		std::string soundName{};
 	};
 
 	void HandleSound()
 	{
-		std::stop_token stopToken{ m_Thread.get_stop_token() };
+		const std::stop_token& stopToken{ m_Thread.get_stop_token() };
 		while (!stopToken.stop_requested())
 		{
 			std::unique_lock lock{ m_Lock };
@@ -159,8 +158,6 @@ private:
 	std::condition_variable m_ThreadCondition{};
 	std::mutex m_Lock{};
 	std::vector<Sound> m_LoadedSounds{};
-
-	bool m_IsActive{false};
 };
 
 dae::SoundSystemSDL::SoundSystemSDL()
