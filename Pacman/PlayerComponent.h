@@ -16,6 +16,9 @@ namespace dae
 		PlayerComponent& operator=(PlayerComponent&& rectComponent) noexcept = delete;
 
 		void Notify(const Event<dae::CollisionData>& e) override;
+	private:
+		unsigned int m_PacDotSoundIdx;
+		const std::string m_PacDotSoundName;
 
 	};
 }

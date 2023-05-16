@@ -46,13 +46,13 @@ void load()
 
 
 	////Background object
-	//auto bgObj = std::make_shared<dae::GameObject>();
-	//auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
-	//bgRender->SetTexture("background.tga");
+	auto bgObj = std::make_shared<dae::GameObject>();
+	auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
+	bgRender->SetTexture("background.tga");
 
-	//auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
-	//bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
-	//bgObj->SetParent(sceneRoot);
+	auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
+	bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
+	bgObj->SetParent(sceneRoot);
 
 	//Map gameobject
 	//Errors galore expected
@@ -104,11 +104,11 @@ void load()
 
 	
 	//How to play
-	/*auto howToPlayObj = std::make_shared < dae::GameObject>();
+	auto howToPlayObj = std::make_shared < dae::GameObject>();
 	auto htpTrans = howToPlayObj->AddComponent<dae::TransformComponent>();
 	htpTrans->SetLocalPosition(glm::vec2{ 10.f, 30.f });
 	howToPlayObj->AddComponent<dae::HowToPlayComponent>();
-	howToPlayObj->SetParent(sceneRoot);*/
+	howToPlayObj->SetParent(sceneRoot);
 
 	//Fps Object
 	auto fpsObj = std::make_shared<dae::GameObject>();

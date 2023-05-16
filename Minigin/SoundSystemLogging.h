@@ -1,18 +1,17 @@
 #pragma once
 #include "SoundSystem.h"
 #include <memory>
-
 namespace dae
 {
-	class SoundSystemSDL final : public SoundSystem
+	class SoundSystemLogging final : public SoundSystem
 	{
 	public:
-		SoundSystemSDL();
-		virtual ~SoundSystemSDL();
-		SoundSystemSDL(const SoundSystemSDL& soundSystem) = delete;
-		SoundSystemSDL(SoundSystemSDL&& soundSystem) noexcept = delete;
-		SoundSystemSDL& operator=(const SoundSystemSDL& soundSystem) = delete;
-		SoundSystemSDL& operator=(SoundSystemSDL&& soundSystem) noexcept = delete;
+		SoundSystemLogging(std::unique_ptr<SoundSystem>&& soundsystem);
+		virtual ~SoundSystemLogging() = default;
+		SoundSystemLogging(const SoundSystemLogging& soundSystem) = delete;
+		SoundSystemLogging(SoundSystemLogging&& soundSystem) noexcept = delete;
+		SoundSystemLogging& operator=(const SoundSystemLogging& soundSystem) = delete;
+		SoundSystemLogging& operator=(SoundSystemLogging&& soundSystem) noexcept = delete;
 
 		virtual void Play(unsigned int soundId, int volume) override;
 		virtual void Pause(unsigned int soundIdx) override;
@@ -23,9 +22,7 @@ namespace dae
 		virtual unsigned int FindSoundId(const std::string soundName) override;
 
 	private:
-
-		class SoundSystemSDLImpl;
-		std::unique_ptr<SoundSystemSDLImpl> m_pImpl;
+		std::unique_ptr<SoundSystem> m_pSoundSystem{};
 	};
 }
 

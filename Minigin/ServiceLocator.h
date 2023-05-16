@@ -5,12 +5,13 @@ namespace dae
 {
 	class DefaultSoundSystem final : public SoundSystem
 	{
-		virtual void Play(unsigned int, float) override {}
+		virtual void Play(unsigned int, int) override {}
 		virtual void Pause(unsigned int) override {}
 		virtual void Resume(unsigned int) override {}
-		virtual void SetVolume(unsigned int, float ) override {}
+		virtual void SetVolume(unsigned int, int ) override {}
 		virtual void Stop(unsigned int ) override {}
 		virtual void LoadSound(const std::string&) override { }
+		virtual unsigned int FindSoundId(const std::string soundName) override { return UINT32_MAX;  };
 	};
 
 	class ServiceLocator final
@@ -19,10 +20,10 @@ namespace dae
 
 		static SoundSystem& GetSoundSystem();
 		
-		template <typename T>
-		static void RegisterSoundSystem()
+		
+		static void RegisterSoundSystem(std::unique_ptr<SoundSystem> soundSystem)
 		{
-			m_pSoundSystemInstance = std::make_unique<T>();
+			m_pSoundSystemInstance = std::move(soundSystem);
 		}
 	
 	private:

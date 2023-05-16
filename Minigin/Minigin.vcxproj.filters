@@ -162,6 +162,9 @@
     <ClInclude Include="SoundSystemSDL.h">
       <Filter>Source Files\Sounds</Filter>
     </ClInclude>
+    <ClInclude Include="SoundSystemLogging.h">
+      <Filter>Source Files\Sounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -272,9 +275,6 @@
     <ClCompile Include="GraphComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\Sounds</Filter>
-    </ClCompile>
     <ClCompile Include="ServiceLocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -282,6 +282,12 @@
       <Filter>Source Files\Sounds</Filter>
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystemLogging.cpp">
       <Filter>Source Files\Sounds</Filter>
     </ClCompile>
   </ItemGroup>

@@ -14,6 +14,7 @@
 #include <chrono>
 #include "ServiceLocator.h"
 #include "SoundSystemSDL.h"
+#include "SoundSystemLogging.h"
 
 SDL_Window* g_window{};
 
@@ -49,7 +50,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 {
 	PrintSDLVersion();
 	
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
@@ -70,7 +71,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	Renderer::GetInstance().Init(g_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
-	ServiceLocator::RegisterSoundSystem<SoundSystemSDL>();
+	ServiceLocator::RegisterSoundSystem(std::make_unique<SoundSystemLogging>(std::make_unique<SoundSystemSDL>()));
 }
 
 dae::Minigin::~Minigin()
