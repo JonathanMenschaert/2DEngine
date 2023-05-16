@@ -217,6 +217,12 @@ private:
 				break;
 				case SoundEvent::Type::VolumeChange:
 				{
+					Sound& sound{ m_LoadedSounds[soundEvent.soundIdx] };
+					if (sound.channel < m_MaxChannels)
+					{
+						continue;
+					}
+					Mix_Volume(sound.channel, soundEvent.volume);
 				}
 				break;
 				}
