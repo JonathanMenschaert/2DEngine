@@ -227,6 +227,8 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClInclude Include="..\3rdParty\imgui\imstb_truetype.h" />
     <ClInclude Include="Achievement.h" />
     <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="ButtonComponent.h" />
+    <ClInclude Include="ButtonGroupComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
@@ -280,6 +282,8 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="ButtonComponent.cpp" />
+    <ClCompile Include="ButtonGroupComponent.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />

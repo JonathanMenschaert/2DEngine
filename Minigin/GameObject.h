@@ -54,6 +54,9 @@ namespace dae
 		T* GetComponent() const;
 
 		template<typename T>
+		std::vector<T*> GetComponentsInChildren() const;
+
+		template<typename T>
 		std::vector<T*> GetComponents() const;
 
 		template<typename T>
@@ -142,6 +145,28 @@ namespace dae
 		for (const auto& pComponent : m_Components.at(componentType))
 		{
 			T* pRequestedComponent{ dynamic_cast<T*>(pComponent.get()) };
+			if (pRequestedComponent)
+			{
+				requestedComponents.emplace_back(pRequestedComponent);
+			}
+		}
+		return requestedComponents;
+	}
+
+	template<typename T>
+	std::vector<T*> GameObject::GetComponentsInChildren() const
+	{
+		//Compile time check to make sure T is a component
+		AssertType<T>();
+
+		//Get Component type
+		
+		std::vector<T*> requestedComponents{};
+
+		//Loop over children to get the requested components
+		for (const auto& pChild : m_Children)
+		{
+			T* pRequestedComponent{ pChild->GetComponent<T>() };
 			if (pRequestedComponent)
 			{
 				requestedComponents.emplace_back(pRequestedComponent);

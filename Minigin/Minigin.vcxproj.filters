@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Sounds">
       <UniqueIdentifier>{d6025f51-8bba-4f99-8fb6-8b927b60eaf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\UI">
+      <UniqueIdentifier>{351bc026-5d9f-46a2-aa66-fc9c428eed5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -165,6 +168,12 @@
     <ClInclude Include="SoundSystemLogging.h">
       <Filter>Source Files\Sounds</Filter>
     </ClInclude>
+    <ClInclude Include="ButtonComponent.h">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonGroupComponent.h">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -289,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="SoundSystemLogging.cpp">
       <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonGroupComponent.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonComponent.cpp">
+      <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

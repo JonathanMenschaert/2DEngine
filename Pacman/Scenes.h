@@ -7,5 +7,11 @@ namespace dae
 	public:
 		static void LoadScene();
 	};
+
+	class MainMenu final
+	{
+	public:
+		static void LoadScene();
+	};
 }
 

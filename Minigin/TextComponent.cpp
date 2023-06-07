@@ -51,6 +51,12 @@ void dae::TextComponent::SetColor(unsigned char r, unsigned char g, unsigned cha
 	m_NeedsUpdate = true;
 }
 
+void dae::TextComponent::SetColor(const SDL_Color& color)
+{
+	m_TextColor = color;
+	m_NeedsUpdate = true;
+}
+
 void dae::TextComponent::UpdateTexture()
 {
 	const auto pSurface = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), m_TextColor);

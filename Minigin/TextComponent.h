@@ -26,6 +26,7 @@ namespace dae
 
 		void SetFont(const std::shared_ptr<Font> pFont);
 		void SetColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+		void SetColor(const SDL_Color& color);
 		void UpdateTexture();
 
 	private:

@@ -64,7 +64,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scenes.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scenes.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

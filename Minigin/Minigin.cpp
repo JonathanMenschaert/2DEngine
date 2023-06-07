@@ -15,6 +15,7 @@
 #include "ServiceLocator.h"
 #include "SoundSystemSDL.h"
 #include "SoundSystemLogging.h"
+#include "Scene.h"
 
 SDL_Window* g_window{};
 
@@ -71,7 +72,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	Renderer::GetInstance().Init(g_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
-	ServiceLocator::RegisterSoundSystem(std::make_unique<SoundSystemLogging>(std::make_unique<SoundSystemSDL>()));
+	ServiceLocator::RegisterSoundSystem(std::make_unique<SoundSystemSDL>());
 }
 
 dae::Minigin::~Minigin()

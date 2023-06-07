@@ -30,6 +30,8 @@
 #include "PlayerComponent.h"
 #include "MapGeneratorComponent.h"
 #include "GhostControllerComponent.h"
+#include "ButtonGroupComponent.h"
+#include "ButtonComponent.h"
 
 
 namespace dae
@@ -294,5 +296,61 @@ namespace dae
 		score2Obj->SetParent(hud2Obj, false);
 		player2Score->AddObserver(score2);
 		hud2Obj->SetParent(sceneRoot);*/
+	}
+
+	void MainMenu::LoadScene()
+	{
+		auto& scene = dae::SceneManager::GetInstance().CreateScene("Main Menu");
+		//auto& inputManager = dae::InputManager::GetInstance();
+		auto sceneRoot = std::make_shared<dae::GameObject>();
+		sceneRoot->AddComponent<dae::TransformComponent>();
+		scene.Add(sceneRoot);
+
+		////Background object
+		auto bgObj = std::make_shared<dae::GameObject>();
+		auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
+		bgRender->SetTexture("background.tga");
+
+		auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
+		bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
+		bgObj->SetParent(sceneRoot);
+
+		//Font
+		auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
+
+		//Button group
+		auto buttonGrObj = std::make_shared<dae::GameObject>();
+		buttonGrObj->AddComponent<dae::TransformComponent>();
+		buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
+		buttonGrObj->SetParent(sceneRoot);
+
+		//Button 1
+		auto button1Obj = std::make_shared<dae::GameObject>();
+		auto button1Trans = button1Obj->AddComponent<dae::TransformComponent>();
+		button1Trans->SetLocalPosition(glm::vec2{50.f, 50.f});
+		auto button1 = button1Obj->AddComponent<dae::ButtonComponent>();
+		button1->SetButtonExtend(glm::vec2{10.f, 10.f});
+		button1->SetButtonFont(font);
+		button1->SetButtonText("Test");
+		button1->SetNormalColor(255, 255, 255, 255);
+		button1->SetHighlightColor(255, 255, 0, 255);
+
+
+		button1Obj->SetParent(buttonGrObj);
+
+		//Button 2
+		auto button2Obj = std::make_shared<dae::GameObject>();
+		auto button2Trans = button2Obj->AddComponent<dae::TransformComponent>();
+		button2Trans->SetLocalPosition(glm::vec2{100.f, 50.f});
+		auto button2 = button2Obj->AddComponent<dae::ButtonComponent>();
+		button2->SetButtonExtend(glm::vec2{10.f, 10.f});
+		button2->SetButtonFont(font);
+		button2->SetButtonText("Test");
+		button2->SetNormalColor(255, 255, 255, 255);
+		button2->SetHighlightColor(255, 255, 0, 255);
+
+
+		button2Obj->SetParent(sceneRoot);
+		
 	}
 }
