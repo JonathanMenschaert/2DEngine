@@ -34,8 +34,8 @@ namespace dae
 
 		std::vector<std::unique_ptr<Gamepad>> m_Gamepads{};
 
-		std::map<SDL_Keycode, std::pair<InputManager::InteractionType, std::unique_ptr<Command>>> m_KeyboardCommands{};
-		std::map<std::pair<unsigned int, Gamepad::DigitalButton>, std::pair<InputManager::InteractionType, std::unique_ptr<Command>>> m_DigitalGamepadCommands{};
+		std::map<SDL_Keycode, std::pair<InteractionType, std::unique_ptr<Command>>> m_KeyboardCommands{};
+		std::map<std::pair<unsigned int, Gamepad::DigitalButton>, std::pair<InteractionType, std::unique_ptr<Command>>> m_DigitalGamepadCommands{};
 		std::map<std::pair<unsigned int, Gamepad::AnalogButton>, std::unique_ptr<Command>> m_AnalogGamepadCommands{};
 
 		std::set<SDL_Keycode> m_KeyboardKeysDown{};
