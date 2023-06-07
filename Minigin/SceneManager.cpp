@@ -43,11 +43,11 @@ void dae::SceneManager::OnGui()
 
 dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
 {
-	m_pNewScene = std::make_unique<Scene>(new Scene(name));
+	m_pNewScene = std::make_unique<Scene>(name);
 	return *m_pNewScene;
 }
 
-dae::Scene& dae::SceneManager::LoadScene(const std::string& name)
+void dae::SceneManager::LoadScene(const std::string& name)
 {
 	if (m_SceneTemplates.find(name) == m_SceneTemplates.end())
 	{
@@ -55,4 +55,14 @@ dae::Scene& dae::SceneManager::LoadScene(const std::string& name)
 	}
 
 	m_SceneTemplates[name]();
+}
+
+void dae::SceneManager::AddScene(const std::string& name, const std::function<void()>& loadFunction, bool setAsDefault)
+{
+	m_SceneTemplates[name] = loadFunction;
+
+	if (setAsDefault)
+	{
+		LoadScene(name);
+	}
 }

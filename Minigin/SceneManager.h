@@ -5,15 +5,17 @@
 #include "Singleton.h"
 #include <unordered_map>
 #include <functional>
+#include "Scene.h"
+
 namespace dae
 {
 	class Scene;
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
-		Scene& CreateScene(const std::string& name);
-		Scene& LoadScene(const std::string& name);
-
+		dae::Scene& CreateScene(const std::string& name);
+		void LoadScene(const std::string& name);
+		void AddScene(const std::string& name, const std::function<void()>& loadFunction, bool setAsDefault = false);
 
 		void Init();
 		void Update();
