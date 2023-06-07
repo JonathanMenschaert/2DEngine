@@ -201,6 +201,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="PointsComponent.cpp" />
+    <ClCompile Include="Scenes.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreDisplayComponent.cpp" />
   </ItemGroup>
@@ -216,6 +217,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PointsComponent.h" />
+    <ClInclude Include="Scenes.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreDisplayComponent.h" />
   </ItemGroup>

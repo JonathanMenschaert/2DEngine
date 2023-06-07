@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{2969b62c-6c26-4a8b-9ad2-90cd2affc56d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{2705fc75-5982-4e4d-90e9-41d17306e9d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pacman.cpp">
@@ -60,6 +63,9 @@
     <ClCompile Include="GhostControllerComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveCommand.h">
@@ -99,6 +105,9 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="GhostControllerComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,7 +3,8 @@
 #include <string>
 #include <memory>
 #include "Singleton.h"
-
+#include <unordered_map>
+#include <functional>
 namespace dae
 {
 	class Scene;
@@ -11,6 +12,8 @@ namespace dae
 	{
 	public:
 		Scene& CreateScene(const std::string& name);
+		Scene& LoadScene(const std::string& name);
+
 
 		void Init();
 		void Update();
@@ -20,6 +23,9 @@ namespace dae
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
-		std::vector<std::shared_ptr<Scene>> m_scenes;
+		std::unordered_map<std::string, std::function<void()>> m_SceneTemplates;
+
+		std::unique_ptr<Scene> m_pActiveScene{};
+		std::unique_ptr<Scene> m_pNewScene{};
 	};
 }

@@ -3,47 +3,56 @@
 
 void dae::SceneManager::Init()
 {
-	for (auto& scene : m_scenes)
+	if (!m_pActiveScene)
 	{
-		scene->Init();
+		if (!m_pNewScene)
+		{
+			CreateScene("SampleScene");
+		}
+		m_pActiveScene = std::move(m_pNewScene);
 	}
+	m_pActiveScene->Init();
 }
 
 void dae::SceneManager::Update()
 {
-	for(auto& scene : m_scenes)
+	if (m_pNewScene)
 	{
-		scene->Update();
+		m_pActiveScene = std::move(m_pNewScene);
+		m_pNewScene = nullptr;
+		Init();
 	}
+
+	m_pActiveScene->Update();
 }
 
 void dae::SceneManager::LateUpdate()
 {
-	for (auto& scene : m_scenes)
-	{
-		scene->LateUpdate();
-	}
+	m_pActiveScene->LateUpdate();
 }
 
 void dae::SceneManager::Render() const
 {
-	for (const auto& scene : m_scenes)
-	{
-		scene->Render();
-	}
+	m_pActiveScene->Render();
 }
 
 void dae::SceneManager::OnGui()
 {
-	for (auto& scene : m_scenes)
-	{
-		scene->OnGui();
-	}
+	m_pActiveScene->OnGui();
 }
 
 dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
 {
-	const auto& scene = std::shared_ptr<Scene>(new Scene(name));
-	m_scenes.push_back(scene);
-	return *scene;
+	m_pNewScene = std::make_unique<Scene>(new Scene(name));
+	return *m_pNewScene;
+}
+
+dae::Scene& dae::SceneManager::LoadScene(const std::string& name)
+{
+	if (m_SceneTemplates.find(name) == m_SceneTemplates.end())
+	{
+		return;
+	}
+
+	m_SceneTemplates[name]();
 }
