@@ -32,13 +32,14 @@
 #include "GhostControllerComponent.h"
 #include "ButtonGroupComponent.h"
 #include "ButtonComponent.h"
-
+#include "ButtonNavCommand.h"
+#include "ButtonPressCommand.h"
 
 namespace dae
 {
 	void SingleOne::LoadScene()
 	{
-		auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
+		auto& scene = dae::SceneManager::GetInstance().CreateScene("Single1");
 		auto& inputManager = dae::InputManager::GetInstance();
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
@@ -62,9 +63,9 @@ namespace dae
 		mapTrans->SetLocalPosition(glm::vec2{ 75.f, 50.f });
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
-		std::vector<int> tileData
+		std::vector<unsigned char> tileData
 		{
-			2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 				2, 5, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 5, 2,
 				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
 				2, 4, 2, 0, 0, 2, 4, 2, 0, 0, 0, 2, 4, 2, 2, 4, 2, 0, 0, 0, 2, 4, 2, 0, 0, 2, 4, 2,
@@ -98,7 +99,7 @@ namespace dae
 
 		};
 
-		mapGen->LoadMap(28, 5, 16, tileData, std::vector<std::string>{"wall.png", "path.png"});
+		mapGen->LoadMap(28, 20, 16, tileData, std::vector<std::string>{"wall.png", "path.png"});
 
 		mapObj->SetParent(sceneRoot);
 
@@ -301,56 +302,82 @@ namespace dae
 	void MainMenu::LoadScene()
 	{
 		auto& scene = dae::SceneManager::GetInstance().CreateScene("Main Menu");
-		//auto& inputManager = dae::InputManager::GetInstance();
+		auto& inputManager = dae::InputManager::GetInstance();
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
 
 		////Background object
-		auto bgObj = std::make_shared<dae::GameObject>();
-		auto bgRender = bgObj->AddComponent<dae::TextureRenderComponent>();
-		bgRender->SetTexture("background.tga");
+		auto logoObj = std::make_shared<dae::GameObject>();
+		auto logoRender = logoObj->AddComponent<dae::TextureRenderComponent>();
+		logoRender->SetTexture("pacmanlogo.png");
 
-		auto bgTrans = bgObj->AddComponent<dae::TransformComponent>();
-		bgTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
-		bgObj->SetParent(sceneRoot);
+		auto logoTrans = logoObj->AddComponent<dae::TransformComponent>();
+		logoTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
+		logoObj->SetParent(sceneRoot);
 
 		//Font
-		auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
+		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
 
 		//Button group
 		auto buttonGrObj = std::make_shared<dae::GameObject>();
 		buttonGrObj->AddComponent<dae::TransformComponent>();
-		buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
+		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
 		buttonGrObj->SetParent(sceneRoot);
 
 		//Button 1
 		auto button1Obj = std::make_shared<dae::GameObject>();
 		auto button1Trans = button1Obj->AddComponent<dae::TransformComponent>();
-		button1Trans->SetLocalPosition(glm::vec2{50.f, 50.f});
+		button1Trans->SetLocalPosition(glm::vec2{200.f, 300.f});
 		auto button1 = button1Obj->AddComponent<dae::ButtonComponent>();
 		button1->SetButtonExtend(glm::vec2{10.f, 10.f});
 		button1->SetButtonFont(font);
-		button1->SetButtonText("Test");
+		button1->SetButtonText("Single Player");
 		button1->SetNormalColor(255, 255, 255, 255);
 		button1->SetHighlightColor(255, 255, 0, 255);
-
-
+		button1->SetOnClick([]() {
+			dae::SceneManager::GetInstance().LoadScene("Single1");
+			}
+		);
 		button1Obj->SetParent(buttonGrObj);
 
 		//Button 2
 		auto button2Obj = std::make_shared<dae::GameObject>();
 		auto button2Trans = button2Obj->AddComponent<dae::TransformComponent>();
-		button2Trans->SetLocalPosition(glm::vec2{100.f, 50.f});
+		button2Trans->SetLocalPosition(glm::vec2{200.f, 340.f});
 		auto button2 = button2Obj->AddComponent<dae::ButtonComponent>();
 		button2->SetButtonExtend(glm::vec2{10.f, 10.f});
 		button2->SetButtonFont(font);
-		button2->SetButtonText("Test");
+		button2->SetButtonText("Co-op");
 		button2->SetNormalColor(255, 255, 255, 255);
 		button2->SetHighlightColor(255, 255, 0, 255);
+		button2->SetOnClick([]() {
+			std::cout << "Button2\n";
+			}
+		);
+		button2Obj->SetParent(buttonGrObj);
 
+		//Button 3
+		auto button3Obj = std::make_shared<dae::GameObject>();
+		auto button3Trans = button3Obj->AddComponent<dae::TransformComponent>();
+		button3Trans->SetLocalPosition(glm::vec2{200.f, 380.f});
+		auto button3 = button3Obj->AddComponent<dae::ButtonComponent>();
+		button3->SetButtonExtend(glm::vec2{10.f, 10.f});
+		button3->SetButtonFont(font);
+		button3->SetButtonText("Versus");
+		button3->SetNormalColor(255, 255, 255, 255);
+		button3->SetHighlightColor(255, 255, 0, 255);
+		button3->SetOnClick([]() {
+			std::cout << "Button3\n";
+			}
+		);
+		button3Obj->SetParent(buttonGrObj);
 
-		button2Obj->SetParent(sceneRoot);
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, -1.f }));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(buttonGr));
 		
 	}
 }

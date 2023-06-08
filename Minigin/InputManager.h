@@ -20,6 +20,7 @@ namespace dae
 	{
 	public:
 		
+		void Reset();
 		bool ProcessInput();
 		void BindKeyboardCommand(InteractionType type, SDL_Keycode key, std::unique_ptr<Command> pCommand);
 		void BindDigitalCommand(unsigned int gamepadIdx, InteractionType type, Gamepad::DigitalButton key, std::unique_ptr<Command> pCommand);

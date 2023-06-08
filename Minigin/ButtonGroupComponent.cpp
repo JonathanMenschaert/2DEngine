@@ -16,6 +16,14 @@ void dae::ButtonGroupComponent::Init()
 	}
 }
 
+void dae::ButtonGroupComponent::PressSelectedButton()
+{
+	for (auto& button : m_Buttons)
+	{
+		button->OnClick();
+	}
+}
+
 void dae::ButtonGroupComponent::NavigateToClosestButton(const glm::vec2& direction)
 {
 	size_t closestIdx{ 0 };
@@ -35,6 +43,7 @@ void dae::ButtonGroupComponent::NavigateToClosestButton(const glm::vec2& directi
 		if (distance < closestDistance)
 		{
 			closestIdx = idx;
+			closestDistance = distance;
 		}
 	}
 	m_Buttons[m_SelectedButtonIdx]->SetSelected(false);

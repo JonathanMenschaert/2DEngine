@@ -40,7 +40,7 @@ void dae::MapRenderComponent::Render() const
 	}
 }
 
-void dae::MapRenderComponent::SetMapData(int tileSize, const glm::vec2& dimensions, const std::vector<int>& tileData, const std::vector<std::string>& textureFiles)
+void dae::MapRenderComponent::SetMapData(int tileSize, const glm::vec2& dimensions, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles)
 {
 	m_TileSize = tileSize;
 	m_Dimensions = dimensions;

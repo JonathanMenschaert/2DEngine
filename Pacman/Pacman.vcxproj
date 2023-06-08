@@ -189,9 +189,12 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonNavCommand.cpp" />
+    <ClCompile Include="ButtonPressCommand.cpp" />
     <ClCompile Include="DebugLivesCommand.cpp" />
     <ClCompile Include="DebugScoreCommand.cpp" />
     <ClCompile Include="GhostControllerComponent.cpp" />
+    <ClCompile Include="LevelIO.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
     <ClCompile Include="MapGeneratorComponent.cpp" />
@@ -206,9 +209,13 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="ScoreDisplayComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonNavCommand.h" />
+    <ClInclude Include="ButtonPressCommand.h" />
     <ClInclude Include="DebugLivesCommand.h" />
     <ClInclude Include="DebugScoreCommand.h" />
     <ClInclude Include="GhostControllerComponent.h" />
+    <ClInclude Include="LevelIO.h" />
+    <ClInclude Include="LevelLayout.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
     <ClInclude Include="MapGeneratorComponent.h" />

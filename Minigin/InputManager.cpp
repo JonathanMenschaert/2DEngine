@@ -3,6 +3,17 @@
 #include <backends/imgui_impl_sdl2.h>
 #include <iostream>
 
+void dae::InputManager::Reset()
+{
+	m_KeyboardKeysUp.clear();
+	m_KeyboardKeysDown.clear();
+	m_KeyboardKeysHold.clear();
+
+	m_KeyboardCommands.clear();
+	m_DigitalGamepadCommands.clear();
+	m_AnalogGamepadCommands.clear();
+}
+
 bool dae::InputManager::ProcessInput()
 {
 	m_KeyboardKeysUp.clear();

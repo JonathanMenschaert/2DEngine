@@ -21,7 +21,7 @@ const std::vector<glm::vec2>& dae::MapGeneratorComponent::GetGhostSpawns() const
 	return m_GhostSpawns;
 }
 
-void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, const std::vector<int>& tileData, const std::vector<std::string>& textureFiles)
+void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles)
 {
 
 	m_TileSize = tileSize;

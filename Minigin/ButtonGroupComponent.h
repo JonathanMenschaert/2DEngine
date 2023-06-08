@@ -15,6 +15,8 @@ namespace dae
 		ButtonGroupComponent& operator=(const ButtonGroupComponent& component) = delete;
 		ButtonGroupComponent& operator=(ButtonGroupComponent&& component) noexcept = delete;
 
+
+		void PressSelectedButton();
 		void NavigateToClosestButton(const glm::vec2& direction);
 		void NavigateToButtonAtPos(const glm::vec2& pos);
 

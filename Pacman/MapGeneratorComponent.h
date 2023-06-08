@@ -35,7 +35,7 @@ namespace dae
 		const glm::vec2& GetPlayerSpawns() const;
 		const std::vector<glm::vec2>& GetGhostSpawns() const;
 
-		void LoadMap(int columns, int rows, int tileSize, const std::vector<int>& tileData, const std::vector<std::string>& textureFiles);
+		void LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles);
 
 	private:
 
