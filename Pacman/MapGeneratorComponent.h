@@ -39,7 +39,7 @@ namespace dae
 
 	private:
 
-		void ConnectNode(const std::vector<int>& tileData, size_t currentIdx, GraphComponent* pGraph, dae::Node* pNode, int width) const;
+		void ConnectNode(const std::vector<unsigned char>& tileData, size_t currentIdx, GraphComponent* pGraph, dae::Node* pNode, int width) const;
 
 		int m_Columns{};
 		int m_Rows{};

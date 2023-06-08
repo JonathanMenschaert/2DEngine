@@ -79,7 +79,7 @@
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
     <ClCompile Include="LevelIO.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,11 +131,8 @@
     <ClInclude Include="ButtonPressCommand.h">
       <Filter>Source Files\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLayout.h">
-      <Filter>Source Files\IO</Filter>
-    </ClInclude>
     <ClInclude Include="LevelIO.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -34,6 +34,7 @@
 #include "ButtonComponent.h"
 #include "ButtonNavCommand.h"
 #include "ButtonPressCommand.h"
+#include "LevelIO.h"
 
 namespace dae
 {
@@ -99,7 +100,9 @@ namespace dae
 
 		};
 
-		mapGen->LoadMap(28, 20, 16, tileData, std::vector<std::string>{"wall.png", "path.png"});
+		//dae::LevelIO::SaveLevelLayout(LevelLayout{ 28, 31, tileData }, "../Data/level0.level");
+		LevelLayout layout{ dae::LevelIO::LoadLevelLayout("../Data/level0.level") };
+		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
 		mapObj->SetParent(sceneRoot);
 

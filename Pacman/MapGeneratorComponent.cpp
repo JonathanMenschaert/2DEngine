@@ -99,7 +99,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 	}
 }
 
-void dae::MapGeneratorComponent::ConnectNode(const std::vector<int>& tileData, size_t idx, GraphComponent* pGraph, dae::Node* pNode, int offset) const
+void dae::MapGeneratorComponent::ConnectNode(const std::vector<unsigned char>& tileData, size_t idx, GraphComponent* pGraph, dae::Node* pNode, int offset) const
 {
 	//bool foundNode{ false };
 	while (true)
