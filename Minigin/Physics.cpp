@@ -52,7 +52,7 @@ void dae::Physics::HandleCollision()
 				if (CompareLayers(layers, other->GetLayers()))
 				{				
 					collider->TriggerCollisionEvent(other->GetGameObject(), CollisionType::Trigger);
-					//std::cout << "Trigger hit\n";
+					other->TriggerCollisionEvent(collider->GetGameObject(), CollisionType::Trigger);
 				}
 			}
 		}

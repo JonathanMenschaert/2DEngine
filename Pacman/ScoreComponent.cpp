@@ -20,7 +20,7 @@ void dae::ScoreComponent::AddScore(int score)
 void dae::ScoreComponent::UpdateScore()
 {
 	Event<int> e{ m_Score };
-	NotifyObservers(e);
+	//NotifyObservers(e);
 }
 
 int dae::ScoreComponent::GetScore() const

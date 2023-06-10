@@ -1,10 +1,11 @@
 #pragma once
 #include "BaseComponent.h"
-#include "SUbject.h"
+#include "Subject.h"
+#include "PlayerEvents.h"
 
 namespace dae
 {
-	class ScoreComponent final : public BaseComponent, public Subject<int>
+	class ScoreComponent final : public BaseComponent, public Subject<PlayerEvent>
 	{
 	public:
 		ScoreComponent(GameObject* pGameObject);

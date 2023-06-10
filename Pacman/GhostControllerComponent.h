@@ -20,6 +20,8 @@ namespace dae
 		virtual void Init() override;
 		virtual void Update() override;
 
+		
+
 	private:
 
 		std::unique_ptr<MoveCommand> m_pUpCommand{};

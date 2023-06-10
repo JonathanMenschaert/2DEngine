@@ -22,6 +22,8 @@ namespace dae
 		void AddPhysicsCollider(RectCollisionComponent* rectCollider);
 		void RemovePhysicsCollider(RectCollisionComponent* rectCollider);
 
+		//bool HasLineOfSight()
+
 	private:
 		bool CalculateCollisionOffset(const glm::vec4& box1, const glm::vec4& box2, glm::vec2& collisionOffset);
 		bool HasTriggered(const glm::vec4& box1, const glm::vec4& box2);

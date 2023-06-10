@@ -193,8 +193,9 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="ButtonPressCommand.cpp" />
     <ClCompile Include="DebugLivesCommand.cpp" />
     <ClCompile Include="DebugScoreCommand.cpp" />
+    <ClCompile Include="GhostComponent.cpp" />
     <ClCompile Include="GhostControllerComponent.cpp" />
-    <ClCompile Include="GhostState.cpp" />
+    <ClCompile Include="GhostWanderState.cpp" />
     <ClCompile Include="LevelIO.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
@@ -204,7 +205,6 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
-    <ClCompile Include="PointsComponent.cpp" />
     <ClCompile Include="Scenes.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreDisplayComponent.cpp" />
@@ -214,8 +214,10 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="ButtonPressCommand.h" />
     <ClInclude Include="DebugLivesCommand.h" />
     <ClInclude Include="DebugScoreCommand.h" />
+    <ClInclude Include="GhostComponent.h" />
     <ClInclude Include="GhostControllerComponent.h" />
     <ClInclude Include="GhostState.h" />
+    <ClInclude Include="GhostWanderState.h" />
     <ClInclude Include="LevelIO.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
@@ -224,10 +226,10 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
-    <ClInclude Include="PointsComponent.h" />
     <ClInclude Include="Scenes.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreDisplayComponent.h" />
+    <ClInclude Include="PlayerEvents.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

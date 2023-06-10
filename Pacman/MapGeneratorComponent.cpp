@@ -61,7 +61,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 		}
 		case TileData::PacDot:
 		{
-			//Pacdot
+			//Pacdot:
 			auto pacdotObj = std::make_shared<dae::GameObject>();
 			auto pacdotCol = pacdotObj->AddComponent<dae::RectCollisionComponent>();
 			pacdotCol->SetCollisionType(dae::CollisionType::Trigger);

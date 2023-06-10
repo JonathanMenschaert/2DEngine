@@ -2,10 +2,12 @@
 #include "BaseComponent.h"
 #include "Observer.h"
 #include "RectCollisionComponent.h"
+#include "Subject.h"
+#include "PlayerEvents.h"
 
 namespace dae
 {
-	class PlayerComponent final : public BaseComponent, public Observer<dae::CollisionData>
+	class PlayerComponent final : public BaseComponent, public Subject<PlayerEvent>, public Observer<dae::CollisionData>
 	{
 	public:
 		PlayerComponent(GameObject* pGameObject);

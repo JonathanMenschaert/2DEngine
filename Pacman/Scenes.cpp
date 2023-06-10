@@ -35,6 +35,7 @@
 #include "ButtonNavCommand.h"
 #include "ButtonPressCommand.h"
 #include "LevelIO.h"
+#include "GhostComponent.h"
 
 namespace dae
 {
@@ -114,7 +115,7 @@ namespace dae
 		player1Obj->SetParent(mapObj, false);
 
 		//Bind keys
-		const float speed{ 100.f };
+		const float speed{ 75.f };
 		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_w, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_a, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_s, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
@@ -165,21 +166,28 @@ namespace dae
 
 
 		//Ghosts
+		int ghostTexIdx{0};
 		for (auto& position : mapGen->GetGhostSpawns())
 		{
 			auto ghostObj = std::make_shared<dae::GameObject>();
 			auto ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
 			ghostCol->SetCollisionType(dae::CollisionType::Trigger);
 			ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
+			//ghostCol->AddObserver();
 			ghostCol->SetLayers(std::vector<std::string>{"player1", "player2"});
 
 			auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
 			ghostTrans->SetLocalPosition(position);
 
-			auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
-			ghostRender->SetTexture("ghost.png");
 			ghostObj->AddComponent<dae::GhostControllerComponent>();
+			auto ghost = ghostObj->AddComponent<dae::GhostComponent>();
+			ghost->SetSpawnPos(position);
 			ghostObj->SetParent(mapObj, false);
+
+			auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
+			std::stringstream ghostTexPath{};
+			ghostTexPath << "ghost" << ghostTexIdx++ << ".png";
+			ghostRender->SetTexture(ghostTexPath.str());
 		}
 
 		//Hud Player 1

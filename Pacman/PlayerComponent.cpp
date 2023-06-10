@@ -3,6 +3,7 @@
 #include "PickupComponent.h"
 #include <iostream>
 #include <ServiceLocator.h>
+#include "GhostComponent.h"
 dae::PlayerComponent::PlayerComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
 	, m_PacDotSoundIdx{UINT32_MAX}
@@ -34,6 +35,20 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 		}
 		ServiceLocator::GetSoundSystem().Play(m_PacDotSoundIdx, 100);
 	}	
+
+	auto ghost{ data.pGameObject->GetComponent<GhostComponent>() };
+
+	if (ghost)
+	{
+		if (ghost->IsScared())
+		{
+			std::cout << "score!\n";
+		}
+		else
+		{
+			std::cout << "Ded\n";
+		}
+	}
 }
 
 

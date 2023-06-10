@@ -2,14 +2,15 @@
 #include <iostream>
 
 dae::GhostControllerComponent::GhostControllerComponent(GameObject* pGameObject)
-	:UpdateComponent{pGameObject}
-	,m_Speed{25.f}
-	,m_AcceptanceRadius{0.5f}
+	:UpdateComponent{ pGameObject }
+	, m_Speed{ 75.f }
+	, m_AcceptanceRadius{ 0.5f }
 {
-	m_pUpCommand = std::make_unique<MoveCommand>(GetGameObject(), m_Speed, glm::vec2{0.f, 1.f});
-	m_pDownCommand = std::make_unique<MoveCommand>(GetGameObject(), m_Speed, glm::vec2{ 0.f, -1.f });
-	m_pRightCommand = std::make_unique<MoveCommand>(GetGameObject(), m_Speed, glm::vec2{ 1.f, 0.f });
-	m_pLeftCommand = std::make_unique<MoveCommand>(GetGameObject(), m_Speed, glm::vec2{ -1.f, 0.f });
+	GameObject* pGameObj{ GetGameObject() };
+	m_pUpCommand = std::make_unique<MoveCommand>(pGameObj, m_Speed, glm::vec2{0.f, 1.f});
+	m_pDownCommand = std::make_unique<MoveCommand>(pGameObj, m_Speed, glm::vec2{ 0.f, -1.f });
+	m_pRightCommand = std::make_unique<MoveCommand>(pGameObj, m_Speed, glm::vec2{ 1.f, 0.f });
+	m_pLeftCommand = std::make_unique<MoveCommand>(pGameObj, m_Speed, glm::vec2{ -1.f, 0.f });
 }
 void dae::GhostControllerComponent::Init()
 {
@@ -51,8 +52,5 @@ void dae::GhostControllerComponent::Update()
 	if (localPos == m_Destination)
 	{
 		m_Destination = m_pGraph->GetRandomNextPosition(m_pTransform->GetLocalPosition());
-		std::cout << "Switch Direction\n";
-		std::cout << "x: " << m_Destination.x << ", y: " << m_Destination.y << "\n";
-		std::cout << "x: " << localPos.x << ", y: " << localPos.y << "\n";
 	}
 }
