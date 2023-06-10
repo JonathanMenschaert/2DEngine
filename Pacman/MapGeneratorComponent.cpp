@@ -71,10 +71,18 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 			pacdotTrans->SetLocalPosition(relativePosition);
 
 			auto pacdotRender = pacdotObj->AddComponent<dae::TextureRenderComponent>();
-			pacdotRender->SetTexture("pacdot.png");
+			//pacdotRender->SetTexture("pacdot.png");
 
-			auto pacDotPoints = pacdotObj->AddComponent<dae::PickupComponent>();
-			pacDotPoints->SetPoints(10);
+			auto pacDotPickup = pacdotObj->AddComponent<dae::PickupComponent>();
+			if (data == TileData::PowerPellet_AI)
+			{
+				pacdotRender->SetTexture("powerpellet.png");
+				pacDotPickup->SetType(PickupType::PowerPellet);
+			}
+			else
+			{
+				pacdotRender->SetTexture("pacdot.png");
+			}
 
 			pacdotObj->SetParent(pGameObject->shared_from_this(), false);
 		}

@@ -4,6 +4,7 @@
 #include "RectCollisionComponent.h"
 #include "Subject.h"
 #include "PlayerEvents.h"
+#include "TransformComponent.h"
 
 namespace dae
 {
@@ -18,9 +19,20 @@ namespace dae
 		PlayerComponent& operator=(PlayerComponent&& rectComponent) noexcept = delete;
 
 		void Notify(const Event<dae::CollisionData>& e) override;
+		void SetSpawnPos(const glm::vec2& spawnPos);
+
 	private:
 		unsigned int m_PacDotSoundIdx;
 		const std::string m_PacDotSoundName;
+
+		unsigned int m_DeathSoundIdx;
+		const std::string m_DeathSoundName;
+
+		unsigned int m_EatGhostSoundIdx;
+		const std::string m_EatGhostSoundName;
+
+		TransformComponent* m_pTransform{};
+		glm::vec2 m_SpawnPos;
 
 	};
 }

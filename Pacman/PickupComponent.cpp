@@ -5,12 +5,13 @@ dae::PickupComponent::PickupComponent(GameObject* pGameObject)
 {
 }
 
-void dae::PickupComponent::SetPoints(int points)
+void dae::PickupComponent::SetType(PickupType type)
 {
-	m_Points = points;
+	m_PickupType = type;
 }
 
-int dae::PickupComponent::GetPoints() const
+dae::PickupType dae::PickupComponent::GetType() const
 {
-	return m_Points;
+	return m_PickupType;
 }
+

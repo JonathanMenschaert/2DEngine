@@ -1,5 +1,6 @@
 #include "GhostComponent.h"
 #include "GameObject.h"
+#include "PlayerComponent.h"
 dae::GhostComponent::GhostComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
 {
@@ -7,14 +8,40 @@ dae::GhostComponent::GhostComponent(GameObject* pGameObject)
 
 void dae::GhostComponent::Init()
 {
+
 	m_pTextureRenderer = GetGameObject()->GetComponent<TextureRenderComponent>();
 	if (!m_pTextureRenderer)
 	{
 		m_pTextureRenderer = GetGameObject()->AddComponent<TextureRenderComponent>();
 	}
-	if (m_pNormalTexture)
+	m_pTransform = GetGameObject()->GetComponent<TransformComponent>();
+	SetScared(false);
+}
+
+void dae::GhostComponent::Notify(const Event<PlayerEvent>& e)
+{
+	switch (e.GetPayload())
 	{
-		m_pTextureRenderer->SetTexture(m_pNormalTexture);
+	case PlayerEvent::PowerpelletCollected:
+		SetScared(true);
+	default:
+		break;
+	}
+}
+
+void dae::GhostComponent::Notify(const Event<dae::CollisionData>& e)
+{
+	const CollisionData& data{ e.GetPayload() };
+
+	if (data.type != CollisionType::Trigger || !m_IsScared)
+	{
+		return;
+	}
+
+	auto player{ data.pGameObject->GetComponent<PlayerComponent>() };
+	if (player)
+	{
+		m_pTransform->SetLocalPosition(m_SpawnPos);
 	}
 }
 

@@ -12,10 +12,10 @@ void dae::ScoreDisplayComponent::Init()
 	m_pText = GetGameObject()->GetComponent<TextComponent>();
 }
 
-void dae::ScoreDisplayComponent::Notify(const Event<PlayerEvent>& /*e*/)
+void dae::ScoreDisplayComponent::Notify(const Event<int>& e)
 {
 	std::stringstream text{};
 
-	//text << "Score: " << e.GetPayload();
+	text << "Score: " << e.GetPayload();
 	m_pText->SetText(text.str());
 }

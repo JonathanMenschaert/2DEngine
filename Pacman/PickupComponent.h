@@ -3,6 +3,12 @@
 
 namespace dae
 {
+	enum class PickupType
+	{
+		Pacdot,
+		PowerPellet
+	};
+
 	class PickupComponent final : public BaseComponent
 	{
 	public:
@@ -13,12 +19,12 @@ namespace dae
 		PickupComponent(PickupComponent&& rectComponent) noexcept = delete;
 		PickupComponent& operator=(const PickupComponent& rectComponent) = delete;
 		PickupComponent& operator=(PickupComponent&& rectComponent) noexcept = delete;
-
-		void SetPoints(int points);
-		int GetPoints() const;
+		
+		void SetType(PickupType type);
+		PickupType GetType() const;
 
 	private:
-		int m_Points{ 0 };
+		PickupType m_PickupType{ PickupType::Pacdot };
 	};
 }
 

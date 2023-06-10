@@ -6,8 +6,9 @@ namespace dae
 	{
 		PacdotCollected,
 		PowerpelletCollected,
-		GhostEncountered,
-		PacmanDied
+		GhostKilled,
+		PacmanDied,
+		PowerpelletTimeout
 	};
 }
 

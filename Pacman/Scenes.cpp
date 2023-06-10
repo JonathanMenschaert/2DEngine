@@ -167,27 +167,33 @@ namespace dae
 
 		//Ghosts
 		int ghostTexIdx{0};
+		std::shared_ptr<Texture2D> pScaredGhostTexture{ResourceManager::GetInstance().LoadTexture("scaredghost.png")};
 		for (auto& position : mapGen->GetGhostSpawns())
 		{
 			auto ghostObj = std::make_shared<dae::GameObject>();
 			auto ghostCol = ghostObj->AddComponent<dae::RectCollisionComponent>();
 			ghostCol->SetCollisionType(dae::CollisionType::Trigger);
 			ghostCol->SetCollisionBox(glm::vec2{ 16, 16 });
-			//ghostCol->AddObserver();
 			ghostCol->SetLayers(std::vector<std::string>{"player1", "player2"});
 
 			auto ghostTrans = ghostObj->AddComponent<dae::TransformComponent>();
 			ghostTrans->SetLocalPosition(position);
 
 			ghostObj->AddComponent<dae::GhostControllerComponent>();
-			auto ghost = ghostObj->AddComponent<dae::GhostComponent>();
-			ghost->SetSpawnPos(position);
 			ghostObj->SetParent(mapObj, false);
 
-			auto ghostRender = ghostObj->AddComponent<dae::TextureRenderComponent>();
+			auto ghost = ghostObj->AddComponent<dae::GhostComponent>();
+			ghost->SetSpawnPos(position);
+			player1Player->AddObserver(ghost);
+			ghostCol->AddObserver(ghost);
+
+			ghostObj->AddComponent<dae::TextureRenderComponent>();
 			std::stringstream ghostTexPath{};
 			ghostTexPath << "ghost" << ghostTexIdx++ << ".png";
-			ghostRender->SetTexture(ghostTexPath.str());
+			
+			std::shared_ptr<Texture2D> pNormalGhosttTexture {ResourceManager::GetInstance().LoadTexture(ghostTexPath.str())};
+			ghost->SetNormalTexture(pNormalGhosttTexture);
+			ghost->SetScaredTexture(pScaredGhostTexture);
 		}
 
 		//Hud Player 1
@@ -227,6 +233,7 @@ namespace dae
 
 		score1Obj->SetParent(hud1Obj, false);
 		player1Score->AddObserver(score1);
+		player1Player->AddObserver(player1Score);
 		hud1Obj->SetParent(sceneRoot);
 
 		//Hud Player 2

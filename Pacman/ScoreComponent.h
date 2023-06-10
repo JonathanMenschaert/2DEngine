@@ -2,10 +2,11 @@
 #include "BaseComponent.h"
 #include "Subject.h"
 #include "PlayerEvents.h"
+#include "Observer.h"
 
 namespace dae
 {
-	class ScoreComponent final : public BaseComponent, public Subject<PlayerEvent>
+	class ScoreComponent final : public BaseComponent, public Subject<int>, public Observer<PlayerEvent>
 	{
 	public:
 		ScoreComponent(GameObject* pGameObject);
@@ -18,6 +19,7 @@ namespace dae
 		void AddScore(int score = 1);
 		void UpdateScore();
 		int GetScore() const;
+		virtual void Notify(const Event<PlayerEvent>& e) override;
 
 	private:
 		int m_Score;
