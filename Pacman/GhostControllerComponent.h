@@ -4,7 +4,8 @@
 #include <memory>
 #include "GraphComponent.h"
 #include "TransformComponent.h"
-
+#include "GhostState.h"
+#include "GhostComponent.h"
 namespace dae
 {
 	class GhostControllerComponent : public UpdateComponent
@@ -31,11 +32,14 @@ namespace dae
 
 		GraphComponent* m_pGraph{};
 		TransformComponent* m_pTransform{};
-
+		GhostComponent* m_pControlledGhost{};
 		const float m_Speed;
 		const float m_AcceptanceRadius{};
 
 		glm::vec2 m_Destination{};	
+
+		std::unique_ptr<GhostState> m_pState{};
+
     };
 }
 

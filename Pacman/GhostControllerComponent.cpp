@@ -1,6 +1,6 @@
 #include "GhostControllerComponent.h"
 #include <iostream>
-
+#include "GhostWanderState.h"
 dae::GhostControllerComponent::GhostControllerComponent(GameObject* pGameObject)
 	:UpdateComponent{ pGameObject }
 	, m_Speed{ 75.f }
@@ -17,11 +17,24 @@ void dae::GhostControllerComponent::Init()
 	m_pGraph = GetGameObject()->GetComponentInParent<GraphComponent>();
 	m_pTransform = GetGameObject()->GetTransform();
 	m_Destination = m_pGraph->GetRandomNextPosition(m_pTransform->GetLocalPosition());
+	m_pState = std::make_unique<GhostWanderState>();
+	m_pControlledGhost = GetGameObject()->GetComponent<GhostComponent>();
 }
 
 void dae::GhostControllerComponent::Update()
 {
 	const glm::vec2& localPos{ m_pTransform->GetLocalPosition() };
+	std::unique_ptr<GhostState> newState = m_pState->UpdateState(m_pControlledGhost);
+	if (newState)
+	{
+		m_pState = std::move(newState);
+		const glm::vec2 nextPos {m_pState->GetNextDestination(m_pGraph, localPos)};
+		if (nextPos != localPos)
+		{
+			m_Destination = nextPos;
+		}
+	}
+
 	const glm::vec2 movementVector{ m_Destination - localPos };
 	if (movementVector.x > m_AcceptanceRadius)
 	{
@@ -51,6 +64,6 @@ void dae::GhostControllerComponent::Update()
 
 	if (localPos == m_Destination)
 	{
-		m_Destination = m_pGraph->GetRandomNextPosition(m_pTransform->GetLocalPosition());
+		m_Destination = m_pState->GetNextDestination(m_pGraph, localPos);
 	}
 }

@@ -13,8 +13,8 @@ namespace dae
 		GhostWanderState& operator=(const GhostWanderState& other) = delete;
 		GhostWanderState& operator=(GhostWanderState&& other) noexcept = delete;
 
-		virtual std::unique_ptr<GhostState> UpdateState() const override;
-		virtual glm::vec2 GetNextDestination(const GraphComponent* pGraph, const glm::vec2& currentPos) const override;
+		virtual std::unique_ptr<GhostState> UpdateState(const GhostComponent* pGhost) const override;
+		virtual glm::vec2 GetNextDestination(GraphComponent* pGraph, const glm::vec2& currentPos) const override;
 
 	};
 }

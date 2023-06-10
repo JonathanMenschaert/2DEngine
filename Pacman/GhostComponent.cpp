@@ -42,6 +42,7 @@ void dae::GhostComponent::Notify(const Event<dae::CollisionData>& e)
 	if (player)
 	{
 		m_pTransform->SetLocalPosition(m_SpawnPos);
+		SetScared(false);
 	}
 }
 

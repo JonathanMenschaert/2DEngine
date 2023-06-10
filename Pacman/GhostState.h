@@ -2,6 +2,7 @@
 #include <memory>
 #include "glm/glm.hpp"
 #include "GraphComponent.h"
+#include "GhostComponent.h"
 
 namespace dae
 {
@@ -9,10 +10,9 @@ namespace dae
 	{
 	public:
 		virtual ~GhostState() = default;
-		virtual std::unique_ptr<GhostState> UpdateState() const = 0;
-		virtual glm::vec2 GetNextDestination(const GraphComponent* pGraph, const glm::vec2& currentPos) const = 0;
-
-		//virtual void 
+		virtual std::unique_ptr<GhostState> UpdateState(const GhostComponent* pGhost) const = 0;
+		virtual glm::vec2 GetNextDestination(GraphComponent* pGraph, const glm::vec2& currentPos) const = 0;
+ 
 	};
 }
 

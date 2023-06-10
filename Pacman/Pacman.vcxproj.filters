@@ -90,6 +90,12 @@
     <ClCompile Include="GhostComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GhostHuntState.cpp">
+      <Filter>Source Files\Components\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostScaredState.cpp">
+      <Filter>Source Files\Components\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesCommand.h">
@@ -151,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="PlayerEvents.h">
       <Filter>Source Files\GameEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostHuntState.h">
+      <Filter>Source Files\Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostScaredState.h">
+      <Filter>Source Files\Components\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
