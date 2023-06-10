@@ -8,6 +8,12 @@ namespace dae
 		static void LoadScene();
 	};
 
+	class LevelTester final
+	{
+	public:
+		static void LoadScene();
+	};
+
 	class MainMenu final
 	{
 	public:

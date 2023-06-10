@@ -25,6 +25,9 @@
     <Filter Include="Source Files\IO">
       <UniqueIdentifier>{73dc13e4-9e96-480c-a712-9085f3a1bd6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\States">
+      <UniqueIdentifier>{4cb0355c-82cc-4932-b849-009fcd2ef1a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pacman.cpp">
@@ -81,6 +84,9 @@
     <ClCompile Include="LevelIO.cpp">
       <Filter>Source Files\IO</Filter>
     </ClCompile>
+    <ClCompile Include="GhostState.cpp">
+      <Filter>Source Files\Components\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesCommand.h">
@@ -133,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="LevelIO.h">
       <Filter>Source Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostState.h">
+      <Filter>Source Files\Components\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

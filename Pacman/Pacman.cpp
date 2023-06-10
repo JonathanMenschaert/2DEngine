@@ -10,8 +10,9 @@
 
 void load()
 {
-	dae::SceneManager::GetInstance().AddScene("Single1", dae::SingleOne::LoadScene);
-	dae::SceneManager::GetInstance().AddScene("Main Menu", dae::MainMenu::LoadScene, true);
+	dae::SceneManager::GetInstance().AddScene("LevelTester", dae::LevelTester::LoadScene, true);
+	dae::SceneManager::GetInstance().AddScene("Single1", dae::SingleOne::LoadScene, true);
+	dae::SceneManager::GetInstance().AddScene("Main Menu", dae::MainMenu::LoadScene);
 }
 
 
