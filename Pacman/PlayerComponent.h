@@ -18,10 +18,13 @@ namespace dae
 		PlayerComponent& operator=(const PlayerComponent& rectComponent) = delete;
 		PlayerComponent& operator=(PlayerComponent&& rectComponent) noexcept = delete;
 
-		void Notify(const Event<dae::CollisionData>& e) override;
+		virtual void Init() override;
+		virtual void Notify(const Event<dae::CollisionData>& e) override;
 		void SetSpawnPos(const glm::vec2& spawnPos);
 
 	private:
+
+		void Respawn();
 		unsigned int m_PacDotSoundIdx;
 		const std::string m_PacDotSoundName;
 

@@ -102,7 +102,7 @@ namespace dae
 		player1Col->SetLayers(std::vector<std::string>{"player1"});
 		auto player1Trans = player1Obj->AddComponent<dae::TransformComponent>();
 		player1Trans->SetLocalPosition(mapGen->GetPlayerSpawns());
-
+		
 		auto player1Render = player1Obj->AddComponent<dae::TextureRenderComponent>();
 		player1Render->SetTexture("pacman.png");
 
@@ -114,7 +114,7 @@ namespace dae
 		auto player1Player = player1Obj->AddComponent<dae::PlayerComponent>();
 		player1Col->AddObserver(player1Player);
 		player1Obj->SetParent(mapObj, false);
-
+		player1Player->SetSpawnPos(mapGen->GetPlayerSpawns());
 		//Bind keys
 		const float speed{ 75.f };
 		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_w, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
@@ -225,7 +225,7 @@ namespace dae
 
 		lives1Obj->SetParent(hud1Obj, false);
 		player1Lives->AddObserver(lives1);
-
+		player1Player->AddObserver(player1Lives);
 		auto score1Obj = std::make_shared < dae::GameObject>();
 		auto score1Text = score1Obj->AddComponent<dae::TextComponent>();
 		score1Text->SetFont(font);

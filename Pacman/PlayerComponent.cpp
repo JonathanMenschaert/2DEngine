@@ -19,6 +19,11 @@ dae::PlayerComponent::PlayerComponent(GameObject* pGameObject)
 	ServiceLocator::GetSoundSystem().LoadSound(m_EatGhostSoundName);
 }
 
+void dae::PlayerComponent::Init()
+{
+	m_pTransform = GetGameObject()->GetTransform();
+}
+
 void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 {
 	const CollisionData& data{ e.GetPayload() };
@@ -69,13 +74,14 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 		}
 		else
 		{
-			Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::GhostKilled};
+			Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::PacmanDied};
 			NotifyObservers(pacmanDiedEvent);
 			if (m_DeathSoundIdx == UINT32_MAX)
 			{
 				m_DeathSoundIdx = ServiceLocator::GetSoundSystem().FindSoundId(m_DeathSoundName);
 			}
 			ServiceLocator::GetSoundSystem().Play(m_DeathSoundIdx, 100);
+			Respawn();
 		}
 	}
 }
@@ -83,6 +89,11 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 void dae::PlayerComponent::SetSpawnPos(const glm::vec2& spawnPos)
 {
 	m_SpawnPos = spawnPos;
+}
+
+void dae::PlayerComponent::Respawn()
+{
+	m_pTransform->SetLocalPosition(m_SpawnPos);
 }
 
 
