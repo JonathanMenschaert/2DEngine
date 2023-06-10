@@ -13,8 +13,9 @@ dae::LevelLayout dae::LevelIO::LoadLevelLayout(const std::string& path)
     LevelLayout layout{};
     inputFile.read(reinterpret_cast<char*>(&layout.columns), sizeof(int));
     inputFile.read(reinterpret_cast<char*>(&layout.rows), sizeof(int));
-    layout.levelData.resize(layout.columns * layout.rows);
-    inputFile.read(reinterpret_cast<char*>(layout.levelData.data()), layout.columns * layout.rows);
+    const int levelDataSize{ layout.columns * layout.rows };
+    layout.levelData.resize(levelDataSize);
+    inputFile.read(reinterpret_cast<char*>(layout.levelData.data()), levelDataSize);
     return layout;
 }
 
