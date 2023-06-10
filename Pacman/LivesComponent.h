@@ -1,10 +1,12 @@
 #pragma once
 #include "BaseComponent.h"
 #include "Subject.h"
+#include "Observer.h"
+#include "PlayerEvents.h"
 
 namespace dae
 {
-	class LivesComponent : public BaseComponent, public Subject<int>
+	class LivesComponent : public BaseComponent, public Subject<int>, public Observer<PlayerEvent>
 	{
 	public:
 		LivesComponent(GameObject* pGameObject);
@@ -14,6 +16,8 @@ namespace dae
 		LivesComponent& operator=(const LivesComponent& rectComponent) = delete;
 		LivesComponent& operator=(LivesComponent&& rectComponent) noexcept = delete;
 
+
+		void Notify(const Event<PlayerEvent>& e) override;
 		void AddLife(int lives = 1);
 		void UpdateLives();
 		int GetLives() const;

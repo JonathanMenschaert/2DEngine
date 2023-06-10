@@ -36,6 +36,7 @@
 #include "ButtonPressCommand.h"
 #include "LevelIO.h"
 #include "GhostComponent.h"
+#include "ScaredTimerComponent.h"
 
 namespace dae
 {
@@ -164,7 +165,12 @@ namespace dae
 		inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 10));
 		inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
 
-
+		//Timer for scared ghosts
+		auto timerObj = std::make_shared<dae::GameObject>();
+		timerObj->AddComponent<dae::TransformComponent>();
+		auto scaredTimer = timerObj->AddComponent<dae::ScaredTimerComponent>();
+		player1Player->AddObserver(scaredTimer);
+		timerObj->SetParent(sceneRoot);
 		//Ghosts
 		int ghostTexIdx{0};
 		std::shared_ptr<Texture2D> pScaredGhostTexture{ResourceManager::GetInstance().LoadTexture("scaredghost.png")};
@@ -194,6 +200,8 @@ namespace dae
 			std::shared_ptr<Texture2D> pNormalGhosttTexture {ResourceManager::GetInstance().LoadTexture(ghostTexPath.str())};
 			ghost->SetNormalTexture(pNormalGhosttTexture);
 			ghost->SetScaredTexture(pScaredGhostTexture);
+
+			scaredTimer->AddObserver(ghost);
 		}
 
 		//Hud Player 1

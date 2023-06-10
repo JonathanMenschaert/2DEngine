@@ -207,6 +207,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="ScaredTimerComponent.cpp" />
     <ClCompile Include="Scenes.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreDisplayComponent.cpp" />
@@ -230,6 +231,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="ScaredTimerComponent.h" />
     <ClInclude Include="Scenes.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreDisplayComponent.h" />

@@ -24,6 +24,10 @@ void dae::GhostComponent::Notify(const Event<PlayerEvent>& e)
 	{
 	case PlayerEvent::PowerpelletCollected:
 		SetScared(true);
+		break;
+	case PlayerEvent::PowerpelletTimeout:
+		SetScared(false);
+		break;
 	default:
 		break;
 	}

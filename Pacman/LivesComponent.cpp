@@ -6,6 +6,17 @@ dae::LivesComponent::LivesComponent(GameObject* pGameObject)
 {
 }
 
+void dae::LivesComponent::Notify(const Event<PlayerEvent>& e)
+{
+	switch (e.GetPayload())
+	{
+	case PlayerEvent::PacmanDied:
+		AddLife(-1);
+	default:
+		break;
+	}
+}
+
 void dae::LivesComponent::AddLife(int lives)
 {
 	m_Lives += lives;
