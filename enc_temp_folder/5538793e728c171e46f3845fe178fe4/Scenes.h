@@ -8,13 +8,7 @@ namespace dae
 		static void LoadScene();
 	};
 
-	class HighScoreList final
-	{
-	public:
-		static void LoadScene();
-	};
-
-	class HighScoreSave final
+	class HighScore final
 	{
 	public:
 		static void LoadScene();

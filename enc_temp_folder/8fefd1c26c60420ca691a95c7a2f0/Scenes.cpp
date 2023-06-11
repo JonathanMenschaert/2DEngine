@@ -451,23 +451,6 @@ namespace dae
 		);
 		button3Obj->SetParent(buttonGrObj.get());
 
-		//Button 4
-		auto button4Obj = std::make_shared<dae::GameObject>();
-		auto button4Trans = button4Obj->AddComponent<dae::TransformComponent>();
-		button4Trans->SetLocalPosition(glm::vec2{200.f, 380.f});
-		auto button4 = button4Obj->AddComponent<dae::ButtonComponent>();
-		button4->SetButtonExtend(glm::vec2{10.f, 10.f});
-		button4->SetButtonFont(font);
-		button4->SetButtonText("Versus");
-		button4->SetNormalColor(255, 255, 255, 255);
-		button4->SetHighlightColor(255, 255, 0, 255);
-		button4->SetOnClick([]() 
-			{
-				std::cout << "Open highscores\n";
-			}
-		);
-		button3Obj->SetParent(buttonGrObj.get());
-
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, -1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
@@ -478,7 +461,7 @@ namespace dae
 		
 	}
 
-	void HighScoreSave::LoadScene()
+	void HighScore::LoadScene()
 	{
 		auto& scene = dae::SceneManager::GetInstance().CreateScene("HighScore");
 		auto& inputManager = dae::InputManager::GetInstance();
@@ -571,27 +554,5 @@ namespace dae
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
 	
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button4));
-	}
-
-	void HighScoreList::LoadScene()
-	{
-		auto& scene = dae::SceneManager::GetInstance().CreateScene("HighScore");
-		auto& inputManager = dae::InputManager::GetInstance();
-		auto sceneRoot = std::make_shared<dae::GameObject>();
-		sceneRoot->AddComponent<dae::TransformComponent>();
-		scene.Add(sceneRoot);
-
-		////Background object
-		auto logoObj = std::make_shared<dae::GameObject>();
-		auto logoRender = logoObj->AddComponent<dae::TextureRenderComponent>();
-		logoRender->SetTexture("pacmanlogo.png");
-
-		auto logoTrans = logoObj->AddComponent<dae::TransformComponent>();
-		logoTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
-		logoObj->SetParent(sceneRoot.get());
-
-		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
-
-
 	}
 }
