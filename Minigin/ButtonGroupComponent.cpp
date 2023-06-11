@@ -26,10 +26,11 @@ void dae::ButtonGroupComponent::PressSelectedButton()
 
 void dae::ButtonGroupComponent::NavigateToClosestButton(const glm::vec2& direction)
 {
-	size_t closestIdx{ 0 };
+	size_t closestIdx{ m_SelectedButtonIdx };
 	float closestDistance{ FLT_MAX };
 
-	glm::vec2 posWithOffset{m_Buttons[m_SelectedButtonIdx]->GetButtonPos() + direction};
+	const glm::vec2& currentButtonPos {m_Buttons[m_SelectedButtonIdx]->GetButtonPos()};
+	glm::vec2 posWithOffset{currentButtonPos + direction};
 
 	for (size_t idx{}; idx < m_Buttons.size(); ++idx)
 	{
@@ -39,8 +40,9 @@ void dae::ButtonGroupComponent::NavigateToClosestButton(const glm::vec2& directi
 		}
 
 		const glm::vec2& nextButton {m_Buttons[idx]->GetButtonPos()};
-		const float distance{ glm::length(nextButton - posWithOffset) };
-		if (distance < closestDistance)
+		const float distanceWithOffset{ glm::length(nextButton - posWithOffset) };
+		const float distance{ glm::length(nextButton - currentButtonPos) };
+		if (distanceWithOffset < closestDistance && distanceWithOffset < distance)
 		{
 			closestIdx = idx;
 			closestDistance = distance;
