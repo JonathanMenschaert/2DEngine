@@ -199,6 +199,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="GhostHuntState.cpp" />
     <ClCompile Include="GhostScaredState.cpp" />
     <ClCompile Include="GhostWanderState.cpp" />
+    <ClCompile Include="HighScoreIO.cpp" />
     <ClCompile Include="LetterScrollButtonComponent.cpp" />
     <ClCompile Include="LevelIO.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
@@ -226,6 +227,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="GhostScaredState.h" />
     <ClInclude Include="GhostState.h" />
     <ClInclude Include="GhostWanderState.h" />
+    <ClInclude Include="HighScoreIO.h" />
     <ClInclude Include="LetterScrollButtonComponent.h" />
     <ClInclude Include="LevelIO.h" />
     <ClInclude Include="LivesComponent.h" />

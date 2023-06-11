@@ -108,6 +108,9 @@
     <ClCompile Include="ButtonScrollCommand.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="HighScoreIO.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesCommand.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="ButtonScrollCommand.h">
       <Filter>Source Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="HighScoreIO.h">
+      <Filter>Source Files\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -479,7 +479,7 @@ namespace dae
 		//Button group
 		auto buttonGrObj = std::make_shared<dae::GameObject>();
 		auto buttonGrTrans{ buttonGrObj->AddComponent<dae::TransformComponent>() };
-		buttonGrTrans->SetLocalPosition(glm::vec2{200.f, 300.f});
+		buttonGrTrans->SetLocalPosition(glm::vec2{300.f, 300.f});
 		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
 		buttonGrObj->SetParent(sceneRoot.get());
 
@@ -515,22 +515,6 @@ namespace dae
 		button3->SetNormalColor(255, 255, 255, 255);
 		button3->SetHighlightColor(255, 255, 0, 255);
 		button3Obj->SetParent(buttonGrObj.get(), false);
-
-		//Button 4
-		auto button4Obj = std::make_shared<dae::GameObject>();
-		auto button4Trans = button4Obj->AddComponent<dae::TransformComponent>();
-		button4Trans->SetLocalPosition(glm::vec2{200.f, 300.f});
-		auto button4 = button4Obj->AddComponent<dae::ButtonComponent>();
-		button4->SetButtonExtend(glm::vec2{10.f, 10.f});
-		button4->SetButtonFont(font);
-		button4->SetButtonText("Single Player");
-		button4->SetNormalColor(255, 255, 255, 255);
-		button4->SetHighlightColor(255, 255, 0, 255);
-		button4->SetOnClick([]() {
-			std::cout << "save highscore\n";
-			}
-		);
-		button1Obj->SetParent(buttonGrObj.get());
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));
