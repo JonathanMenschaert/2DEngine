@@ -4,7 +4,8 @@
 #include <string>
 #include "glm/glm.hpp"
 #include "GraphComponent.h"
-
+#include "PlayerEvents.h"
+#include "Subject.h"
 namespace dae
 {
 
@@ -21,7 +22,7 @@ namespace dae
 		GhostSpawn = 8
 	};
 
-	class MapGeneratorComponent final : public BaseComponent
+	class MapGeneratorComponent final : public BaseComponent, public Subject<PlayerEvent>
 	{
 	public:
 		MapGeneratorComponent(GameObject* pGameObject);
@@ -36,10 +37,13 @@ namespace dae
 		const std::vector<glm::vec2>& GetGhostSpawns() const;
 
 		void LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles);
+		void ReducePacdots();
 
 	private:
 
 		void ConnectNode(const std::vector<unsigned char>& tileData, size_t currentIdx, GraphComponent* pGraph, dae::Node* pNode, int width) const;
+
+		int m_TotalPacDots{};
 
 		int m_Columns{};
 		int m_Rows{};

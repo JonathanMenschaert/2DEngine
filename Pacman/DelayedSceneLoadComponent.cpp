@@ -37,6 +37,8 @@ void dae::DelayedSceneLoadComponent::Notify(const Event<PlayerEvent>& e)
 		m_pLoadScene->SetSceneToLoad(m_GameOverScene);
 		break;
 	}
+	m_Timer = m_MaxTime;
+	m_IsTimerActivated = true;
 }
 
 void dae::DelayedSceneLoadComponent::SetScenes(const std::string& nextLevelScene, const std::string& gameOverScene)

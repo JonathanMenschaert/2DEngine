@@ -4,7 +4,7 @@
 #include "RectCollisionComponent.h"
 #include "TextureRenderComponent.h"
 #include "PickupComponent.h"
-
+#include "ResourceManager.h"
 
 dae::MapGeneratorComponent::MapGeneratorComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
@@ -23,10 +23,12 @@ const std::vector<glm::vec2>& dae::MapGeneratorComponent::GetGhostSpawns() const
 
 void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles)
 {
-
 	m_TileSize = tileSize;
 	m_Columns = columns;
 	m_Rows = rows;
+	auto pPacDotTex = ResourceManager::GetInstance().LoadTexture("pacdot.png");
+	auto pPowerPelletTex = ResourceManager::GetInstance().LoadTexture("powerpellet.png");
+
 	auto pGameObject{ GetGameObject() };
 	
 	auto pMapRenderer{ pGameObject->AddComponent<MapRenderComponent>() };
@@ -47,7 +49,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 				auto pWallCollision = pGameObject->AddComponent<RectCollisionComponent>();
 				pWallCollision->SetCollisionBox(glm::vec2{ tileSize, tileSize }, relativePosition);
 				pWallCollision->SetCollisionType(CollisionType::StaticCollision);
-				pWallCollision->SetLayers(std::vector<std::string>{ "player1", "player2", "enemy" });
+				pWallCollision->SetLayers(std::vector<std::string>{ "player1", "player2"});
 			}
 		break;
 		case TileData::PowerPellet_AI:
@@ -62,6 +64,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 		case TileData::PacDot:
 		{
 			//Pacdot:
+			++m_TotalPacDots;
 			auto pacdotObj = std::make_shared<dae::GameObject>();
 			auto pacdotCol = pacdotObj->AddComponent<dae::RectCollisionComponent>();
 			pacdotCol->SetCollisionType(dae::CollisionType::Trigger);
@@ -71,17 +74,17 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 			pacdotTrans->SetLocalPosition(relativePosition);
 
 			auto pacdotRender = pacdotObj->AddComponent<dae::TextureRenderComponent>();
-			//pacdotRender->SetTexture("pacdot.png");
 
 			auto pacDotPickup = pacdotObj->AddComponent<dae::PickupComponent>();
+			pacDotPickup->SetMap(this);
 			if (data == TileData::PowerPellet_AI)
 			{
-				pacdotRender->SetTexture("powerpellet.png");
+				pacdotRender->SetTexture(pPowerPelletTex);
 				pacDotPickup->SetType(PickupType::PowerPellet);
 			}
 			else
 			{
-				pacdotRender->SetTexture("pacdot.png");
+				pacdotRender->SetTexture(pPacDotTex);
 			}
 
 			pacdotObj->SetParent(pGameObject, false);
@@ -104,6 +107,16 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 		default:
 			break;
 		}			
+	}
+}
+
+void dae::MapGeneratorComponent::ReducePacdots()
+{
+	--m_TotalPacDots;
+	if (m_TotalPacDots <= 0)
+	{
+		Event<PlayerEvent> e {PlayerEvent::LevelWin};
+		NotifyObservers(e);
 	}
 }
 

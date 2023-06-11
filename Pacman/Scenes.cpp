@@ -250,8 +250,9 @@ namespace dae
 		loadSceneObj->SetParent(sceneRoot.get());
 	
 		//add delayed scene load
-		//auto delayedLoad = loadSceneObj->AddComponent<dae::DelayedSceneLoadComponent>();
-		
+		auto delayedLoad = loadSceneObj->AddComponent<dae::DelayedSceneLoadComponent>();
+		delayedLoad->SetScenes(scenePath.str(), "HighScoreSave");
+		mapGen->AddObserver(delayedLoad);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
 
@@ -740,6 +741,8 @@ namespace dae
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
 
+		scene.GetPersistentObjects();
+
 		////Background object
 		auto logoObj = std::make_shared<dae::GameObject>();
 		auto logoRender = logoObj->AddComponent<dae::TextureRenderComponent>();
@@ -842,7 +845,7 @@ namespace dae
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
-
+		scene.GetPersistentObjects();
 		////Background object
 		auto logoObj = std::make_shared<dae::GameObject>();
 		auto logoRender = logoObj->AddComponent<dae::TextureRenderComponent>();
@@ -940,6 +943,8 @@ namespace dae
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
+
+		scene.GetPersistentObjects();
 
 		////Background object
 		auto logoObj = std::make_shared<dae::GameObject>();
