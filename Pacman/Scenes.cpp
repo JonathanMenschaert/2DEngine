@@ -475,18 +475,57 @@ namespace dae
 		logoObj->SetParent(sceneRoot.get());
 
 		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
+
+		//Button group
+		auto buttonGrObj = std::make_shared<dae::GameObject>();
+		auto buttonGrTrans{ buttonGrObj->AddComponent<dae::TransformComponent>() };
+		buttonGrTrans->SetLocalPosition(glm::vec2{200.f, 300.f});
+		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
+		buttonGrObj->SetParent(sceneRoot.get());
+
 		//Button 1
 		auto button1Obj = std::make_shared<dae::GameObject>();
 		auto button1Trans = button1Obj->AddComponent<dae::TransformComponent>();
-		button1Trans->SetLocalPosition(glm::vec2{200.f, 300.f});
+		button1Trans->SetLocalPosition(glm::vec2{0.f, 0.f});
 		auto button1 = button1Obj->AddComponent<dae::LetterScrollButtonComponent>();
 		button1->SetButtonExtend(glm::vec2{10.f, 10.f});
 		button1->SetButtonFont(font);
 		button1->SetNormalColor(255, 255, 255, 255);
 		button1->SetHighlightColor(255, 255, 0, 255);
-		button1Obj->SetParent(sceneRoot.get());
+		button1Obj->SetParent(buttonGrObj.get(), false);
+
+		//Button 2
+		auto button2Obj = std::make_shared<dae::GameObject>();
+		auto button2Trans = button2Obj->AddComponent<dae::TransformComponent>();
+		button2Trans->SetLocalPosition(glm::vec2{40.f, 0.f});
+		auto button2 = button2Obj->AddComponent<dae::LetterScrollButtonComponent>();
+		button2->SetButtonExtend(glm::vec2{10.f, 10.f});
+		button2->SetButtonFont(font);
+		button2->SetNormalColor(255, 255, 255, 255);
+		button2->SetHighlightColor(255, 255, 0, 255);
+		button2Obj->SetParent(buttonGrObj.get(),false);
+
+		//Button 3
+		auto button3Obj = std::make_shared<dae::GameObject>();
+		auto button3Trans = button3Obj->AddComponent<dae::TransformComponent>();
+		button3Trans->SetLocalPosition(glm::vec2{80.f, 0.f});
+		auto button3 = button3Obj->AddComponent<dae::LetterScrollButtonComponent>();
+		button3->SetButtonExtend(glm::vec2{10.f, 10.f});
+		button3->SetButtonFont(font);
+		button3->SetNormalColor(255, 255, 255, 255);
+		button3->SetHighlightColor(255, 255, 0, 255);
+		button3Obj->SetParent(buttonGrObj.get(), false);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));
+
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button2, 1));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button2, -1));
+
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button3, 1));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button3, -1));
+
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
 	}
 }

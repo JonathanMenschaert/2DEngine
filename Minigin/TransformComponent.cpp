@@ -54,7 +54,7 @@ void dae::TransformComponent::SetFlagDirty()
 
 void dae::TransformComponent::UpdateWorldPosition()
 {
-	std::shared_ptr<GameObject> pParentObj{ GetGameObject()->GetParent()};
+	GameObject* pParentObj{ GetGameObject()->GetParent()};
 
 
 	if (!pParentObj)

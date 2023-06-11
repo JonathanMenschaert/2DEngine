@@ -125,12 +125,12 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldPosition)
 		}
 	}
 
-	if (!m_pParent)
+	if (m_pParent)
 	{
 		m_pParent->RemoveChild(shared_from_this());
 	}
 	m_pParent = pParent;
-	if (!m_pParent)
+	if (m_pParent)
 	{
 		m_pParent->AddChild(shared_from_this());
 	}
@@ -145,7 +145,7 @@ void dae::GameObject::Destroy()
 	}
 }
 
-bool dae::GameObject::IsValidParentOrNull(GameObject* pParent)
+bool dae::GameObject::IsValidParentOrNull(GameObject* /*pParent*/)
 {
 	return true;
 }

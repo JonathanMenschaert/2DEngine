@@ -31,9 +31,11 @@ namespace dae
 		bool IsPointOnButton(const glm::vec2& point) const;
 		void Init() override;
 		const glm::vec2& GetButtonPos() const;
+	
+	protected:
+		bool m_IsSelected;
 
 	private:
-		bool m_IsSelected;
 		std::function<void()> m_OnClick;
 		TransformComponent* m_pTransform{};
 		TextComponent* m_pButtonText{};

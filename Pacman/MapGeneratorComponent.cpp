@@ -84,7 +84,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 				pacdotRender->SetTexture("pacdot.png");
 			}
 
-			pacdotObj->SetParent(pGameObject->shared_from_this(), false);
+			pacdotObj->SetParent(pGameObject, false);
 		}
 		break;
 		case TileData::PlayerSpawn:

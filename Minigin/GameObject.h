@@ -178,9 +178,9 @@ namespace dae
 	template<typename T>
 	T* GameObject::GetComponentInParent() const
 	{
-		if (!m_pParent.expired())
+		if (!m_pParent)
 		{
-			return m_pParent.lock()->GetComponent<T>();
+			return m_pParent->GetComponent<T>();
 		}
 		
 		return nullptr;

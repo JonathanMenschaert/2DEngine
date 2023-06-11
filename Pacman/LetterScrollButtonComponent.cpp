@@ -14,6 +14,10 @@ dae::LetterScrollButtonComponent::LetterScrollButtonComponent(GameObject* pGameO
 
 void dae::LetterScrollButtonComponent::Scroll(int scrollAmount)
 {
+	if (!m_IsSelected)
+	{
+		return;
+	}
 	const int size{ static_cast<int>(m_Letters.size()) };
 	if (scrollAmount <= -size)
 	{
