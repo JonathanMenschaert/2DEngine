@@ -7,8 +7,10 @@ namespace dae
 		PacdotCollected,
 		PowerpelletCollected,
 		GhostKilled,
-		PacmanDied,
-		PowerpelletTimeout
+		PacmanLiveLost,
+		PowerpelletTimeout,
+		LevelWin,
+		PacmanDied
 	};
 }
 

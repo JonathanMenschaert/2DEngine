@@ -2,8 +2,7 @@
 #include "GameTime.h"
 
 dae::ScaredTimerComponent::ScaredTimerComponent(GameObject* pGameObject)
-	:UpdateComponent{pGameObject}
-	,m_MaxTime{6.f}
+	:TimerComponent{pGameObject}
 {
 }
 
@@ -34,7 +33,3 @@ void dae::ScaredTimerComponent::Notify(const Event<PlayerEvent>& e)
 	}
 }
 
-void dae::ScaredTimerComponent::SetMaxTime(float time)
-{
-	m_MaxTime = time;
-}

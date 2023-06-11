@@ -74,7 +74,7 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 		}
 		else
 		{
-			Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::PacmanDied};
+			Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::PacmanLiveLost};
 			NotifyObservers(pacmanDiedEvent);
 			if (m_DeathSoundIdx == UINT32_MAX)
 			{

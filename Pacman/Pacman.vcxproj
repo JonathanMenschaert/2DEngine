@@ -194,6 +194,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="ButtonScrollCommand.cpp" />
     <ClCompile Include="DebugLivesCommand.cpp" />
     <ClCompile Include="DebugScoreCommand.cpp" />
+    <ClCompile Include="DelayedSceneLoadComponent.cpp" />
     <ClCompile Include="GhostComponent.cpp" />
     <ClCompile Include="GhostControllerComponent.cpp" />
     <ClCompile Include="GhostHuntState.cpp" />
@@ -216,6 +217,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="Scenes.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreDisplayComponent.cpp" />
+    <ClCompile Include="TimerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonNavCommand.h" />
@@ -223,6 +225,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="ButtonScrollCommand.h" />
     <ClInclude Include="DebugLivesCommand.h" />
     <ClInclude Include="DebugScoreCommand.h" />
+    <ClInclude Include="DelayedSceneLoadComponent.h" />
     <ClInclude Include="GhostComponent.h" />
     <ClInclude Include="GhostControllerComponent.h" />
     <ClInclude Include="GhostHuntState.h" />
@@ -246,6 +249,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreDisplayComponent.h" />
     <ClInclude Include="PlayerEvents.h" />
+    <ClInclude Include="TimerComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

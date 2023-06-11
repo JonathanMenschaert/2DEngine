@@ -10,7 +10,7 @@ void dae::LivesComponent::Notify(const Event<PlayerEvent>& e)
 {
 	switch (e.GetPayload())
 	{
-	case PlayerEvent::PacmanDied:
+	case PlayerEvent::PacmanLiveLost:
 		AddLife(-1);
 	default:
 		break;

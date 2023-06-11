@@ -43,6 +43,7 @@
 #include "LoadSceneComponent.h"
 #include "LoadSceneCommand.h"
 #include "Prefabs.h"
+#include "DelayedSceneLoadComponent.h"
 
 namespace dae
 {
@@ -247,6 +248,10 @@ namespace dae
 		scenePath << "SingleLevel" << (level + 1);
 		loadScene->SetSceneToLoad(scenePath.str());
 		loadSceneObj->SetParent(sceneRoot.get());
+	
+		//add delayed scene load
+		//auto delayedLoad = loadSceneObj->AddComponent<dae::DelayedSceneLoadComponent>();
+		
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
 
