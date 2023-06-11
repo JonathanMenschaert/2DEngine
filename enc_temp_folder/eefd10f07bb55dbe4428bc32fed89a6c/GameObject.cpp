@@ -100,12 +100,12 @@ dae::TransformComponent* dae::GameObject::GetTransform() const
 }
 
 
-dae::GameObject* dae::GameObject::GetParent()
+std::shared_ptr<dae::GameObject> dae::GameObject::GetParent()
 {
-	return m_pParent;
+	return m_pParent.lock();
 }
 
-void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldPosition)
+void dae::GameObject::SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition)
 {
 	if (!IsValidParentOrNull(pParent)) return;
 	
@@ -125,14 +125,14 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldPosition)
 		}
 	}
 
-	if (!m_pParent)
+	if (!m_pParent.expired())
 	{
-		m_pParent->RemoveChild(shared_from_this());
+		m_pParent.lock()->RemoveChild(shared_from_this());
 	}
 	m_pParent = pParent;
-	if (!m_pParent)
+	if (!m_pParent.expired())
 	{
-		m_pParent->AddChild(shared_from_this());
+		m_pParent.lock()->AddChild(shared_from_this());
 	}
 }
 
@@ -145,7 +145,7 @@ void dae::GameObject::Destroy()
 	}
 }
 
-bool dae::GameObject::IsValidParentOrNull(GameObject* pParent)
+bool dae::GameObject::IsValidParentOrNull(std::weak_ptr<GameObject> pParent)
 {
 	return true;
 }

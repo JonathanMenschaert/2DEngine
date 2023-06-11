@@ -41,9 +41,9 @@ namespace dae
 
 		std::list<std::shared_ptr<GameObject>>& GetChildren();
 
-		GameObject* GetParent();
+		std::shared_ptr<dae::GameObject> GetParent();
 
-		void SetParent(GameObject* pParent, bool keepWorldPosition = true);
+		void SetParent(std::shared_ptr<GameObject> pParent, bool keepWorldPosition = true);
 
 		void Destroy();
 
@@ -71,7 +71,7 @@ namespace dae
 	private:
 		void DestroyComponents();
 		void DestroyChildren();
-		bool IsValidParentOrNull(GameObject* pParent);
+		bool IsValidParentOrNull(std::weak_ptr<GameObject> pParent);
 		void RemoveChild(std::shared_ptr<GameObject> child);
 		void AddChild(std::shared_ptr<GameObject> child);
 
@@ -85,7 +85,7 @@ namespace dae
 		bool m_ComponentsMarkedForDeath;
 		std::unordered_map<ComponentType, std::list<std::unique_ptr<BaseComponent>>> m_Components;
 
-		GameObject* m_pParent{};
+		std::weak_ptr<GameObject> m_pParent{};
 		std::list<std::shared_ptr<GameObject>> m_Children;
 
 		TransformComponent* m_pTransform;

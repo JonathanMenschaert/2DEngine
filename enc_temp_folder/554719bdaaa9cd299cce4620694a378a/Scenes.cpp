@@ -59,7 +59,7 @@ namespace dae
 		LevelLayout layout{ dae::LevelIO::LoadLevelLayout("../Data/level0.level") };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
-		mapObj->SetParent(sceneRoot.get());
+		mapObj->SetParent(sceneRoot);
 
 
 		//How to play
@@ -67,7 +67,7 @@ namespace dae
 		auto htpTrans = howToPlayObj->AddComponent<dae::TransformComponent>();
 		htpTrans->SetLocalPosition(glm::vec2{ 10.f, 30.f });
 		howToPlayObj->AddComponent<dae::HowToPlayComponent>();
-		howToPlayObj->SetParent(sceneRoot.get());
+		howToPlayObj->SetParent(sceneRoot);
 
 		//Fps Object
 		auto fpsObj = std::make_shared<dae::GameObject>();
@@ -82,7 +82,7 @@ namespace dae
 		fpsText->SetColor(255, 255, 0, 255);
 
 		fpsObj->AddComponent<dae::FPSComponent>();
-		fpsObj->SetParent(sceneRoot.get());
+		fpsObj->SetParent(sceneRoot);
 
 		//Pacman
 		auto player1Obj = std::make_shared<dae::GameObject>();
@@ -103,7 +103,7 @@ namespace dae
 
 		auto player1Player = player1Obj->AddComponent<dae::PlayerComponent>();
 		player1Col->AddObserver(player1Player);
-		player1Obj->SetParent(mapObj.get(), false);
+		player1Obj->SetParent(mapObj, false);
 		player1Player->SetSpawnPos(mapGen->GetPlayerSpawns());
 
 		//Bind keys
@@ -131,7 +131,7 @@ namespace dae
 		timerObj->AddComponent<dae::TransformComponent>();
 		auto scaredTimer = timerObj->AddComponent<dae::ScaredTimerComponent>();
 		player1Player->AddObserver(scaredTimer);
-		timerObj->SetParent(sceneRoot.get());
+		timerObj->SetParent(sceneRoot);
 		//Ghosts
 		int ghostTexIdx{0};
 		std::shared_ptr<Texture2D> pScaredGhostTexture{ResourceManager::GetInstance().LoadTexture("scaredghost.png")};
@@ -147,7 +147,7 @@ namespace dae
 			ghostTrans->SetLocalPosition(position);
 
 			ghostObj->AddComponent<dae::GhostControllerComponent>();
-			ghostObj->SetParent(mapObj.get(), false);
+			ghostObj->SetParent(mapObj, false);
 
 			auto ghost = ghostObj->AddComponent<dae::GhostComponent>();
 			ghost->SetSpawnPos(position);
@@ -184,7 +184,7 @@ namespace dae
 		auto lives1 = lives1Obj->AddComponent<dae::LivesDisplayComponent>();
 		lives1Trans->SetLocalPosition(glm::vec2{ 0.f, 100.f });
 
-		lives1Obj->SetParent(hud1Obj.get(), false);
+		lives1Obj->SetParent(hud1Obj, false);
 		player1Lives->AddObserver(lives1);
 		player1Player->AddObserver(player1Lives);
 		auto score1Obj = std::make_shared < dae::GameObject>();
@@ -200,10 +200,10 @@ namespace dae
 		auto score1 = score1Obj->AddComponent<dae::ScoreDisplayComponent>();
 		score1Trans->SetLocalPosition(glm::vec2{ 0.f, 120.f });
 
-		score1Obj->SetParent(hud1Obj.get(), false);
+		score1Obj->SetParent(hud1Obj, false);
 		player1Score->AddObserver(score1);
 		player1Player->AddObserver(player1Score);
-		hud1Obj->SetParent(sceneRoot.get());
+		hud1Obj->SetParent(sceneRoot);
 	}
 
 	void LevelTester::LoadScene()
@@ -369,7 +369,7 @@ namespace dae
 		LevelLayout layout{ dae::LevelIO::LoadLevelLayout("../Data/level1.level") };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
-		mapObj->SetParent(sceneRoot.get());
+		mapObj->SetParent(sceneRoot);
 
 		//dae::LevelIO::SaveLevelLayout(LevelLayout{ 28, 31, tileData }, "../Data/level1.level");
 		//LevelLayout layout{ dae::LevelIO::LoadLevelLayout("../Data/level1.level") };
@@ -390,7 +390,7 @@ namespace dae
 
 		auto logoTrans = logoObj->AddComponent<dae::TransformComponent>();
 		logoTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
-		logoObj->SetParent(sceneRoot.get());
+		logoObj->SetParent(sceneRoot);
 
 		//Font
 		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
@@ -399,7 +399,7 @@ namespace dae
 		auto buttonGrObj = std::make_shared<dae::GameObject>();
 		buttonGrObj->AddComponent<dae::TransformComponent>();
 		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
-		buttonGrObj->SetParent(sceneRoot.get());
+		buttonGrObj->SetParent(sceneRoot);
 
 		//Button 1
 		auto button1Obj = std::make_shared<dae::GameObject>();
@@ -415,7 +415,7 @@ namespace dae
 			dae::SceneManager::GetInstance().LoadScene("Single1");
 			}
 		);
-		button1Obj->SetParent(buttonGrObj.get());
+		button1Obj->SetParent(buttonGrObj);
 
 		//Button 2
 		auto button2Obj = std::make_shared<dae::GameObject>();
@@ -431,7 +431,7 @@ namespace dae
 			std::cout << "Button2\n";
 			}
 		);
-		button2Obj->SetParent(buttonGrObj.get());
+		button2Obj->SetParent(buttonGrObj);
 
 		//Button 3
 		auto button3Obj = std::make_shared<dae::GameObject>();
@@ -447,7 +447,7 @@ namespace dae
 			std::cout << "Button3\n";
 			}
 		);
-		button3Obj->SetParent(buttonGrObj.get());
+		button3Obj->SetParent(buttonGrObj);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, -1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
@@ -472,7 +472,7 @@ namespace dae
 
 		auto logoTrans = logoObj->AddComponent<dae::TransformComponent>();
 		logoTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
-		logoObj->SetParent(sceneRoot.get());
+		logoObj->SetParent(sceneRoot);
 
 		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
 		//Button 1
@@ -484,7 +484,8 @@ namespace dae
 		button1->SetButtonFont(font);
 		button1->SetNormalColor(255, 255, 255, 255);
 		button1->SetHighlightColor(255, 255, 0, 255);
-		button1Obj->SetParent(sceneRoot.get());
+		button1->SetSelected(true);
+		button1Obj->SetParent(sceneRoot);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));
