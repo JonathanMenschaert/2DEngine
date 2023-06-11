@@ -34,7 +34,7 @@ void dae::LetterScrollButtonComponent::Init()
 {
 	ButtonComponent::Init();
 	SetButtonText(m_Letters[m_CurrentLetterIdx]);
-	/*GameObject* pGameObj{ GetGameObject() };
+	GameObject* pGameObj{ GetGameObject() };
 
 	auto pArrowUp{ std::make_shared<GameObject>() };
 
@@ -42,10 +42,12 @@ void dae::LetterScrollButtonComponent::Init()
 	auto pUpRender{ pArrowUp->AddComponent<TextureRenderComponent>() };
 	pUpTrans->SetLocalPosition(glm::vec2{0, -40.f});
 	pUpRender->SetTexture("arrowup.png");
-	pArrowUp->SetParent(pGameObj);
+	pArrowUp->SetParent(pGameObj, false);
+
 	auto pArrowDown{ std::make_shared<GameObject>() };
 	auto pDownTrans{ pArrowDown->AddComponent<TransformComponent>() };
 	auto pDownRender{ pArrowDown->AddComponent<TextureRenderComponent>() };
 	pDownTrans->SetLocalPosition(glm::vec2{0, 40.f});
-	pDownRender->SetTexture("arrowdown.png");*/
+	pArrowDown->SetParent(pGameObj,false);
+	pDownRender->SetTexture("arrowdown.png");
 }
