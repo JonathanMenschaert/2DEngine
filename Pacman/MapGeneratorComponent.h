@@ -26,13 +26,13 @@ namespace dae
 	public:
 		MapGeneratorComponent(GameObject* pGameObject);
 		virtual ~MapGeneratorComponent() = default;
-		MapGeneratorComponent(const MapGeneratorComponent& rectComponent) = delete;
-		MapGeneratorComponent(MapGeneratorComponent&& rectComponent) noexcept = delete;
-		MapGeneratorComponent& operator=(const MapGeneratorComponent& rectComponent) = delete;
-		MapGeneratorComponent& operator=(MapGeneratorComponent&& rectComponent) noexcept = delete;
+		MapGeneratorComponent(const MapGeneratorComponent& other) = delete;
+		MapGeneratorComponent(MapGeneratorComponent&& other) noexcept = delete;
+		MapGeneratorComponent& operator=(const MapGeneratorComponent& other) = delete;
+		MapGeneratorComponent& operator=(MapGeneratorComponent&& other) noexcept = delete;
 
 
-		const glm::vec2& GetPlayerSpawns() const;
+		const std::vector<glm::vec2>& GetPlayerSpawns() const;
 		const std::vector<glm::vec2>& GetGhostSpawns() const;
 
 		void LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles);
@@ -45,7 +45,7 @@ namespace dae
 		int m_Rows{};
 		int m_TileSize{};
 
-		glm::vec2 m_PlayerSpawns{};
+		std::vector<glm::vec2> m_PlayerSpawns{};
 		std::vector<glm::vec2> m_GhostSpawns{};
 	};
 

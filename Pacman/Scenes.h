@@ -20,6 +20,26 @@ namespace dae
 		static void LoadScene();
 	};
 
+	class Coop final
+	{
+	public:
+		static void LoadScene(int level);
+	};
+
+	class CoopOne final
+	{
+	public:
+		static void LoadScene();
+
+	};
+
+	class CoopTwo final
+	{
+	public:
+		static void LoadScene();
+
+	};
+
 	class HighScoreList final
 	{
 	public:

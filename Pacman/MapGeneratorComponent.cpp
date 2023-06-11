@@ -11,7 +11,7 @@ dae::MapGeneratorComponent::MapGeneratorComponent(GameObject* pGameObject)
 {
 }
 
-const glm::vec2& dae::MapGeneratorComponent::GetPlayerSpawns() const
+const std::vector<glm::vec2>& dae::MapGeneratorComponent::GetPlayerSpawns() const
 {
 	return m_PlayerSpawns;
 }
@@ -88,7 +88,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 		}
 		break;
 		case TileData::PlayerSpawn:
-			m_PlayerSpawns = relativePosition;
+			m_PlayerSpawns.emplace_back( relativePosition);
 			break;	
 		case TileData::GhostSpawn:
 			m_GhostSpawns.emplace_back(relativePosition);

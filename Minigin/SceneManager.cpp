@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
+#include "InputManager.h"
 
 void dae::SceneManager::Init()
 {
@@ -21,6 +22,7 @@ void dae::SceneManager::Update()
 	{
 		m_pActiveScene = std::move(m_pNewScene);
 		m_pNewScene = nullptr;
+		InputManager::GetInstance().Reset();
 		Init();
 	}
 
