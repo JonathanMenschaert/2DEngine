@@ -53,7 +53,7 @@ bool dae::InputManager::ProcessInput()
 	for (const auto& keyboardButton : m_KeyboardCommands)
 	{
 		const auto& keyboardCommand{ keyboardButton.second };
-		if (ShouldExecuteCommand(keyboardCommand.first, keyboardButton.first))
+		if (ShouldExecuteCommand(keyboardCommand.first, keyboardButton.first.second))
 		{
 			keyboardCommand.second->Execute();
 		}
@@ -133,9 +133,9 @@ void dae::InputManager::AddControllerById(unsigned int gamepadIdx)
 	}
 }
 
-void dae::InputManager::BindKeyboardCommand(InteractionType type, SDL_Keycode key, std::unique_ptr<Command> pCommand)
+void dae::InputManager::BindKeyboardCommand(InteractionType type, SDL_Keycode key, std::unique_ptr<Command> pCommand, unsigned int index)
 {
-	m_KeyboardCommands[key] = std::make_pair(type, std::move(pCommand));
+	m_KeyboardCommands[std::make_pair(index, key)] = std::make_pair(type, std::move(pCommand));
 }
 
 void dae::InputManager::BindDigitalCommand(unsigned int gamepadIdx, InteractionType type, Gamepad::DigitalButton key, std::unique_ptr<Command> pCommand)
