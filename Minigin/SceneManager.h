@@ -14,7 +14,7 @@ namespace dae
 	{
 	public:
 		dae::Scene& CreateScene(const std::string& name);
-		void LoadScene(const std::string& name);
+		bool LoadScene(const std::string& name);
 		void AddScene(const std::string& name, const std::function<void()>& loadFunction, bool setAsDefault = false);
 
 		void Init();

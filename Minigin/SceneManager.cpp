@@ -9,6 +9,7 @@ void dae::SceneManager::Init()
 		{
 			CreateScene("SampleScene");
 		}
+		
 		m_pActiveScene = std::move(m_pNewScene);
 	}
 	m_pActiveScene->Init();
@@ -18,6 +19,7 @@ void dae::SceneManager::Update()
 {
 	if (m_pNewScene)
 	{
+		m_pNewScene->SetPersistentObjects(m_pActiveScene->GetPersistentObjects());
 		m_pActiveScene = std::move(m_pNewScene);
 		m_pNewScene = nullptr;
 		Init();
@@ -47,14 +49,15 @@ dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
 	return *m_pNewScene;
 }
 
-void dae::SceneManager::LoadScene(const std::string& name)
+bool dae::SceneManager::LoadScene(const std::string& name)
 {
 	if (m_SceneTemplates.find(name) == m_SceneTemplates.end())
 	{
-		return;
+		return false;
 	}
 
 	m_SceneTemplates[name]();
+	return true;
 }
 
 void dae::SceneManager::AddScene(const std::string& name, const std::function<void()>& loadFunction, bool setAsDefault)

@@ -14,6 +14,11 @@ namespace dae
 		void Remove(std::shared_ptr<GameObject> object);
 		void RemoveAll();
 
+		void SetObjectPersistent(std::shared_ptr<GameObject> persistentObject);
+
+		void SetPersistentObjects(std::vector<std::shared_ptr<GameObject>> persistentObject);
+		std::vector<std::shared_ptr<GameObject>> GetPersistentObjects(bool emptyPersistentVector = true);
+
 		void Init();
 		void Update();
 		void LateUpdate();
@@ -30,7 +35,8 @@ namespace dae
 	private: 
 
 		std::string m_name;
-		std::vector < std::shared_ptr<GameObject>> m_objects{};
+		std::vector <std::shared_ptr<GameObject>> m_Objects{};
+		std::vector <std::shared_ptr<GameObject>> m_PersistentObjects{};
 
 		static unsigned int m_idCounter; 
 	};

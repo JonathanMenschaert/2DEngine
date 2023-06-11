@@ -237,11 +237,14 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClInclude Include="GraphComponent.h" />
     <ClInclude Include="HowToPlayComponent.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LoadSceneCommand.h" />
+    <ClInclude Include="LoadSceneComponent.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="RectCollisionComponent.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SoundSystemLogging.h" />
@@ -292,6 +295,8 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClCompile Include="GraphComponent.cpp" />
     <ClCompile Include="HowToPlayComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LoadSceneCommand.cpp" />
+    <ClCompile Include="LoadSceneComponent.cpp" />
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Physics.cpp" />
@@ -316,6 +321,9 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClCompile Include="DearImGuiComponent.cpp" />
     <ClCompile Include="UpdateComponent.cpp" />
     <ClCompile Include="Gamepad.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Minigin.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

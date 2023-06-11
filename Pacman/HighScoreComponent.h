@@ -21,11 +21,12 @@ namespace dae
 
 		bool CanSaveHighScore() const;
 		void SaveHighScore();
+		void SetLives(int lives);
+		
 
 	private:
 
 		void SetScore(int score);
-		void SetLives(int lives);
 
 		const std::string m_Path;
 		std::vector<HighScoreData> m_HighScores{};

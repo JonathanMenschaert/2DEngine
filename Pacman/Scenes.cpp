@@ -40,25 +40,55 @@
 #include "LetterScrollButtonComponent.h"
 #include "ButtonScrollCommand.h"
 #include "HighScoreComponent.h"
+#include "LoadSceneComponent.h"
+#include "LoadSceneCommand.h"
 
 namespace dae
 {
-	void SingleOne::LoadScene()
+	void SinglePlayer::LoadScene(int level)
 	{
-		auto& scene = dae::SceneManager::GetInstance().CreateScene("Single1");
+		auto& scene = dae::SceneManager::GetInstance().CreateScene("SingleLevel0");
 		auto& inputManager = dae::InputManager::GetInstance();
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
 
+		
+		std::vector<std::shared_ptr<GameObject>> persistedObjects{scene.GetPersistentObjects()};
+
+		for (auto& persistentObj : persistedObjects)
+		{
+			persistentObj->SetParent(sceneRoot.get());
+		}
+
+		HighScoreComponent* highScoreP1{};
+
+		auto highScoreObj = std::make_shared<dae::GameObject>();
+		for (auto& persistentObj : persistedObjects)
+		{
+			highScoreP1 = persistentObj->GetComponent<dae::HighScoreComponent>();
+		}
+
+		if (!highScoreP1)
+		{
+			highScoreP1 = highScoreObj->AddComponent<dae::HighScoreComponent>();
+			highScoreP1->SetLives(3);
+		}
+		highScoreObj->AddComponent<TransformComponent>();
+		highScoreObj->SetParent(sceneRoot.get());
+		scene.SetObjectPersistent(highScoreObj);
+		highScoreP1->SetLevel(level);
+
 		//Map gameobject
 		auto mapObj = std::make_shared<dae::GameObject>();
 		auto mapTrans = mapObj->AddComponent<dae::TransformComponent>();
-		mapTrans->SetLocalPosition(glm::vec2{ 75.f, 50.f });
+		mapTrans->SetLocalPosition(glm::vec2{ 150.f, 50.f });
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
 		//dae::LevelIO::SaveLevelLayout(LevelLayout{ 28, 31, tileData }, "../Data/level0.level");
-		LevelLayout layout{ dae::LevelIO::LoadLevelLayout("../Data/level0.level") };
+		std::stringstream levelPath{};
+		levelPath << "../Data/level" << level << ".level";
+		LevelLayout layout{ dae::LevelIO::LoadLevelLayout(levelPath.str()) };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
 		mapObj->SetParent(sceneRoot.get());
@@ -99,10 +129,10 @@ namespace dae
 		player1Render->SetTexture("pacman.png");
 
 		auto player1Lives = player1Obj->AddComponent<dae::LivesComponent>();
-		player1Lives->AddLife(3);
+		player1Lives->AddLife(highScoreP1->GetLives());
 
 		auto player1Score = player1Obj->AddComponent<dae::ScoreComponent>();
-
+		player1Score->AddScore(highScoreP1->GetScore());
 		auto player1Player = player1Obj->AddComponent<dae::PlayerComponent>();
 		player1Col->AddObserver(player1Player);
 		player1Obj->SetParent(mapObj.get(), false);
@@ -206,6 +236,19 @@ namespace dae
 		player1Score->AddObserver(score1);
 		player1Player->AddObserver(player1Score);
 		hud1Obj->SetParent(sceneRoot.get());
+
+		//SceneLoad component
+		auto loadSceneObj = std::make_shared<GameObject>();
+		loadSceneObj->AddComponent<dae::TransformComponent>();
+		auto loadScene = loadSceneObj->AddComponent<dae::LoadSceneComponent>();
+		loadScene->SetDefaultScene("HighScoreSave");
+		std::stringstream scenePath {};
+		scenePath << "SingleLevel" << (level + 1);
+		loadScene->SetSceneToLoad(scenePath.str());
+		loadSceneObj->SetParent(sceneRoot.get());
+
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
+
 	}
 
 	void LevelTester::LoadScene()
@@ -414,7 +457,7 @@ namespace dae
 		button1->SetNormalColor(255, 255, 255, 255);
 		button1->SetHighlightColor(255, 255, 0, 255);
 		button1->SetOnClick([]() {
-			dae::SceneManager::GetInstance().LoadScene("Single1");
+			dae::SceneManager::GetInstance().LoadScene("SingleLevel0");
 			}
 		);
 		button1Obj->SetParent(buttonGrObj.get());
@@ -480,7 +523,7 @@ namespace dae
 
 	void HighScoreSave::LoadScene()
 	{
-		auto& scene = dae::SceneManager::GetInstance().CreateScene("HighScore");
+		auto& scene = dae::SceneManager::GetInstance().CreateScene("HighScoreSave");
 		auto& inputManager = dae::InputManager::GetInstance();
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
@@ -558,6 +601,8 @@ namespace dae
 
 		button4Obj->SetParent(buttonGrObj.get(), false);
 
+		
+
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));
 
@@ -571,12 +616,13 @@ namespace dae
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
 	
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button4));
+		
 	}
 
 	void HighScoreList::LoadScene()
 	{
-		auto& scene = dae::SceneManager::GetInstance().CreateScene("HighScore");
-		auto& inputManager = dae::InputManager::GetInstance();
+		auto& scene = dae::SceneManager::GetInstance().CreateScene("HighScoreList");
+		//auto& inputManager = dae::InputManager::GetInstance();
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
@@ -593,5 +639,14 @@ namespace dae
 		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
 
 
+	}
+
+	void SingleOne::LoadScene()
+	{
+		SinglePlayer::LoadScene(0);
+	}
+	void SingleTwo::LoadScene()
+	{
+		SinglePlayer::LoadScene(1);
 	}
 }

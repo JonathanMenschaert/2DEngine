@@ -178,7 +178,7 @@ namespace dae
 	template<typename T>
 	T* GameObject::GetComponentInParent() const
 	{
-		if (!m_pParent)
+		if (m_pParent)
 		{
 			return m_pParent->GetComponent<T>();
 		}

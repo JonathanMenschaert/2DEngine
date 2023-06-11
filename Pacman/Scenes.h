@@ -2,7 +2,19 @@
 
 namespace dae
 {
-	class SingleOne final
+	class SinglePlayer final
+	{
+	public:
+		static void LoadScene(int level);
+	};
+
+	class SingleOne
+	{
+	public:
+		static void LoadScene();
+	};
+
+	class SingleTwo
 	{
 	public:
 		static void LoadScene();

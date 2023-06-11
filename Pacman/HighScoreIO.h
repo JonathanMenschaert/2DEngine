@@ -9,8 +9,8 @@ namespace dae
 		static const size_t nameSize{4};
 
 		char name[nameSize];
-		int level;
-		int score;
+		int level{};
+		int score{};
 
 	};
 

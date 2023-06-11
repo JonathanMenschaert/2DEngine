@@ -1,7 +1,6 @@
 #pragma once
 namespace dae
 {
-	class GameObject;
 	class Command
 	{
 	public:
