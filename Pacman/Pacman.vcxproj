@@ -191,6 +191,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
   <ItemGroup>
     <ClCompile Include="ButtonNavCommand.cpp" />
     <ClCompile Include="ButtonPressCommand.cpp" />
+    <ClCompile Include="ButtonScrollCommand.cpp" />
     <ClCompile Include="DebugLivesCommand.cpp" />
     <ClCompile Include="DebugScoreCommand.cpp" />
     <ClCompile Include="GhostComponent.cpp" />
@@ -198,6 +199,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClCompile Include="GhostHuntState.cpp" />
     <ClCompile Include="GhostScaredState.cpp" />
     <ClCompile Include="GhostWanderState.cpp" />
+    <ClCompile Include="LetterScrollButtonComponent.cpp" />
     <ClCompile Include="LevelIO.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
@@ -215,6 +217,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
   <ItemGroup>
     <ClInclude Include="ButtonNavCommand.h" />
     <ClInclude Include="ButtonPressCommand.h" />
+    <ClInclude Include="ButtonScrollCommand.h" />
     <ClInclude Include="DebugLivesCommand.h" />
     <ClInclude Include="DebugScoreCommand.h" />
     <ClInclude Include="GhostComponent.h" />
@@ -223,6 +226,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
     <ClInclude Include="GhostScaredState.h" />
     <ClInclude Include="GhostState.h" />
     <ClInclude Include="GhostWanderState.h" />
+    <ClInclude Include="LetterScrollButtonComponent.h" />
     <ClInclude Include="LevelIO.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="LivesDisplayComponent.h" />

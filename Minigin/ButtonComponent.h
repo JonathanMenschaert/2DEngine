@@ -9,7 +9,7 @@
 
 namespace dae
 {
-	class ButtonComponent final : public BaseComponent
+	class ButtonComponent : public BaseComponent
 	{
 	public:
 		ButtonComponent(GameObject* pGameObject);

@@ -31,6 +31,9 @@
     <Filter Include="Source Files\GameEvents">
       <UniqueIdentifier>{04dfb868-dac3-43eb-80c5-740bf039c4b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\UI">
+      <UniqueIdentifier>{e4f718c9-25f4-4db3-b432-b36fb496859c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pacman.cpp">
@@ -98,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="ScaredTimerComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LetterScrollButtonComponent.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonScrollCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="ScaredTimerComponent.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LetterScrollButtonComponent.h">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonScrollCommand.h">
+      <Filter>Source Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
