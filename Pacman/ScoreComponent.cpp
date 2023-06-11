@@ -7,7 +7,7 @@ dae::ScoreComponent::ScoreComponent(GameObject* pGameObject)
 {
 }
 
-void dae::ScoreComponent::AddScore(int score)
+void dae::ScoreComponent::AddScore(unsigned int score)
 {
 	m_Score += score;
 	if (m_Score < 0)
@@ -19,7 +19,7 @@ void dae::ScoreComponent::AddScore(int score)
 
 void dae::ScoreComponent::UpdateScore()
 {
-	Event<int> e{ m_Score };
+	Event<unsigned int> e{ m_Score };
 	NotifyObservers(e);
 }
 

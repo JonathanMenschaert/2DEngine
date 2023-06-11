@@ -6,7 +6,7 @@
 
 namespace dae
 {
-	class ScoreComponent final : public BaseComponent, public Subject<int>, public Observer<PlayerEvent>
+	class ScoreComponent final : public BaseComponent, public Subject<unsigned int>, public Observer<PlayerEvent>
 	{
 	public:
 		ScoreComponent(GameObject* pGameObject);
@@ -16,13 +16,13 @@ namespace dae
 		ScoreComponent& operator=(const ScoreComponent& rectComponent) = delete;
 		ScoreComponent& operator=(ScoreComponent&& rectComponent) noexcept = delete;
 
-		void AddScore(int score = 1);
+		void AddScore(unsigned int score = 1);
 		void UpdateScore();
 		int GetScore() const;
 		virtual void Notify(const Event<PlayerEvent>& e) override;
 
 	private:
-		int m_Score;
+		unsigned int m_Score;
 	};
 }
 
