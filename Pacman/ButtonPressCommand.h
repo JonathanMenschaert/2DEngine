@@ -1,5 +1,5 @@
 #pragma once
-#include "ButtonGroupComponent.h"
+#include "ButtonComponent.h"
 #include "Command.h"
 
 namespace dae
@@ -7,12 +7,12 @@ namespace dae
 	class ButtonPressCommand final : public Command
 	{
 	public:
-		ButtonPressCommand(ButtonGroupComponent* pButtonGroup);
+		ButtonPressCommand(ButtonComponent* pButtonGroup);
 		virtual ~ButtonPressCommand() = default;
 		virtual void Execute() override;
 
 	private:
-		ButtonGroupComponent* m_pButtonGroup;
+		ButtonComponent* m_pButton;
 	};
 }
 

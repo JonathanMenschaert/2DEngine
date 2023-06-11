@@ -455,7 +455,9 @@ namespace dae
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(buttonGr));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button1));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button2), 1);
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button3), 2);
 		
 	}
 
@@ -530,10 +532,11 @@ namespace dae
 		button4->SetButtonText("Save");
 		button4->SetNormalColor(255, 255, 255, 255);
 		button4->SetHighlightColor(255, 255, 0, 255);
-		button4->SetOnClick([&highScore]() {
+		button4->SetOnClick([highScore]() {
 			highScore->SaveHighScore();
 			}
 		);
+
 		button4Obj->SetParent(buttonGrObj.get(), false);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
@@ -547,5 +550,7 @@ namespace dae
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
+	
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button4));
 	}
 }

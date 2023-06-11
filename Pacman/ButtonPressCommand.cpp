@@ -1,11 +1,11 @@
 #include "ButtonPressCommand.h"
 
-dae::ButtonPressCommand::ButtonPressCommand(ButtonGroupComponent* pButtonGroup)
-	:m_pButtonGroup{pButtonGroup}
+dae::ButtonPressCommand::ButtonPressCommand(ButtonComponent* pButton)
+	:m_pButton{pButton}
 {
 }
 
 void dae::ButtonPressCommand::Execute()
 {
-	m_pButtonGroup->PressSelectedButton();
+	m_pButton->OnClick();
 }
