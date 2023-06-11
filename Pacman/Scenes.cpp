@@ -39,6 +39,8 @@
 #include "ScaredTimerComponent.h"
 #include "LetterScrollButtonComponent.h"
 #include "ButtonScrollCommand.h"
+#include "HighScoreComponent.h"
+
 namespace dae
 {
 	void SingleOne::LoadScene()
@@ -481,6 +483,8 @@ namespace dae
 		auto buttonGrTrans{ buttonGrObj->AddComponent<dae::TransformComponent>() };
 		buttonGrTrans->SetLocalPosition(glm::vec2{200.f, 300.f});
 		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
+
+		auto highScore = buttonGrObj->AddComponent<dae::HighScoreComponent>();
 		buttonGrObj->SetParent(sceneRoot.get());
 
 		//Button 1
@@ -519,18 +523,18 @@ namespace dae
 		//Button 4
 		auto button4Obj = std::make_shared<dae::GameObject>();
 		auto button4Trans = button4Obj->AddComponent<dae::TransformComponent>();
-		button4Trans->SetLocalPosition(glm::vec2{200.f, 300.f});
+		button4Trans->SetLocalPosition(glm::vec2{200.f, 0.f});
 		auto button4 = button4Obj->AddComponent<dae::ButtonComponent>();
 		button4->SetButtonExtend(glm::vec2{10.f, 10.f});
 		button4->SetButtonFont(font);
-		button4->SetButtonText("Single Player");
+		button4->SetButtonText("Save");
 		button4->SetNormalColor(255, 255, 255, 255);
 		button4->SetHighlightColor(255, 255, 0, 255);
-		button4->SetOnClick([]() {
-			std::cout << "save highscore\n";
+		button4->SetOnClick([&highScore]() {
+			highScore->SaveHighScore();
 			}
 		);
-		button1Obj->SetParent(buttonGrObj.get());
+		button4Obj->SetParent(buttonGrObj.get(), false);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));

@@ -51,3 +51,8 @@ void dae::LetterScrollButtonComponent::Init()
 	pArrowDown->SetParent(pGameObj,false);
 	pDownRender->SetTexture("arrowdown.png");
 }
+
+const std::string& dae::LetterScrollButtonComponent::GetButtonText() const
+{
+	return m_Letters[m_CurrentLetterIdx];
+}

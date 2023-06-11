@@ -6,9 +6,12 @@ namespace dae
 {
 	struct HighScoreData
 	{
-		char name[3];
-		unsigned int level;
-		unsigned int score;
+		static const size_t nameSize{4};
+
+		char name[nameSize];
+		int level;
+		int score;
+
 	};
 
 	class HighScoreIO
@@ -21,7 +24,7 @@ namespace dae
 		HighScoreIO& operator=(HighScoreIO&& component) noexcept = delete;
 
 		static std::vector<HighScoreData> LoadHighScoreTable(const std::string& path);
-		static void SaveLevelLayout(const std::vector<HighScoreData>& highscores, const std::string& path);
+		static void SaveHighScores(const std::vector<HighScoreData>& highscores, const std::string& path);
 
 	private:
 		HighScoreIO() = default;

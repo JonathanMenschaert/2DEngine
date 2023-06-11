@@ -111,6 +111,9 @@
     <ClCompile Include="HighScoreIO.cpp">
       <Filter>Source Files\IO</Filter>
     </ClCompile>
+    <ClCompile Include="HighScoreComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesCommand.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="HighScoreIO.h">
       <Filter>Source Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="HighScoreComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

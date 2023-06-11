@@ -8,16 +8,16 @@ std::vector<dae::HighScoreData> dae::HighScoreIO::LoadHighScoreTable(const std::
     {
         return std::vector<HighScoreData>{};
     }
-    unsigned int amount{};
-    inputFile.read(reinterpret_cast<char*>(&amount), sizeof(unsigned int));
+    int amount{};
+    inputFile.read(reinterpret_cast<char*>(&amount), sizeof(int));
     
-    std::vector<HighScoreData> highScores{amount};
+    std::vector<HighScoreData> highScores{static_cast<size_t>(amount)};
     inputFile.read(reinterpret_cast<char*>(highScores.data()), sizeof(HighScoreData) * amount);
 
     return highScores;
 }
 
-void dae::HighScoreIO::SaveLevelLayout(const std::vector<HighScoreData>& highscores, const std::string& path)
+void dae::HighScoreIO::SaveHighScores(const std::vector<HighScoreData>& highscores, const std::string& path)
 {
     std::ofstream outputFile{path, std::ios::binary};
     if (!outputFile.is_open())
@@ -25,8 +25,8 @@ void dae::HighScoreIO::SaveLevelLayout(const std::vector<HighScoreData>& highsco
         return;
     }
 
-    unsigned int amount{ highscores.size() };
-    outputFile.write(reinterpret_cast<const char*>(&amount), sizeof(unsigned int));
+    int amount{ static_cast<int>(highscores.size() )};
+    outputFile.write(reinterpret_cast<const char*>(&amount), sizeof(int));
 
     for (const HighScoreData& highScore : highscores)
     {

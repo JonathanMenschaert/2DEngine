@@ -14,7 +14,7 @@ namespace dae
 
 		void Scroll(int scrollAmount);
 		void Init() override;
-
+		const std::string& GetButtonText() const;
 	private:
 		static std::vector<std::string> m_Letters;
 
