@@ -1,6 +1,8 @@
 #include "HighScoreComponent.h"
 #include "LetterScrollButtonComponent.h"
 #include "GameObject.h"
+#include <iostream>
+
 dae::HighScoreComponent::HighScoreComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
 	,m_Path{"../Data/highscores.hs"}
@@ -91,6 +93,16 @@ void dae::HighScoreComponent::SetScore(int score)
 void dae::HighScoreComponent::SetLives(int lives)
 {
 	m_Lives = lives;
+}
+
+void dae::HighScoreComponent::Notify(const Event<int>& e)
+{
+	m_Lives = e.GetPayload();
+}
+
+void dae::HighScoreComponent::Notify(const Event<unsigned int>& e)
+{
+	m_CurrentData.score = static_cast<int>(e.GetPayload());
 }
 
 

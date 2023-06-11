@@ -1,10 +1,11 @@
 #pragma once
 #include "BaseComponent.h"
 #include "HighScoreIO.h"
+#include "Observer.h"
 
 namespace dae
 {
-	class HighScoreComponent final : public BaseComponent
+	class HighScoreComponent final : public BaseComponent, public Observer<int>, public Observer<unsigned int>
 	{
 	public:
 		HighScoreComponent(GameObject* pGameObject);
@@ -22,6 +23,9 @@ namespace dae
 		bool CanSaveHighScore() const;
 		void SaveHighScore();
 		void SetLives(int lives);
+
+		virtual void Notify(const Event<int>& e) override;
+		virtual void Notify(const Event<unsigned int>& e) override;
 		
 
 	private:

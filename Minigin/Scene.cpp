@@ -36,7 +36,7 @@ void dae::Scene::SetPersistentObjects(std::vector<std::shared_ptr<GameObject>> p
 
 std::vector<std::shared_ptr<GameObject>> dae::Scene::GetPersistentObjects(bool emptyPersistentVector)
 {
-	std::vector<std::shared_ptr<GameObject>> persistentObjects {m_PersistentObjects};
+	std::vector<std::shared_ptr<GameObject>> persistentObjects = m_PersistentObjects;
 	if (emptyPersistentVector)
 	{
 		m_PersistentObjects.clear();

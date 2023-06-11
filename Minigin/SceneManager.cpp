@@ -19,7 +19,6 @@ void dae::SceneManager::Update()
 {
 	if (m_pNewScene)
 	{
-		m_pNewScene->SetPersistentObjects(m_pActiveScene->GetPersistentObjects());
 		m_pActiveScene = std::move(m_pNewScene);
 		m_pNewScene = nullptr;
 		Init();
@@ -46,6 +45,10 @@ void dae::SceneManager::OnGui()
 dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
 {
 	m_pNewScene = std::make_unique<Scene>(name);
+	if (m_pActiveScene)
+	{
+		m_pNewScene->SetPersistentObjects(m_pActiveScene->GetPersistentObjects());
+	}
 	return *m_pNewScene;
 }
 

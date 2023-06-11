@@ -137,6 +137,8 @@ namespace dae
 		player1Col->AddObserver(player1Player);
 		player1Obj->SetParent(mapObj.get(), false);
 		player1Player->SetSpawnPos(mapGen->GetPlayerSpawns());
+		player1Lives->AddObserver(highScoreP1);
+		player1Score->AddObserver(highScoreP1);
 
 		//Bind keys
 		const float speed{ 75.f };

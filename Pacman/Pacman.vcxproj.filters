@@ -112,7 +112,7 @@
       <Filter>Source Files\IO</Filter>
     </ClCompile>
     <ClCompile Include="HighScoreComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -195,7 +195,7 @@
       <Filter>Source Files\IO</Filter>
     </ClInclude>
     <ClInclude Include="HighScoreComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
