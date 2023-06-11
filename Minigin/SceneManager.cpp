@@ -18,11 +18,15 @@ void dae::SceneManager::Init()
 
 void dae::SceneManager::Update()
 {
-	if (m_pNewScene)
+	if (m_LoadNextScene)
 	{
+		m_LoadNextScene = false;
+		InputManager::GetInstance().Reset();
+
+		m_SceneLoader();
+
 		m_pActiveScene = std::move(m_pNewScene);
 		m_pNewScene = nullptr;
-		InputManager::GetInstance().Reset();
 		Init();
 	}
 
@@ -61,8 +65,10 @@ bool dae::SceneManager::LoadScene(const std::string& name)
 		return false;
 	}
 
-	m_SceneTemplates[name]();
-	return true;
+	m_LoadNextScene = true;
+	m_SceneLoader = m_SceneTemplates[name];
+
+	return m_LoadNextScene;
 }
 
 void dae::SceneManager::AddScene(const std::string& name, const std::function<void()>& loadFunction, bool setAsDefault)

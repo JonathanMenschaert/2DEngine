@@ -27,6 +27,9 @@ namespace dae
 		SceneManager() = default;
 		std::unordered_map<std::string, std::function<void()>> m_SceneTemplates;
 
+		bool m_LoadNextScene{ false };
+		std::function<void()> m_SceneLoader{};
+
 		std::unique_ptr<Scene> m_pActiveScene{};
 		std::unique_ptr<Scene> m_pNewScene{};
 	};
