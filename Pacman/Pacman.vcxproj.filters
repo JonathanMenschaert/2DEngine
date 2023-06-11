@@ -16,9 +16,6 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{2969b62c-6c26-4a8b-9ad2-90cd2affc56d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scenes">
-      <UniqueIdentifier>{2705fc75-5982-4e4d-90e9-41d17306e9d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Commands">
       <UniqueIdentifier>{776037ee-cb2c-477b-9809-d244f7e7a3a1}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
     </Filter>
     <Filter Include="Source Files\Components\UI">
       <UniqueIdentifier>{e4f718c9-25f4-4db3-b432-b36fb496859c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenegraph">
+      <UniqueIdentifier>{2705fc75-5982-4e4d-90e9-41d17306e9d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,7 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Scenes.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Source Files\Scenegraph</Filter>
     </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source Files\Commands</Filter>
@@ -114,6 +114,9 @@
     <ClCompile Include="HighScoreComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Prefabs.cpp">
+      <Filter>Source Files\Scenegraph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesCommand.h">
@@ -147,7 +150,7 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Scenes.h">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Source Files\Scenegraph</Filter>
     </ClInclude>
     <ClInclude Include="MoveCommand.h">
       <Filter>Source Files\Commands</Filter>
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="HighScoreComponent.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs.h">
+      <Filter>Source Files\Scenegraph</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

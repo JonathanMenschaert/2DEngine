@@ -42,6 +42,7 @@
 #include "HighScoreComponent.h"
 #include "LoadSceneComponent.h"
 #include "LoadSceneCommand.h"
+#include "Prefabs.h"
 
 namespace dae
 {
@@ -55,18 +56,14 @@ namespace dae
 
 		
 		std::vector<std::shared_ptr<GameObject>> persistedObjects{scene.GetPersistentObjects()};
-
-		for (auto& persistentObj : persistedObjects)
-		{
-			persistentObj->SetParent(sceneRoot.get());
-		}
-
 		HighScoreComponent* highScoreP1{};
-
 		auto highScoreObj = std::make_shared<dae::GameObject>();
+
 		for (auto& persistentObj : persistedObjects)
 		{
-			highScoreP1 = persistentObj->GetComponent<dae::HighScoreComponent>();
+			highScoreObj = persistentObj;
+			highScoreObj->SetParent(sceneRoot.get());
+			highScoreP1 = highScoreObj->GetComponent<dae::HighScoreComponent>();
 		}
 
 		if (!highScoreP1)
@@ -74,6 +71,7 @@ namespace dae
 			highScoreP1 = highScoreObj->AddComponent<dae::HighScoreComponent>();
 			highScoreP1->SetLives(3);
 		}
+
 		highScoreObj->AddComponent<TransformComponent>();
 		highScoreObj->SetParent(sceneRoot.get());
 		scene.SetObjectPersistent(highScoreObj);
@@ -85,7 +83,6 @@ namespace dae
 		mapTrans->SetLocalPosition(glm::vec2{ 150.f, 50.f });
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
-		//dae::LevelIO::SaveLevelLayout(LevelLayout{ 28, 31, tileData }, "../Data/level0.level");
 		std::stringstream levelPath{};
 		levelPath << "../Data/level" << level << ".level";
 		LevelLayout layout{ dae::LevelIO::LoadLevelLayout(levelPath.str()) };
@@ -140,24 +137,11 @@ namespace dae
 		player1Lives->AddObserver(highScoreP1);
 		player1Score->AddObserver(highScoreP1);
 
-		//Bind keys
-		const float speed{ 75.f };
-		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_w, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_a, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_s, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Hold, SDLK_d, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_e, std::make_unique<dae::DebugLivesCommand>(player1Obj.get()));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_o, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 10));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_p, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
+		//Bind keyboard keys
+		InputPrefabs::AttachPlayerKeyboard(inputManager, player1Obj.get());
 
 		//Bind Controller keys
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player1Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player1Obj.get()));
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 10));
-		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player1Obj.get(), 50));
+		InputPrefabs::AttachPlayerController(inputManager, player1Obj.get(), 0);
 
 		
 		//Timer for scared ghosts
@@ -166,6 +150,7 @@ namespace dae
 		auto scaredTimer = timerObj->AddComponent<dae::ScaredTimerComponent>();
 		player1Player->AddObserver(scaredTimer);
 		timerObj->SetParent(sceneRoot.get());
+
 		//Ghosts
 		int ghostTexIdx{0};
 		std::shared_ptr<Texture2D> pScaredGhostTexture{ResourceManager::GetInstance().LoadTexture("scaredghost.png")};

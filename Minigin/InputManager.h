@@ -6,6 +6,7 @@
 #include <memory>
 #include <map>
 #include <set>
+#include "SDL_keycode.h"
 
 namespace dae
 {
