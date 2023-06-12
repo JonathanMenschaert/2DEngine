@@ -18,6 +18,9 @@ void load()
 	dae::SceneManager::GetInstance().AddScene("CoopLevel0", dae::CoopOne::LoadScene);
 	dae::SceneManager::GetInstance().AddScene("CoopLevel1", dae::CoopTwo::LoadScene);
 
+	dae::SceneManager::GetInstance().AddScene("VersusLevel0", dae::VersusOne::LoadScene);
+	dae::SceneManager::GetInstance().AddScene("VersusLevel1", dae::VersusTwo::LoadScene);
+
 	dae::SceneManager::GetInstance().AddScene("Main Menu", dae::MainMenu::LoadScene, true);
 	dae::SceneManager::GetInstance().AddScene("HighScoreSave", dae::HighScoreSave::LoadScene);
 }

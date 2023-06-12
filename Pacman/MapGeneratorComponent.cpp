@@ -62,7 +62,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 				auto pWallCollision = pGameObject->AddComponent<RectCollisionComponent>();
 				pWallCollision->SetCollisionBox(glm::vec2{ tileSize, tileSize }, relativePosition);
 				pWallCollision->SetCollisionType(CollisionType::StaticCollision);
-				pWallCollision->SetLayers(std::vector<std::string>{ "player1", "player2"});
+				pWallCollision->SetLayers(std::vector<std::string>{ "player1", "player2", "enemy"});
 			}
 		break;
 		case TileData::PowerPellet_AI:

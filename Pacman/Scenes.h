@@ -40,6 +40,24 @@ namespace dae
 
 	};
 
+	class VersusOne final
+	{
+	public:
+		static void LoadScene();
+	};
+
+	class VersusTwo final
+	{
+	public:
+		static void LoadScene();
+	};
+
+	class Versus final
+	{
+	public:
+		static void LoadScene(int level);
+	};
+
 	class HighScoreList final
 	{
 	public:
