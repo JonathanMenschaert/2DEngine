@@ -45,7 +45,8 @@ public:
 	{
 		{
 			std::lock_guard lock{ m_Lock };
-			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::Play, soundIdx, volume });
+			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::Play, soundIdx });
+			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::VolumeChange, soundIdx, volume });
 		}
 		m_ThreadCondition.notify_one();
 	}
@@ -161,12 +162,23 @@ private:
 						break;
 					}
 
-					const int channel{ Mix_PlayChannel(m_ChannelWildcard, sound.soundData, 0) };
-					if (channel != m_ChannelWildcard)
+					if (sound.channel > m_MaxChannels)
 					{
-						sound.channel = channel;
-						Mix_Volume(channel, soundEvent.volume);
+						const int channel{ Mix_PlayChannel(m_ChannelWildcard, sound.soundData, 0) };
+						if (channel != m_ChannelWildcard)
+						{
+							sound.channel = channel;
+						}
+						else
+						{
+							break;
+						}
 					}
+					else
+					{
+						Mix_PlayChannel(sound.channel, sound.soundData, 0);
+					}
+					Mix_Volume(sound.channel, soundEvent.volume);
 				}
 				break;
 				case SoundEvent::Type::Pause:
