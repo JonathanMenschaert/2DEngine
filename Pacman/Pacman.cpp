@@ -27,7 +27,7 @@ void load()
 
 
 int main(int, char* []) {
-	dae::Minigin engine{ "../Data/" };
+	dae::Minigin engine{ "Data/" };
 	std::srand(static_cast<int>(std::time(nullptr)));
 	engine.Run(load);
 	return 0;

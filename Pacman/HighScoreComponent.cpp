@@ -5,7 +5,7 @@
 
 dae::HighScoreComponent::HighScoreComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
-	,m_Path{"../Data/highscores.hs"}
+	,m_Path{"Data/highscores.hs"}
 	,m_MaxEntries{10}
 {
 }

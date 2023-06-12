@@ -782,6 +782,7 @@ namespace dae
 		lives1Obj->SetParent(hud1Obj.get(), false);
 		player1Lives->AddObserver(lives1);
 		player1Player->AddObserver(player1Lives);
+
 		auto score1Obj = std::make_shared < dae::GameObject>();
 		auto score1Text = score1Obj->AddComponent<dae::TextComponent>();
 		score1Text->SetFont(font);
@@ -1102,7 +1103,10 @@ namespace dae
 		auto sceneRoot = std::make_shared<dae::GameObject>();
 		sceneRoot->AddComponent<dae::TransformComponent>();
 		scene.Add(sceneRoot);
-		scene.GetPersistentObjects();
+		
+		std::vector<std::shared_ptr<GameObject>> persistedObjects{scene.GetPersistentObjects()};
+
+
 		////Background object
 		auto logoObj = std::make_shared<dae::GameObject>();
 		auto logoRender = logoObj->AddComponent<dae::TextureRenderComponent>();
@@ -1115,13 +1119,19 @@ namespace dae
 		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
 
 		//Button group
-		auto buttonGrObj = std::make_shared<dae::GameObject>();
-		auto buttonGrTrans{ buttonGrObj->AddComponent<dae::TransformComponent>() };
+		std::shared_ptr<GameObject> buttonGrObj{};
+		HighScoreComponent* highScore{};
+
+		for (auto& persistentObj : persistedObjects)
+		{
+			buttonGrObj = persistentObj;
+			highScore = buttonGrObj->GetComponent<dae::HighScoreComponent>();
+		}
+
+		auto buttonGrTrans{ buttonGrObj->GetComponent<dae::TransformComponent>() };
 		buttonGrTrans->SetLocalPosition(glm::vec2{200.f, 300.f});
 		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
-
-		auto highScore = buttonGrObj->AddComponent<dae::HighScoreComponent>();
-		buttonGrObj->SetParent(sceneRoot.get());
+		buttonGrObj->SetParent(sceneRoot.get(), false);
 
 		//Button 1
 		auto button1Obj = std::make_shared<dae::GameObject>();
@@ -1175,8 +1185,22 @@ namespace dae
 
 		button4Obj->SetParent(buttonGrObj.get(), false);
 
-		
+		//Score display
+		auto scoreObj = std::make_shared < dae::GameObject>();
+		auto scoreText = scoreObj->AddComponent<dae::TextComponent>();
+		scoreText->SetFont(font);
+		scoreText->SetColor(255, 255, 255, 255);
+		std::stringstream scoreStreamText{};
+		scoreStreamText << "Score: " << highScore->GetScore();
+		scoreText->SetText(scoreStreamText.str());
 
+		scoreObj->AddComponent<dae::TextureRenderComponent>();
+		auto scoreTrans = scoreObj->AddComponent<dae::TransformComponent>();
+		scoreTrans->SetLocalPosition(glm::vec2{ 200.f, 500.f });
+
+		scoreObj->SetParent(sceneRoot.get(), false);
+		
+		//Inputs
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));
 

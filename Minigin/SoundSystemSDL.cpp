@@ -178,7 +178,6 @@ private:
 					{
 						Mix_PlayChannel(sound.channel, sound.soundData, 0);
 					}
-					Mix_Volume(sound.channel, soundEvent.volume);
 				}
 				break;
 				case SoundEvent::Type::Pause:
@@ -244,7 +243,7 @@ private:
 	std::mutex m_Lock{};
 	std::vector<Sound> m_LoadedSounds{};
 	const int m_ChannelWildcard{ -1 };
-	const std::string m_PathPrefix{ "../Data/"};
+	const std::string m_PathPrefix{ "Data/"};
 	const int m_MaxChannels{ 4096 };
 };
 
