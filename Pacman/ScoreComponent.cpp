@@ -34,7 +34,7 @@ void dae::ScoreComponent::Notify(const Event<PlayerEvent>& e)
 	{
 	case PlayerEvent::GhostKilled:
 		AddScore(m_GhostKillScore);
-		m_GhostKillScore * 2;
+		m_GhostKillScore *= 2;
 		break;
 	case PlayerEvent::PowerpelletCollected:
 		AddScore(50);
