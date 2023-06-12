@@ -23,6 +23,7 @@ void load()
 
 	dae::SceneManager::GetInstance().AddScene("Main Menu", dae::MainMenu::LoadScene, true);
 	dae::SceneManager::GetInstance().AddScene("HighScoreSave", dae::HighScoreSave::LoadScene);
+	dae::SceneManager::GetInstance().AddScene("HighScoreList", dae::HighScoreList::LoadScene, true);
 }
 
 

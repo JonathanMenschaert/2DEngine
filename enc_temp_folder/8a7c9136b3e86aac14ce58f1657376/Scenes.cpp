@@ -1179,7 +1179,7 @@ namespace dae
 		button4->SetOnClick([highScore]()
 			{
 				highScore->SaveHighScore();
-				dae::SceneManager::GetInstance().LoadScene("HighScoreList");
+				dae::SceneManager::GetInstance().LoadScene("Main Menu");
 			}
 		);
 
