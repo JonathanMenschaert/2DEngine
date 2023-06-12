@@ -65,16 +65,13 @@ void dae::HighScoreComponent::SaveHighScore()
 		}		
 	}
 
-	size_t insertIdx{};
+	size_t insertIdx{ m_HighScores.size() };
 	
 	for (size_t idx{}; idx < m_HighScores.size(); ++idx)
 	{
-		if (m_HighScores[idx].score < m_CurrentData.score)
+		if (m_HighScores[idx].score <= m_CurrentData.score)
 		{
 			insertIdx = idx;
-		}
-		else
-		{
 			break;
 		}
 	}

@@ -85,7 +85,7 @@ namespace dae
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
 		std::stringstream levelPath{};
-		levelPath << "../Data/level" << level << ".level";
+		levelPath << "Data/level" << level << ".level";
 		LevelLayout layout{ dae::LevelIO::LoadLevelLayout(levelPath.str()) };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
@@ -320,7 +320,7 @@ namespace dae
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
 		std::stringstream levelPath{};
-		levelPath << "../Data/level" << level << ".level";
+		levelPath << "Data/level" << level << ".level";
 		LevelLayout layout{ dae::LevelIO::LoadLevelLayout(levelPath.str()) };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
@@ -612,7 +612,7 @@ namespace dae
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
 		std::stringstream levelPath{};
-		levelPath << "../Data/level" << level << ".level";
+		levelPath << "Data/level" << level << ".level";
 		LevelLayout layout{ dae::LevelIO::LoadLevelLayout(levelPath.str()) };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
@@ -939,7 +939,7 @@ namespace dae
 		};*/
 
 	
-		std::vector<unsigned char> tileData
+		/*std::vector<unsigned char> tileData
 		{
 				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 				2, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 2,
@@ -973,6 +973,42 @@ namespace dae
 				2, 5, 4, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 5, 2,
 				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
 
+		};*/
+
+		std::vector<unsigned char> tileData
+		{
+			2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+				2, 5, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 2, 2, 6, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 5, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 4, 2, 0, 0, 2, 4, 2, 0, 0, 0, 2, 6, 4, 4, 6, 2, 0, 0, 0, 2, 4, 2, 0, 0, 2, 4, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 6, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 6, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 6, 4, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 4, 6, 2,
+				2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+				2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+				2, 6, 4, 6, 2, 2, 6, 4, 4, 6, 4, 4, 6, 6, 6, 6, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 6, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 1, 1, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 8, 1, 3, 3, 1, 8, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 6, 4, 4, 4, 4, 6, 2, 2, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 2, 2, 6, 4, 4, 4, 4, 6, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 8, 1, 1, 1, 1, 8, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 6, 4, 6, 2, 2, 4, 2, 2, 6, 4, 4, 4, 4, 4, 4, 4, 4, 6, 2, 2, 4, 2, 2, 6, 4, 6, 2,
+				2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+				2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+				2, 6, 4, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 7, 7, 6, 4, 4, 6, 4, 4, 6, 4, 4, 6, 4, 6, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 6, 4, 6, 2, 2, 6, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 4, 4, 6, 2, 2, 6, 4, 6, 2,
+				2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+				2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 4, 2, 2, 2,
+				2, 6, 4, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 2, 2, 6, 4, 4, 6, 4, 6, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2,
+				2, 5, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 5, 2,
+				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+
 		};
 
 		auto mapObj = std::make_shared<dae::GameObject>();
@@ -980,8 +1016,8 @@ namespace dae
 		mapTrans->SetLocalPosition(glm::vec2{ 75.f, 50.f });
 		auto mapGen = mapObj->AddComponent<dae::MapGeneratorComponent>();
 
-		dae::LevelIO::SaveLevelLayout(LevelLayout{ 28, static_cast<int>(tileData.size()) / 28, tileData}, "../Data/level1.level");
-		LevelLayout layout{ dae::LevelIO::LoadLevelLayout("../Data/level1.level") };
+		dae::LevelIO::SaveLevelLayout(LevelLayout{ 28, static_cast<int>(tileData.size()) / 28, tileData}, "Data/level2.level");
+		LevelLayout layout{ dae::LevelIO::LoadLevelLayout("Data/level2.level") };
 		mapGen->LoadMap(layout.columns, layout.rows, 16, layout.levelData, std::vector<std::string>{"wall.png", "path.png"});
 
 		mapObj->SetParent(sceneRoot.get());
@@ -1072,19 +1108,19 @@ namespace dae
 		//Button 4
 		auto button4Obj = std::make_shared<dae::GameObject>();
 		auto button4Trans = button4Obj->AddComponent<dae::TransformComponent>();
-		button4Trans->SetLocalPosition(glm::vec2{200.f, 380.f});
+		button4Trans->SetLocalPosition(glm::vec2{200.f, 420.f});
 		auto button4 = button4Obj->AddComponent<dae::ButtonComponent>();
 		button4->SetButtonExtend(glm::vec2{10.f, 10.f});
 		button4->SetButtonFont(font);
-		button4->SetButtonText("Versus");
+		button4->SetButtonText("Highscores");
 		button4->SetNormalColor(255, 255, 255, 255);
 		button4->SetHighlightColor(255, 255, 0, 255);
 		button4->SetOnClick([]() 
 			{
-				std::cout << "Open highscores\n";
+				dae::SceneManager::GetInstance().LoadScene("HighScoreList");
 			}
 		);
-		button3Obj->SetParent(buttonGrObj.get());
+		button4Obj->SetParent(buttonGrObj.get());
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, -1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
@@ -1093,7 +1129,7 @@ namespace dae
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button1));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button2), 1);
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button3), 2);
-		
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button4), 4);
 	}
 
 	void HighScoreSave::LoadScene()
