@@ -505,7 +505,7 @@ namespace dae
 		//Hud Player 2
 		auto hud2Obj = std::make_shared<dae::GameObject>();
 		auto hud2Trans = hud2Obj->AddComponent<dae::TransformComponent>();
-		hud2Trans->SetLocalPosition(glm::vec2{ 150.f, 560.f });
+		hud2Trans->SetLocalPosition(glm::vec2{ 440.f, 560.f });
 
 		auto player2TextObj = std::make_shared<dae::GameObject>();
 		auto player2Text = player2TextObj->AddComponent<dae::TextComponent>();
@@ -558,7 +558,7 @@ namespace dae
 		auto loadScene = loadSceneObj->AddComponent<dae::LoadSceneComponent>();
 		loadScene->SetDefaultScene("Main Menu");
 		std::stringstream scenePath {};
-		scenePath << "SingleLevel" << (level + 1);
+		scenePath << "CoopLevel" << (level + 1);
 		loadScene->SetSceneToLoad(scenePath.str());
 		loadSceneObj->SetParent(sceneRoot.get());
 
@@ -808,7 +808,7 @@ namespace dae
 		auto loadScene = loadSceneObj->AddComponent<dae::LoadSceneComponent>();
 		loadScene->SetDefaultScene("HighScoreSave");
 		std::stringstream scenePath {};
-		scenePath << "SingleLevel" << (level + 1);
+		scenePath << "Versus" << (level + 1);
 		loadScene->SetSceneToLoad(scenePath.str());
 		loadSceneObj->SetParent(sceneRoot.get());
 

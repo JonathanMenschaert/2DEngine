@@ -18,7 +18,7 @@ void dae::HowToPlayComponent::OnGui()
 	if (ImGui::Begin("How To Play"))
 	{
 		ImGui::TextWrapped("Menu navigation:\n\n");
-		ImGui::TextWrapped("Keyboard: WASD and ENTER, F1 to skip levels\n");
+		ImGui::TextWrapped("Keyboard: WASD and ENTER\n");
 		ImGui::TextWrapped("Controller: DPAD and A Button\n\n");
 
 		ImGui::TextWrapped("Ingame Controls:\n\n");
@@ -28,7 +28,6 @@ void dae::HowToPlayComponent::OnGui()
 
 		ImGui::TextWrapped("Player2: \n");
 		ImGui::TextWrapped("Controller: DPAD to move \n\n");
-
 	}
 	ImGui::End();
 }
