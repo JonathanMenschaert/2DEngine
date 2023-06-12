@@ -23,6 +23,8 @@ namespace dae
 
 	private:
 		unsigned int m_Score;
+
+		unsigned int m_GhostKillScore{ 200 };
 	};
 }
 

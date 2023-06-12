@@ -33,7 +33,8 @@ void dae::ScoreComponent::Notify(const Event<PlayerEvent>& e)
 	switch (e.GetPayload())
 	{
 	case PlayerEvent::GhostKilled:
-		AddScore(200);
+		AddScore(m_GhostKillScore);
+		m_GhostKillScore * 2;
 		break;
 	case PlayerEvent::PowerpelletCollected:
 		AddScore(50);
@@ -41,5 +42,7 @@ void dae::ScoreComponent::Notify(const Event<PlayerEvent>& e)
 	case PlayerEvent::PacdotCollected:
 		AddScore(10);
 		break;
+	case PlayerEvent::PowerpelletTimeout:
+		m_GhostKillScore = 200;
 	}
 }
