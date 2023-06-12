@@ -318,7 +318,7 @@
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
     <ClCompile Include="LoadSceneComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
