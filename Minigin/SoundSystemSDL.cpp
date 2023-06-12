@@ -38,6 +38,7 @@ public:
 			Mix_FreeChunk(sound.soundData);
 		}
 		
+		Mix_CloseAudio();
 		Mix_Quit();
 	}
 
@@ -46,9 +47,17 @@ public:
 		{
 			std::lock_guard lock{ m_Lock };
 			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::Play, soundIdx });
-			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::VolumeChange, soundIdx, volume });
+			if (!m_IsMuted)
+			{
+				m_SoundQueue.push(SoundEvent{ SoundEvent::Type::VolumeChange, soundIdx, volume });
+			}
 		}
 		m_ThreadCondition.notify_one();
+	}
+
+	bool IsMuted()
+	{
+		return m_IsMuted;
 	}
 
 	void Pause(unsigned int soundIdx)
@@ -71,6 +80,10 @@ public:
 
 	void SetVolume(unsigned int soundIdx, int volume)
 	{
+		if (m_IsMuted)
+		{
+			return;
+		}
 		{
 			std::lock_guard lock{ m_Lock };
 			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::VolumeChange, soundIdx, volume });
@@ -83,6 +96,16 @@ public:
 		{
 			std::lock_guard lock{ m_Lock };
 			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::Stop, soundIdx });
+		}
+		m_ThreadCondition.notify_one();
+	}
+
+	void Mute(bool mute)
+	{
+		m_IsMuted = mute;
+		{
+			std::lock_guard lock{ m_Lock };
+			m_SoundQueue.push(SoundEvent{ SoundEvent::Type::Mute, 0, (mute ? 0 : m_CurrentVolume) });
 		}
 		m_ThreadCondition.notify_one();
 	}
@@ -121,7 +144,8 @@ private:
 			Resume,
 			Stop,
 			Load,
-			VolumeChange
+			VolumeChange,
+			Mute
 		};
 
 		Type eventType{};
@@ -230,6 +254,16 @@ private:
 					}					
 				}
 				break;
+				case SoundEvent::Type::Mute:
+					if (soundEvent.volume == 0)
+					{
+						Mix_Volume(-1, 0);
+					}
+					else
+					{
+						Mix_Volume(-1, soundEvent.volume);
+					}
+				break;
 				}
 
 				lock.lock();
@@ -245,6 +279,8 @@ private:
 	const int m_ChannelWildcard{ -1 };
 	const std::string m_PathPrefix{ "Data/"};
 	const int m_MaxChannels{ 4096 };
+	int m_CurrentVolume{ 100 };
+	bool m_IsMuted{};
 };
 
 dae::SoundSystemSDL::SoundSystemSDL()
@@ -279,6 +315,16 @@ void dae::SoundSystemSDL::SetVolume(unsigned int soundIdx, int volume)
 void dae::SoundSystemSDL::Stop(unsigned int soundIdx)
 {
 	m_pImpl->Stop(soundIdx);
+}
+
+void dae::SoundSystemSDL::Mute(bool mute)
+{
+	m_pImpl->Mute(mute);
+}
+
+bool dae::SoundSystemSDL::IsMuted()
+{
+	return m_pImpl->IsMuted();
 }
 
 void dae::SoundSystemSDL::LoadSound(const std::string& soundPath)

@@ -183,6 +183,9 @@
     <ClInclude Include="LoadSceneComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MuteCommand.h">
+      <Filter>Source Files\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -319,6 +322,9 @@
     </ClCompile>
     <ClCompile Include="LoadSceneComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MuteCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,8 @@ namespace dae
 		virtual void Resume(unsigned int soundIdx) = 0;
 		virtual void SetVolume(unsigned int soundIdx, int volume) = 0;
 		virtual void Stop(unsigned int idx) = 0;
+		virtual void Mute(bool mute) = 0;
+		virtual bool IsMuted() = 0;
 		virtual void LoadSound(const std::string& soundPath) = 0;
 		virtual unsigned int FindSoundId(const std::string soundName) = 0;
 	};

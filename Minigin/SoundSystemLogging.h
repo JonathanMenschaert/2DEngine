@@ -18,6 +18,8 @@ namespace dae
 		virtual void Resume(unsigned int soundIdx) override;
 		virtual void SetVolume(unsigned int soundIdx, int volume) override;
 		virtual void Stop(unsigned int idx) override;
+		virtual void Mute(bool mute) override;
+		virtual bool IsMuted() override;
 		virtual void LoadSound(const std::string& soundPath) override;
 		virtual unsigned int FindSoundId(const std::string soundName) override;
 

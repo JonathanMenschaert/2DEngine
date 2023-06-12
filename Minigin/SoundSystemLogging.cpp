@@ -35,6 +35,10 @@ void dae::SoundSystemLogging::Stop(unsigned int idx)
     m_pSoundSystem->Stop(idx);
 }
 
+void dae::SoundSystemLogging::Mute(bool)
+{
+}
+
 void dae::SoundSystemLogging::LoadSound(const std::string& soundPath)
 {
     std::cout << "Loading sound file " << soundPath << "\n";

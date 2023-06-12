@@ -240,6 +240,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClInclude Include="LoadSceneCommand.h" />
     <ClInclude Include="LoadSceneComponent.h" />
     <ClInclude Include="Minigin.h" />
+    <ClInclude Include="MuteCommand.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="RectCollisionComponent.h" />
@@ -298,6 +299,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll $(OutputPath) /R /Y
     <ClCompile Include="LoadSceneCommand.cpp" />
     <ClCompile Include="LoadSceneComponent.cpp" />
     <ClCompile Include="Minigin.cpp" />
+    <ClCompile Include="MuteCommand.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="RectCollisionComponent.cpp" />

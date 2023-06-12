@@ -10,6 +10,8 @@ namespace dae
 		virtual void Resume(unsigned int) override {}
 		virtual void SetVolume(unsigned int, int ) override {}
 		virtual void Stop(unsigned int ) override {}
+		virtual void Mute(bool ) override {};
+		virtual bool IsMuted() override { return false; }
 		virtual void LoadSound(const std::string&) override { }
 		virtual unsigned int FindSoundId(const std::string soundName) override { return UINT32_MAX;  };
 	};

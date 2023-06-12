@@ -44,6 +44,7 @@
 #include "LoadSceneCommand.h"
 #include "Prefabs.h"
 #include "DelayedSceneLoadComponent.h"
+#include "MuteCommand.h"
 
 namespace dae
 {
@@ -257,7 +258,7 @@ namespace dae
 		player1Player->AddObserver(delayedLoad);
 		player1Player->AddObserver(mapGen);
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
-
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_m, std::make_unique<dae::MuteCommand>());
 	}
 
 	void Coop::LoadScene(int level)
@@ -572,7 +573,7 @@ namespace dae
 		player2Player->AddObserver(mapGen);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
-
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_m, std::make_unique<dae::MuteCommand>());
 	}
 
 	void Versus::LoadScene(int level)
@@ -819,7 +820,7 @@ namespace dae
 		player1Player->AddObserver(delayedLoad);
 		player1Player->AddObserver(mapGen);
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
-
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_m, std::make_unique<dae::MuteCommand>());
 	}
 
 	void LevelTester::LoadScene()
