@@ -19,7 +19,7 @@ namespace dae
 		ButtonComponent& operator=(const ButtonComponent& component) = delete;
 		ButtonComponent& operator=(ButtonComponent&& component) noexcept = delete;
 
-
+		virtual void Scroll(int scrollAmount);
 		void SetButtonText(const std::string& text);
 		void SetButtonFont(const std::shared_ptr<Font> pFont);
 		void SetNormalColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a);

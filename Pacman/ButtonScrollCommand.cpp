@@ -1,7 +1,7 @@
 #include "ButtonScrollCommand.h"
 
 
-dae::ButtonScrollCommand::ButtonScrollCommand(LetterScrollButtonComponent* pScrollButton, int scrollAmount)
+dae::ButtonScrollCommand::ButtonScrollCommand(ButtonGroupComponent* pScrollButton, int scrollAmount)
 	:m_pScrollButton{ pScrollButton }
 	,m_ScrollAmount{scrollAmount}
 {
@@ -9,5 +9,5 @@ dae::ButtonScrollCommand::ButtonScrollCommand(LetterScrollButtonComponent* pScro
 
 void dae::ButtonScrollCommand::Execute()
 {
-	m_pScrollButton->Scroll(m_ScrollAmount);
+	m_pScrollButton->ScrollButton(m_ScrollAmount);
 }

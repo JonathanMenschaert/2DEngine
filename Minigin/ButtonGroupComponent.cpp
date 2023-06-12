@@ -16,6 +16,14 @@ void dae::ButtonGroupComponent::Init()
 	}
 }
 
+void dae::ButtonGroupComponent::ScrollButton(int amount)
+{
+	for (auto& button : m_Buttons)
+	{
+		button->Scroll(amount);
+	}
+}
+
 void dae::ButtonGroupComponent::PressSelectedButton()
 {
 	for (auto& button : m_Buttons)

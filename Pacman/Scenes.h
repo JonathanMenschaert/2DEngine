@@ -20,6 +20,12 @@ namespace dae
 		static void LoadScene();
 	};
 
+	class SingleThree
+	{
+	public:
+		static void LoadScene();
+	};
+
 	class Coop final
 	{
 	public:
@@ -40,6 +46,14 @@ namespace dae
 
 	};
 
+	class CoopThree final
+	{
+	public:
+		static void LoadScene();
+
+	};
+
+
 	class VersusOne final
 	{
 	public:
@@ -47,6 +61,12 @@ namespace dae
 	};
 
 	class VersusTwo final
+	{
+	public:
+		static void LoadScene();
+	};
+
+	class VersusThree final
 	{
 	public:
 		static void LoadScene();

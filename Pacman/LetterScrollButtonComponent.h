@@ -12,7 +12,7 @@ namespace dae
 		LetterScrollButtonComponent& operator=(const LetterScrollButtonComponent& component) = delete;
 		LetterScrollButtonComponent& operator=(LetterScrollButtonComponent&& component) noexcept = delete;
 
-		void Scroll(int scrollAmount);
+		virtual void Scroll(int scrollAmount) override;
 		void Init() override;
 		const std::string& GetButtonText() const;
 	private:

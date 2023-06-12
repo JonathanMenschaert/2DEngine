@@ -1124,12 +1124,12 @@ namespace dae
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, -1.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button1));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button2), 1);
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button3), 2);
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button4), 4);
+		
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, -1.f }));
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 0.f, 1.f }));
+
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_RETURN, std::make_unique<dae::ButtonPressCommand>(buttonGr));
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::ButtonPressCommand>(buttonGr));
 	}
 
 	void HighScoreSave::LoadScene()
@@ -1237,19 +1237,20 @@ namespace dae
 		scoreObj->SetParent(sceneRoot.get(), false);
 		
 		//Inputs
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button1, 1));
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button1, -1));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(buttonGr, 1));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(buttonGr, -1));
 
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button2, 1), 1);
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button2, -1), 1);
-
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_w, std::make_unique<dae::ButtonScrollCommand>(button3, 1), 2);
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonScrollCommand>(button3, -1), 2);
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::ButtonScrollCommand>(buttonGr, 1));
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::ButtonScrollCommand>(buttonGr, -1));
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_d, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_a, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
+
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ -1.f, 0.f }));
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::ButtonNavCommand>(buttonGr, glm::vec2{ 1.f, 0.f }));
 	
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_KP_ENTER, std::make_unique<dae::ButtonPressCommand>(button4));
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_RETURN, std::make_unique<dae::ButtonPressCommand>(buttonGr));
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::ButtonPressCommand>(buttonGr));
 		
 	}
 
@@ -1282,7 +1283,7 @@ namespace dae
 		//Button group
 		auto buttonGrObj = std::make_shared<dae::GameObject>();
 		buttonGrObj->AddComponent<dae::TransformComponent>();
-		/*auto buttonGr =*/ buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
+		auto buttonGr = buttonGrObj->AddComponent<dae::ButtonGroupComponent>();
 		buttonGrObj->SetParent(sceneRoot.get());
 
 		//Button back
@@ -1302,8 +1303,8 @@ namespace dae
 		);
 		button1Obj->SetParent(buttonGrObj.get());
 
-		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_s, std::make_unique<dae::ButtonPressCommand>(button1));
-
+		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_RETURN, std::make_unique<dae::ButtonPressCommand>(buttonGr));
+		inputManager.BindDigitalCommand(0, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::ButtonPressCommand>(buttonGr));
 		//HIgh score list
 		rootTrans->SetLocalPosition(glm::vec2{180.f, 300.f});
 		rootObj->SetParent(sceneRoot.get(), false);
@@ -1475,5 +1476,18 @@ namespace dae
 	void VersusTwo::LoadScene()
 	{
 		Versus::LoadScene(1);
+	}
+	void SingleThree::LoadScene()
+	{
+		SinglePlayer::LoadScene(2);
+	}
+
+	void CoopThree::LoadScene()
+	{
+		Coop::LoadScene(2);
+	}
+	void VersusThree::LoadScene()
+	{
+		Versus::LoadScene(2);
 	}
 }

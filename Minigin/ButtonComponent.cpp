@@ -11,6 +11,10 @@ dae::ButtonComponent::ButtonComponent(GameObject* pGameObject)
 {
 }
 
+void dae::ButtonComponent::Scroll(int)
+{
+}
+
 void dae::ButtonComponent::SetButtonText(const std::string& text)
 {
 	if (m_pButtonText)
