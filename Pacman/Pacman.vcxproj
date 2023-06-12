@@ -104,7 +104,7 @@
       <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.dll $(OutputPath)/R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x86\*.dll $(OutputPath) /R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_ttf\x86\*.dll $(OutputPath) /R /Y
-xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll $(OutputPath) /R /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -132,7 +132,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll /Y
       <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.dll $(OutputPath)/R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x86\*.dll $(OutputPath) /R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_ttf\x86\*.dll $(OutputPath) /R /Y
-xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll $(OutputPath) /R /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -156,7 +156,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86\*.dll /Y
       <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll $(OutputPath)/R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll $(OutputPath) /R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_ttf\x64\*.dll $(OutputPath) /R /Y
-xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll $(OutputPath) /R /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -184,7 +184,7 @@ xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
       <Command>xcopy $(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll $(OutputPath)/R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll $(OutputPath) /R /Y
 xcopy $(SolutionDir)3rdParty\SDL2_ttf\x64\*.dll $(OutputPath) /R /Y
-xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll /Y
+xcopy $(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x64\*.dll $(OutputPath) /R /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
