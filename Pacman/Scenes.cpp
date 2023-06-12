@@ -253,7 +253,8 @@ namespace dae
 		auto delayedLoad = loadSceneObj->AddComponent<dae::DelayedSceneLoadComponent>();
 		delayedLoad->SetScenes(scenePath.str(), "HighScoreSave");
 		mapGen->AddObserver(delayedLoad);
-
+		player1Player->AddObserver(delayedLoad);
+		player1Player->AddObserver(mapGen);
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
 
 	}
@@ -554,11 +555,20 @@ namespace dae
 		auto loadSceneObj = std::make_shared<GameObject>();
 		loadSceneObj->AddComponent<dae::TransformComponent>();
 		auto loadScene = loadSceneObj->AddComponent<dae::LoadSceneComponent>();
-		loadScene->SetDefaultScene("HighScoreSave");
+		loadScene->SetDefaultScene("Main Menu");
 		std::stringstream scenePath {};
 		scenePath << "SingleLevel" << (level + 1);
 		loadScene->SetSceneToLoad(scenePath.str());
 		loadSceneObj->SetParent(sceneRoot.get());
+
+		//add delayed scene load
+		auto delayedLoad = loadSceneObj->AddComponent<dae::DelayedSceneLoadComponent>();
+		delayedLoad->SetScenes(scenePath.str(), "Main Menu");
+		mapGen->AddObserver(delayedLoad);
+		player1Player->AddObserver(delayedLoad);
+		player1Player->AddObserver(mapGen);
+		player2Player->AddObserver(delayedLoad);
+		player2Player->AddObserver(mapGen);
 
 		inputManager.BindKeyboardCommand(dae::InteractionType::Press, SDLK_F1, std::make_unique<dae::LoadSceneCommand>(loadScene));
 

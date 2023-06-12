@@ -36,6 +36,8 @@ void dae::DelayedSceneLoadComponent::Notify(const Event<PlayerEvent>& e)
 	case PlayerEvent::PacmanDied:
 		m_pLoadScene->SetSceneToLoad(m_GameOverScene);
 		break;
+	default: 
+		return;
 	}
 	m_Timer = m_MaxTime;
 	m_IsTimerActivated = true;

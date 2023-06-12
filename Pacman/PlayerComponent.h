@@ -5,7 +5,7 @@
 #include "Subject.h"
 #include "PlayerEvents.h"
 #include "TransformComponent.h"
-
+#include "LivesComponent.h"
 namespace dae
 {
 	class PlayerComponent final : public BaseComponent, public Subject<PlayerEvent>, public Observer<dae::CollisionData>
@@ -37,6 +37,7 @@ namespace dae
 		TransformComponent* m_pTransform{};
 		glm::vec2 m_SpawnPos;
 
+		LivesComponent* m_pLives{};
 	};
 }
 

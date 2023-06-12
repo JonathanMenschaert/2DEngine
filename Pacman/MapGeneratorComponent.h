@@ -6,6 +6,8 @@
 #include "GraphComponent.h"
 #include "PlayerEvents.h"
 #include "Subject.h"
+#include "PlayerEvents.h"
+#include "Observer.h"
 namespace dae
 {
 
@@ -22,7 +24,7 @@ namespace dae
 		GhostSpawn = 8
 	};
 
-	class MapGeneratorComponent final : public BaseComponent, public Subject<PlayerEvent>
+	class MapGeneratorComponent final : public BaseComponent, public Subject<PlayerEvent>, public Observer<PlayerEvent>
 	{
 	public:
 		MapGeneratorComponent(GameObject* pGameObject);
@@ -35,7 +37,7 @@ namespace dae
 
 		const std::vector<glm::vec2>& GetPlayerSpawns() const;
 		const std::vector<glm::vec2>& GetGhostSpawns() const;
-
+		virtual void Notify(const Event<PlayerEvent>& e) override;
 		void LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles);
 		void ReducePacdots();
 

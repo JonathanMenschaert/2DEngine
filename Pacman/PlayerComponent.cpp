@@ -22,6 +22,7 @@ dae::PlayerComponent::PlayerComponent(GameObject* pGameObject)
 void dae::PlayerComponent::Init()
 {
 	m_pTransform = GetGameObject()->GetTransform();
+	m_pLives = GetGameObject()->GetComponent<LivesComponent>();
 }
 
 void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
@@ -74,8 +75,16 @@ void dae::PlayerComponent::Notify(const Event<dae::CollisionData>& e)
 		}
 		else
 		{
-			Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::PacmanLiveLost};
-			NotifyObservers(pacmanDiedEvent);
+			if (m_pLives->GetLives() > 0)
+			{
+				Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::PacmanLiveLost};
+				NotifyObservers(pacmanDiedEvent);
+			}
+			else
+			{
+				Event<PlayerEvent> pacmanDiedEvent {PlayerEvent::PacmanDied};
+				NotifyObservers(pacmanDiedEvent);
+			}
 			if (m_DeathSoundIdx == UINT32_MAX)
 			{
 				m_DeathSoundIdx = ServiceLocator::GetSoundSystem().FindSoundId(m_DeathSoundName);

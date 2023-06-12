@@ -11,13 +11,12 @@ namespace dae
 		PowerPellet
 	};
 
-	class MapGeneratorComponent;
 	class PickupComponent final : public BaseComponent
 	{
 	public:
 
 		PickupComponent(GameObject* pGameObject);
-		virtual ~PickupComponent();
+		virtual ~PickupComponent() = default;
 		PickupComponent(const PickupComponent& rectComponent) = delete;
 		PickupComponent(PickupComponent&& rectComponent) noexcept = delete;
 		PickupComponent& operator=(const PickupComponent& rectComponent) = delete;
@@ -25,12 +24,10 @@ namespace dae
 		
 
 		void SetType(PickupType type);
-		void SetMap(MapGeneratorComponent* pMap);
 		PickupType GetType() const;
 
 	private:
 		PickupType m_PickupType{ PickupType::Pacdot };
-		MapGeneratorComponent* m_pMap;
 	};
 }
 

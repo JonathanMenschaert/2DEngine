@@ -5,7 +5,7 @@
 #include "TextureRenderComponent.h"
 #include "PickupComponent.h"
 #include "ResourceManager.h"
-
+#include <iostream>
 dae::MapGeneratorComponent::MapGeneratorComponent(GameObject* pGameObject)
 	:BaseComponent{pGameObject}
 {
@@ -19,6 +19,19 @@ const std::vector<glm::vec2>& dae::MapGeneratorComponent::GetPlayerSpawns() cons
 const std::vector<glm::vec2>& dae::MapGeneratorComponent::GetGhostSpawns() const
 {
 	return m_GhostSpawns;
+}
+
+void dae::MapGeneratorComponent::Notify(const Event<PlayerEvent>& e)
+{
+	switch (e.GetPayload())
+	{
+	case PlayerEvent::PacdotCollected:
+	case PlayerEvent::PowerpelletCollected:
+		ReducePacdots();
+		break;
+	default:
+		break;
+	}
 }
 
 void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, const std::vector<unsigned char>& tileData, const std::vector<std::string>& textureFiles)
@@ -76,7 +89,7 @@ void dae::MapGeneratorComponent::LoadMap(int columns, int rows, int tileSize, co
 			auto pacdotRender = pacdotObj->AddComponent<dae::TextureRenderComponent>();
 
 			auto pacDotPickup = pacdotObj->AddComponent<dae::PickupComponent>();
-			pacDotPickup->SetMap(this);
+			
 			if (data == TileData::PowerPellet_AI)
 			{
 				pacdotRender->SetTexture(pPowerPelletTex);
