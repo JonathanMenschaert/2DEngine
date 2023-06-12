@@ -56,6 +56,7 @@ namespace dae
 		scene.Add(sceneRoot);
 
 		
+
 		std::vector<std::shared_ptr<GameObject>> persistedObjects{scene.GetPersistentObjects()};
 		HighScoreComponent* highScoreP1{};
 		auto highScoreObj = std::make_shared<dae::GameObject>();
@@ -824,78 +825,6 @@ namespace dae
 	void LevelTester::LoadScene()
 	{
 
-		//Pacman 2
-		/*auto player2Obj = std::make_shared<dae::GameObject>();
-		auto player2Col = player2Obj->AddComponent<dae::RectCollisionComponent>();
-		player2Col->SetCollisionType(dae::CollisionType::DynamicCollision);
-		player2Col->SetCollisionBox(glm::vec2{ 16, 16 });
-		player2Col->SetLayers(std::vector<std::string>{"player2"});
-		auto player2Trans = player2Obj->AddComponent<dae::TransformComponent>();
-		player2Trans->SetLocalPosition(glm::vec2{ 250.f, 300.f });
-
-		auto player2Render = player2Obj->AddComponent<dae::TextureRenderComponent>();
-		player2Render->SetTexture("pacman.png");
-
-		auto player2Lives = player2Obj->AddComponent<dae::LivesComponent>();
-		player2Lives->AddLife(3);
-
-		auto player2Score = player2Obj->AddComponent<dae::ScoreComponent>();
-
-		auto player2Player = player2Obj->AddComponent<dae::PlayerComponent>();
-		player2Col->AddObserver(player2Player);
-
-		player2Obj->SetParent(sceneRoot);*/
-
-		//Hud Player 2
-		/*auto hud2Obj = std::make_shared<dae::GameObject>();
-	font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
-	auto hud2Trans = hud2Obj->AddComponent<dae::TransformComponent>();
-	hud2Trans->SetLocalPosition(glm::vec2{ 10.f, 0.f });
-
-	auto lives2Obj = std::make_shared < dae::GameObject>();
-	auto lives2Text = lives2Obj->AddComponent<dae::TextComponent>();
-	lives2Text->SetFont(font);
-	lives2Text->SetColor(255, 255, 0, 255);
-	std::stringstream lives2StreamText{};
-	lives2StreamText << "Lives: " << player2Lives->GetLives();
-	lives2Text->SetText(lives2StreamText.str());
-
-	lives2Obj->AddComponent<dae::TextureRenderComponent>();
-	auto lives2Trans = lives2Obj->AddComponent<dae::TransformComponent>();
-	auto lives2 = lives2Obj->AddComponent<dae::LivesDisplayComponent>();
-	lives2Trans->SetLocalPosition(glm::vec2{ 0.f, 160.f });
-
-	lives2Obj->SetParent(hud2Obj, false);
-	player2Lives->AddObserver(lives2);
-
-	auto score2Obj = std::make_shared<dae::GameObject>();
-	auto score2Text = score2Obj->AddComponent<dae::TextComponent>();
-	score2Text->SetFont(font);
-	score2Text->SetColor(255, 255, 0, 255);
-	std::stringstream score2StreamText{};
-	score2StreamText << "Score: " << player2Score->GetScore();
-	score2Text->SetText(score2StreamText.str());
-
-	score2Obj->AddComponent<dae::TextureRenderComponent>();
-	auto score2Trans = score2Obj->AddComponent<dae::TransformComponent>();
-	auto score2 = score2Obj->AddComponent<dae::ScoreDisplayComponent>();
-	score2Trans->SetLocalPosition(glm::vec2{ 0.f, 180.f });
-
-	score2Obj->SetParent(hud2Obj, false);
-	player2Score->AddObserver(score2);
-	hud2Obj->SetParent(sceneRoot);*/
-
-
-		//Bind Controller keys
-		/*inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadUp, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, 1.f }));
-		inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadDown, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 0.f, -1.f }));
-		inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadLeft, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ -1.f, 0.f }));
-		inputManager.BindDigitalCommand(1, dae::InteractionType::Hold, dae::Gamepad::DigitalButton::DPadRight, std::make_unique<dae::MoveCommand>(player2Obj.get(), speed, glm::vec2{ 1.f, 0.f }));
-		inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonA, std::make_unique<dae::DebugLivesCommand>(player2Obj.get()));
-		inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonX, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 10));
-		inputManager.BindDigitalCommand(1, dae::InteractionType::Press, dae::Gamepad::DigitalButton::ButtonY, std::make_unique<dae::DebugScoreCommand>(player2Obj.get(), 50));*/
-
-
 		auto& scene = dae::SceneManager::GetInstance().CreateScene("LevelTester");
 		//auto& inputManager = dae::InputManager::GetInstance();
 		auto sceneRoot = std::make_shared<dae::GameObject>();
@@ -1044,6 +973,13 @@ namespace dae
 		auto logoTrans = logoObj->AddComponent<dae::TransformComponent>();
 		logoTrans->SetLocalPosition(glm::vec3{ 0.f, 0.f, 0.f });
 		logoObj->SetParent(sceneRoot.get());
+
+		//How to play
+		auto howToPlayObj = std::make_shared < dae::GameObject>();
+		auto htpTrans = howToPlayObj->AddComponent<dae::TransformComponent>();
+		htpTrans->SetLocalPosition(glm::vec2{ 10.f, 30.f });
+		howToPlayObj->AddComponent<dae::HowToPlayComponent>();
+		howToPlayObj->SetParent(sceneRoot.get());
 
 		//Font
 		auto font = dae::ResourceManager::GetInstance().LoadFont("ArcadeFont.ttf", 32);
