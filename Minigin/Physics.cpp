@@ -151,6 +151,10 @@ bool dae::Physics::CalculateCollisionOffset(const glm::vec4& box1, const glm::ve
 		{
 			offset.x = offsetX;
 		}
+		else if (abs(offsetX) < 2.f && abs(offsetY) < 2.f)
+		{
+			offset = glm::vec2{};
+		}
 		else if (abs(offsetX) < abs(offsetY))
 		{
 			offset.x = offsetX;
